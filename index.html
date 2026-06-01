@@ -107,7 +107,23 @@ function App(){
   const[faq,setFaq]=useState(0);
   const[form,setForm]=useState({name:"",phone:"",email:"",service:"residential",notes:""});
   const[sent,setSent]=useState(false);
+  const[sending,setSending]=useState(false);
+  const[err,setErr]=useState("");
   const[sc,setSc]=useState(false);
+  const FORM_ENDPOINT="https://script.google.com/macros/s/AKfycbwd6_grRUcJWzo2svxE7pEJX613jQlSKqaDFRJmNXKN858nrJ8sBUAwM6x83MvOb0-_/exec";
+  const submitForm=async()=>{
+    setErr("");
+    if(!form.name.trim()){setErr("Please enter your name.");return;}
+    if(!form.phone.trim()&&!form.email.trim()){setErr("Please add a phone or email so we can reach you.");return;}
+    if(form.email.trim()&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())){setErr("That email doesn't look right — please check it.");return;}
+    setSending(true);
+    try{
+      await fetch(FORM_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(form)});
+      setSent(true);
+    }catch(e){
+      setErr("Something went wrong sending your request. Please call us instead.");
+    }finally{setSending(false);}
+  };
   useEffect(()=>{const f=()=>setSc(window.scrollY>40);addEventListener("scroll",f);return()=>removeEventListener("scroll",f)},[]);
   const go=id=>document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
 
@@ -178,7 +194,8 @@ function App(){
                 <option value="residential">Residential</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
               </select>
               <textarea placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:C.mist,height:62,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
-              <button onClick={()=>setSent(true)} style={{width:"100%",padding:15,background:GRAD,color:"#fff",border:"none",borderRadius:10,fontSize:"1rem",fontWeight:700,cursor:"pointer",fontFamily:F}}>Request My Free Quote →</button>
+              {err&&<div style={{background:"#fdecea",border:"1px solid #f5c2c0",color:"#b3261e",fontSize:".83rem",padding:"10px 13px",borderRadius:9,marginBottom:12}}>{err}</div>}
+              <button onClick={submitForm} disabled={sending} style={{width:"100%",padding:15,background:GRAD,color:"#fff",border:"none",borderRadius:10,fontSize:"1rem",fontWeight:700,cursor:sending?"default":"pointer",fontFamily:F,opacity:sending?.7:1}}>{sending?"Sending…":"Request My Free Quote →"}</button>
             </div>):(
             <div style={{textAlign:"center",padding:"30px 0"}}>
               <div style={{width:60,height:60,borderRadius:"50%",background:GRAD,margin:"0 auto 14px",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:"1.8rem"}}>✓</div>
