@@ -40,7 +40,7 @@ const P = {
   generic: "https://images.unsplash.com/photo-1718152470408-cfeebeb6b9fc?w=1400&q=80&auto=format&fit=crop", // pressure washing in progress
 };
 
-const BRAND = { name:"Cascade Clean Pros", phone:"(425) 555-0199", email:"info@cascadecleanpros.com", domain:"CascadeCleanPros.com" };
+const BRAND = { name:"Cascade Clean Pros", phone:"(360) 202-7249", tel:"3602027249", email:"info@cascadecleanpros.com", domain:"CascadeCleanPros.com" };
 
 const STATS=["Free Estimates","Owner-Operated","King & Snohomish","Residential & Commercial"];
 
@@ -147,7 +147,7 @@ function App(){
             {[["Services","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
               <button key={a[1]} onClick={()=>go(a[1])} className="nd" style={{display:"none",background:"none",border:"none",color:sc?C.text:"rgba(255,255,255,.9)",fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
             ))}
-            <a href={`tel:${BRAND.phone}`} style={{color:sc?C.teal:"#fff",fontWeight:700,fontSize:".9rem"}}>{BRAND.phone}</a>
+            <a href={`tel:${BRAND.tel}`} style={{color:sc?C.teal:"#fff",fontWeight:700,fontSize:".9rem"}}>{BRAND.phone}</a>
             <button onClick={()=>go("quote")} style={{background:C.aqua,color:C.ink,border:"none",padding:"11px 22px",borderRadius:9,fontWeight:700,fontSize:".83rem",cursor:"pointer",fontFamily:F,boxShadow:"0 4px 16px rgba(63,192,180,.4)"}}>Free Quote</button>
           </div>
         </div>
@@ -201,7 +201,7 @@ function App(){
               <div style={{width:60,height:60,borderRadius:"50%",background:GRAD,margin:"0 auto 14px",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:"1.8rem"}}>✓</div>
               <h4 style={{color:C.teal,marginBottom:8,fontSize:"1.2rem",fontFamily:FS}}>Request received!</h4>
               <p style={{color:C.soft,fontSize:".92rem",marginBottom:18}}>We'll contact you within the hour during business hours.</p>
-              <a href={`tel:${BRAND.phone}`} style={{display:"inline-block",padding:"13px 26px",background:C.aqua,color:C.ink,borderRadius:10,fontWeight:700}}>Call {BRAND.phone}</a>
+              <a href={`tel:${BRAND.tel}`} style={{display:"inline-block",padding:"13px 26px",background:C.aqua,color:C.ink,borderRadius:10,fontWeight:700}}>Call {BRAND.phone}</a>
             </div>)}
           </div>
         </div>
@@ -358,7 +358,7 @@ function App(){
           <h2 style={{fontFamily:FS,fontSize:"2.9rem",color:"#fff",marginBottom:14,fontWeight:600,lineHeight:1.1}}>Ready to transform your property?</h2>
           <p style={{fontSize:"1.12rem",color:"rgba(255,255,255,.85)",marginBottom:34}}>Free, no-obligation estimate. We respond within the hour.</p>
           <div style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap"}}>
-            <a href={`tel:${BRAND.phone}`} style={{display:"inline-flex",alignItems:"center",gap:10,background:C.aqua,color:C.ink,padding:"18px 38px",borderRadius:12,fontSize:"1.2rem",fontWeight:800,boxShadow:"0 10px 30px rgba(63,192,180,.45)"}}>📞 {BRAND.phone}</a>
+            <a href={`tel:${BRAND.tel}`} style={{display:"inline-flex",alignItems:"center",gap:10,background:C.aqua,color:C.ink,padding:"18px 38px",borderRadius:12,fontSize:"1.2rem",fontWeight:800,boxShadow:"0 10px 30px rgba(63,192,180,.45)"}}>📞 {BRAND.phone}</a>
             <button onClick={()=>scrollTo({top:0,behavior:"smooth"})} style={{background:"rgba(255,255,255,.14)",color:"#fff",border:"1px solid rgba(255,255,255,.32)",padding:"18px 32px",borderRadius:12,fontSize:"1rem",fontWeight:600,cursor:"pointer",fontFamily:F,backdropFilter:"blur(8px)"}}>↑ Back to Quote Form</button>
           </div>
         </div>
