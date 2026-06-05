@@ -1,0 +1,16 @@
+{
+  "name": "cascade-clean-pros",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Cascade Clean Pros marketing site — prerendered + hydrated React (no in-browser Babel).",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.0"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
