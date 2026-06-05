@@ -25,7 +25,7 @@ const RES=[
   {img:P.drive1,title:"Driveway & Concrete",desc:"Restores concrete, pavers & walkways, with oil-stain treatment for tough spots."},
   {img:P.floor,title:"Deck & Patio",desc:"Brighten wood, composite & stone surfaces so your outdoor space looks new again."},
   {img:P.surface,title:"Walkways & Hardscape",desc:"Clear algae, moss & weathering from paths, steps, pavers & retaining walls."},
-  {img:P.floor,title:"Fence Cleaning",desc:"Remove green algae, moss & grime from wood, vinyl and metal fencing."},
+  {img:"/media/cascade-fence.jpg",title:"Fence Cleaning",desc:"Remove green algae, moss & grime from wood, vinyl and metal fencing."},
 ];
 
 const ADDON_SERVICES=[
@@ -327,6 +327,29 @@ function App(){
             {faq===i&&<div style={{padding:"0 0 22px",fontSize:".95rem",color:C.soft,lineHeight:1.7}}>{f.a}</div>}
           </div>
         ))}
+      </section>
+
+      {/* RESULTS / BEFORE-AFTER */}
+      <section style={{background:C.mist,padding:"90px 28px"}}>
+        <div style={{maxWidth:1180,margin:"0 auto"}}>
+          <div style={{textAlign:"center",maxWidth:660,margin:"0 auto"}}>
+            <div style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:700,marginBottom:14}}>The difference</div>
+            <h2 style={{fontFamily:FS,fontSize:"2.5rem",color:C.ink,fontWeight:600,lineHeight:1.12,marginBottom:14}}>See what a proper wash does</h2>
+            <p style={{color:C.soft,fontSize:"1.02rem",lineHeight:1.6}}>Each photo shows one surface — dirty on the left, cleaned on the right. Illustrative examples of the results that professional pressure and soft washing delivers.</p>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:22,marginTop:42}}>
+            {[["/media/cascade-ba-roof.jpg","Roof — moss removal"],["/media/cascade-ba-siding.jpg","House siding — soft wash"],["/media/cascade-ba-deck.jpg","Wood deck restoration"],["/media/cascade-ba-driveway.jpg","Concrete driveway"]].map(it=>(
+              <div key={it[1]} style={{borderRadius:16,overflow:"hidden",boxShadow:"0 10px 30px rgba(0,24,56,.10)",background:"#fff"}}>
+                <div style={{position:"relative",aspectRatio:"16/9",overflow:"hidden"}}>
+                  <img src={it[0]} alt={"Before and after: "+it[1]} loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}/>
+                  <span style={{position:"absolute",top:12,left:12,background:"rgba(0,24,56,.80)",color:"#fff",fontSize:".64rem",fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 10px",borderRadius:6}}>Before</span>
+                  <span style={{position:"absolute",top:12,right:12,background:C.blue,color:"#fff",fontSize:".64rem",fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 10px",borderRadius:6}}>After</span>
+                </div>
+                <div style={{padding:"15px 18px",fontFamily:F,fontWeight:600,color:C.ink,fontSize:".96rem"}}>{it[1]}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* CTA */}
