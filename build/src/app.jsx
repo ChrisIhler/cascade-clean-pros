@@ -331,7 +331,7 @@ function App(){
       <section id="quote" style={{position:"relative",padding:"100px 28px",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0}}><img src={P.drive2} alt="" loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover"}}/><div style={{position:"absolute",inset:0,background:`linear-gradient(135deg,${C.ink}f2,${C.teal}cc)`}}/></div>
         <div style={{position:"relative",zIndex:2,maxWidth:680,margin:"0 auto",textAlign:"center"}}>
-          <h2 style={{fontFamily:FS,fontSize:"2.9rem",color:"#fff",marginBottom:14,fontWeight:600,lineHeight:1.1}}>Ready to transform your property?</h2>
+          <h2 style={{fontFamily:FS,fontSize:"2.9rem",color:"#fff",marginBottom:14,fontWeight:600,lineHeight:1.1}}>Ready for a cleaner property?</h2>
           <p style={{fontSize:"1.12rem",color:"rgba(255,255,255,.85)",marginBottom:34}}>Free, no-obligation estimate. We respond within the hour.</p>
           <div style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap"}}>
             <a href={`tel:${BRAND.tel}`} style={{display:"inline-flex",alignItems:"center",gap:10,background:C.aqua,color:C.ink,padding:"18px 38px",borderRadius:12,fontSize:"1.2rem",fontWeight:800,boxShadow:"0 10px 30px rgba(63,192,180,.45)"}}>📞 {BRAND.phone}</a>
