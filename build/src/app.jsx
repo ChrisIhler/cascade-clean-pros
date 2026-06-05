@@ -8,12 +8,12 @@ const { useState, useEffect, useRef } = React;
    To use your own job photos later, just replace the URLs here.
    =========================================================== */
 const P = {
-  wand:    "https://images.unsplash.com/photo-1581883579507-019c44b711cb?w=1920&q=80&auto=format&fit=crop", // person with pressure washer wand
-  drive1:  "https://images.unsplash.com/photo-1645256418914-feb28d7ec701?w=1400&q=80&auto=format&fit=crop", // driveway pressure washing
-  drive2:  "https://images.unsplash.com/photo-1592365559101-19adfefdf294?w=1400&q=80&auto=format&fit=crop", // driveway pressure washing
-  surface: "https://images.unsplash.com/photo-1718152521364-b9655b8a7926?w=1400&q=80&auto=format&fit=crop", // cleaning a paved surface
-  floor:   "https://images.unsplash.com/photo-1718152421680-d1580e843cc9?w=1400&q=80&auto=format&fit=crop", // cleaning a hard floor/surface
-  generic: "https://images.unsplash.com/photo-1718152470408-cfeebeb6b9fc?w=1400&q=80&auto=format&fit=crop", // pressure washing in progress
+  wand:    "https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg?auto=compress&cs=tinysrgb&w=1600", // person with pressure washer wand
+  drive1:  "https://images.pexels.com/photos/12111864/pexels-photo-12111864.jpeg?auto=compress&cs=tinysrgb&w=1600", // driveway pressure washing
+  drive2:  "https://images.pexels.com/photos/14965464/pexels-photo-14965464.jpeg?auto=compress&cs=tinysrgb&w=1600", // driveway pressure washing
+  surface: "https://images.pexels.com/photos/14965464/pexels-photo-14965464.jpeg?auto=compress&cs=tinysrgb&w=1600", // cleaning a paved surface
+  floor:   "https://images.pexels.com/photos/12919779/pexels-photo-12919779.jpeg?auto=compress&cs=tinysrgb&w=1600", // cleaning a hard floor/surface
+  generic: "https://images.pexels.com/photos/30958770/pexels-photo-30958770.jpeg?auto=compress&cs=tinysrgb&w=1600", // pressure washing in progress
 };
 
 const BRAND = { name:"Cascade Clean Pros", phone:"(360) 202-7249", tel:"3602027249", email:"info@cascadecleanpros.com", domain:"CascadeCleanPros.com" };
@@ -25,7 +25,7 @@ const RES=[
   {img:P.drive1,title:"Driveway & Concrete",desc:"Restores concrete, pavers & walkways, with oil-stain treatment for tough spots."},
   {img:P.floor,title:"Deck & Patio",desc:"Brighten wood, composite & stone surfaces so your outdoor space looks new again."},
   {img:P.surface,title:"Walkways & Hardscape",desc:"Clear algae, moss & weathering from paths, steps, pavers & retaining walls."},
-  {img:P.generic,title:"Fence Cleaning",desc:"Remove green algae, moss & grime from wood, vinyl and metal fencing."},
+  {img:P.floor,title:"Fence Cleaning",desc:"Remove green algae, moss & grime from wood, vinyl and metal fencing."},
 ];
 
 const ADDON_SERVICES=[
@@ -133,7 +133,9 @@ function App(){
       {/* HERO */}
       <header style={{position:"relative",minHeight:"100vh",display:"flex",alignItems:"center",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0}}>
-          <img src={P.wand} alt="Professional pressure washing in progress" fetchPriority="high" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+          <video autoPlay muted loop playsInline poster="/media/hero-poster.jpg" aria-hidden="true" style={{width:"100%",height:"100%",objectFit:"cover"}}>
+            <source src="/media/hero.mp4" type="video/mp4"/>
+          </video>
           <div style={{position:"absolute",inset:0,background:`linear-gradient(105deg,${C.ink}f5 0%,${C.deep}e0 40%,${C.blue}66 72%,transparent 100%)`}}/>
         </div>
         <div style={{position:"relative",zIndex:2,maxWidth:1240,margin:"0 auto",padding:"120px 28px 60px",width:"100%",display:"grid",gridTemplateColumns:"1.1fr .9fr",gap:60,alignItems:"center"}} className="hg">
