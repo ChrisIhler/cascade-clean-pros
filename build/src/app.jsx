@@ -222,44 +222,40 @@ function App(){
         </div>
       </section>
 
-      {/* COMMERCIAL SERVICES */}
-      <section id="commercial-services" style={{maxWidth:1240,margin:"0 auto",padding:"60px 28px 80px"}}>
-        <Reveal>
-          <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>Commercial</span></div>
-          <h2 style={{fontFamily:FS,fontSize:"2.7rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Built for business</h2>
+      {/* COMMERCIAL */}
+      <section id="commercial" style={{margin:"50px 0 0"}}>
+        <div style={{position:"relative",minHeight:480,display:"flex",alignItems:"center",overflow:"hidden"}}>
+          <div style={{position:"absolute",inset:0}}>
+            <img src={P.surface} alt="Commercial pressure washing" loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+            <div style={{position:"absolute",inset:0,background:`linear-gradient(100deg,${C.ink}f5,${C.deep}d4 55%,${C.blue}88)`}}/>
+          </div>
+          <div style={{position:"relative",zIndex:2,maxWidth:1240,margin:"0 auto",padding:"70px 28px",width:"100%"}}>
+            <div style={{maxWidth:620}}>
+              <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.aqua,fontWeight:800}}>Commercial Division</span>
+              <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:"#fff",margin:"14px 0 18px",fontWeight:600,lineHeight:1.1}}>Built for property managers & business owners</h2>
+              <p style={{fontSize:"1.08rem",color:"rgba(255,255,255,.82)",marginBottom:24,lineHeight:1.7}}>
+                Moss and algae on concrete aren't just unsightly — when wet, they become a slip-and-fall liability for your tenants and customers. We help keep your property safe, clean, and presentable. With experience on large commercial properties and full multi-building campuses, no job is too big.
+              </p>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginBottom:30,maxWidth:520}}>
+                {["Free on-site assessments & written bids","Flexible scheduling around your hours","Soft wash & pressure washing for every surface","Experienced on large multi-building properties"].map(x=>(
+                  <div key={x} style={{display:"flex",gap:9,alignItems:"flex-start",color:"rgba(255,255,255,.88)",fontSize:".88rem"}}><span style={{color:C.aqua,fontWeight:800,flexShrink:0}}>✓</span>{x}</div>
+                ))}
+              </div>
+              <button onClick={()=>go("quote")} style={{background:C.aqua,color:C.ink,border:"none",padding:"16px 32px",borderRadius:11,fontWeight:700,fontSize:"1rem",cursor:"pointer",fontFamily:F,boxShadow:"0 8px 28px rgba(63,192,180,.4)"}}>Request a Commercial Bid →</button>
+            </div>
+          </div>
+        </div>
+        <div style={{maxWidth:1240,margin:"0 auto",padding:"60px 28px 80px"}}>
           <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 8px",textAlign:"center"}}>From storefronts and restaurants to warehouses and fleets — scheduled around your operations.</p>
           <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap any service to enlarge.</p>
-        </Reveal>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
-          {[["/media/cascade-apartment-multifamily.jpg","Apartment and multi-family exterior cleaning"],["/media/cascade-retail-storefront.jpg","Retail and storefront cleaning"],["/media/cascade-industrial-warehouse.jpg","Industrial and warehouse cleaning"],["/media/cascade-office-medical.jpg","Office and medical park cleaning"],["/media/cascade-restaurant-food.jpg","Restaurant and food service cleaning"],["/media/cascade-fleet-equipment.jpg","Fleet and equipment washing — trucks, vans and heavy equipment"]].map(p=>(
-            <div key={p[0]} role="button" tabIndex={0} aria-label={"Enlarge: "+p[1]} onClick={()=>setLightbox(p[0])} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setLightbox(p[0]);}}} style={{display:"block",cursor:"zoom-in",borderRadius:14,overflow:"hidden",boxShadow:"0 5px 20px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
-              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 16px 38px rgba(0,24,56,.18)";}}
-              onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 5px 20px rgba(0,24,56,.10)";}}>
-              <img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* COMMERCIAL BANNER */}
-      <section id="commercial" style={{position:"relative",margin:"50px 0",minHeight:520,display:"flex",alignItems:"center",overflow:"hidden"}}>
-        <div style={{position:"absolute",inset:0}}>
-          <img src={P.surface} alt="Commercial surface cleaning" loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover"}}/>
-          <div style={{position:"absolute",inset:0,background:`linear-gradient(100deg,${C.ink}f5,${C.deep}d4 55%,${C.blue}88)`}}/>
-        </div>
-        <div style={{position:"relative",zIndex:2,maxWidth:1240,margin:"0 auto",padding:"70px 28px",width:"100%"}}>
-          <div style={{maxWidth:620}}>
-            <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.aqua,fontWeight:800}}>Commercial Division</span>
-            <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:"#fff",margin:"14px 0 18px",fontWeight:600,lineHeight:1.1}}>Built for property managers & business owners</h2>
-            <p style={{fontSize:"1.08rem",color:"rgba(255,255,255,.82)",marginBottom:24,lineHeight:1.7}}>
-              Moss and algae on concrete aren't just unsightly — when wet, they become a slip-and-fall liability for your tenants and customers. We help keep your property safe, clean, and presentable. With experience on large commercial properties and full multi-building campuses, no job is too big.
-            </p>
-            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginBottom:30,maxWidth:520}}>
-              {["Free on-site assessments & written bids","Flexible scheduling around your hours","Soft wash & pressure washing for every surface","Experienced on large multi-building properties"].map(x=>(
-                <div key={x} style={{display:"flex",gap:9,alignItems:"flex-start",color:"rgba(255,255,255,.88)",fontSize:".88rem"}}><span style={{color:C.aqua,fontWeight:800,flexShrink:0}}>✓</span>{x}</div>
-              ))}
-            </div>
-            <button onClick={()=>go("quote")} style={{background:C.aqua,color:C.ink,border:"none",padding:"16px 32px",borderRadius:11,fontWeight:700,fontSize:"1rem",cursor:"pointer",fontFamily:F,boxShadow:"0 8px 28px rgba(63,192,180,.4)"}}>Request a Commercial Bid →</button>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
+            {[["/media/cascade-apartment-multifamily.jpg","Apartment and multi-family exterior cleaning"],["/media/cascade-retail-storefront.jpg","Retail and storefront cleaning"],["/media/cascade-industrial-warehouse.jpg","Industrial and warehouse cleaning"],["/media/cascade-office-medical.jpg","Office and medical park cleaning"],["/media/cascade-restaurant-food.jpg","Restaurant and food service cleaning"],["/media/cascade-fleet-equipment.jpg","Fleet and equipment washing — trucks, vans and heavy equipment"]].map(p=>(
+              <div key={p[0]} role="button" tabIndex={0} aria-label={"Enlarge: "+p[1]} onClick={()=>setLightbox(p[0])} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setLightbox(p[0]);}}} style={{display:"block",cursor:"zoom-in",borderRadius:14,overflow:"hidden",boxShadow:"0 5px 20px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
+                onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 16px 38px rgba(0,24,56,.18)";}}
+                onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 5px 20px rgba(0,24,56,.10)";}}>
+                <img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/>
+              </div>
+            ))}
           </div>
         </div>
       </section>
