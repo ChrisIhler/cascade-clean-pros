@@ -80,6 +80,7 @@ function Reveal({children,style}){const r=useRef(null);useEffect(()=>{const o=ne
 
 function App(){
   const[tab,setTab]=useState("residential");
+  const[lightbox,setLightbox]=useState(null);
   const[faq,setFaq]=useState(0);
   const[form,setForm]=useState({name:"",phone:"",email:"",service:"residential",notes:""});
   const[sent,setSent]=useState(false);
@@ -101,11 +102,17 @@ function App(){
     }finally{setSending(false);}
   };
   useEffect(()=>{const f=()=>setSc(window.scrollY>40);addEventListener("scroll",f);return()=>removeEventListener("scroll",f)},[]);
+  useEffect(()=>{const k=e=>{if(e.key==="Escape")setLightbox(null);};addEventListener("keydown",k);return()=>removeEventListener("keydown",k)},[]);
   const go=id=>document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
 
   return(
     <div style={{fontFamily:F,color:C.text,background:C.bg,lineHeight:1.65,overflowX:"hidden"}}>
       <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+      {lightbox&&<div onClick={()=>setLightbox(null)} style={{position:"fixed",inset:0,zIndex:2000,background:"rgba(0,12,28,.92)",display:"flex",alignItems:"center",justifyContent:"center",padding:"4vw",cursor:"zoom-out"}}>
+        <img src={lightbox} alt="Service detail" onClick={e=>e.stopPropagation()} style={{maxWidth:"96vw",maxHeight:"92vh",width:"auto",height:"auto",borderRadius:12,boxShadow:"0 30px 90px rgba(0,0,0,.55)",cursor:"default"}}/>
+        <button onClick={()=>setLightbox(null)} aria-label="Close" style={{position:"fixed",top:"16px",right:"20px",width:46,height:46,borderRadius:"50%",border:"none",background:"rgba(255,255,255,.18)",color:"#fff",fontSize:"1.7rem",lineHeight:1,cursor:"pointer"}}>×</button>
+      </div>}
 
       {/* NAV */}
       <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:200,background:"#ffffff",backdropFilter:"blur(12px)",borderBottom:`1px solid ${C.line}`,transition:"all .3s",boxShadow:"0 4px 24px rgba(0,24,56,.06)"}}>
@@ -201,15 +208,16 @@ function App(){
         <Reveal>
           <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>Residential</span></div>
           <h2 style={{fontFamily:FS,fontSize:"2.7rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Homes, top to bottom</h2>
-          <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 40px",textAlign:"center"}}>Gentle, surface-safe soft washing and pressure washing for every part of your property.</p>
+          <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 8px",textAlign:"center"}}>Gentle, surface-safe soft washing and pressure washing for every part of your property.</p>
+          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap any service to enlarge.</p>
         </Reveal>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(440px,1fr))",gap:24}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
           {[["/media/cascade-house-washing.jpg","House washing — soft wash for siding, trim, soffits and exterior surfaces"],["/media/cascade-driveway-concrete.jpg","Driveway and concrete cleaning"],["/media/cascade-deck-patio.jpg","Deck and patio cleaning"],["/media/cascade-walkways-hardscape.jpg","Walkways and hardscape cleaning"],["/media/cascade-fence-cleaning.jpg","Fence cleaning"]].map(p=>(
-            <a key={p[0]} href="#quote" onClick={e=>{e.preventDefault();go("quote");}} style={{display:"block",borderRadius:16,overflow:"hidden",boxShadow:"0 6px 24px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
-              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="0 18px 44px rgba(0,24,56,.18)";}}
-              onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 6px 24px rgba(0,24,56,.10)";}}>
+            <div key={p[0]} role="button" tabIndex={0} aria-label={"Enlarge: "+p[1]} onClick={()=>setLightbox(p[0])} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setLightbox(p[0]);}}} style={{display:"block",cursor:"zoom-in",borderRadius:14,overflow:"hidden",boxShadow:"0 5px 20px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
+              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 16px 38px rgba(0,24,56,.18)";}}
+              onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 5px 20px rgba(0,24,56,.10)";}}>
               <img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/>
-            </a>
+            </div>
           ))}
         </div>
       </section>
@@ -219,15 +227,16 @@ function App(){
         <Reveal>
           <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>Commercial</span></div>
           <h2 style={{fontFamily:FS,fontSize:"2.7rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Built for business</h2>
-          <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 40px",textAlign:"center"}}>From storefronts and restaurants to warehouses and fleets — scheduled around your operations.</p>
+          <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 8px",textAlign:"center"}}>From storefronts and restaurants to warehouses and fleets — scheduled around your operations.</p>
+          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap any service to enlarge.</p>
         </Reveal>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(440px,1fr))",gap:24}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
           {[["/media/cascade-apartment-multifamily.jpg","Apartment and multi-family exterior cleaning"],["/media/cascade-retail-storefront.jpg","Retail and storefront cleaning"],["/media/cascade-industrial-warehouse.jpg","Industrial and warehouse cleaning"],["/media/cascade-office-medical.jpg","Office and medical park cleaning"],["/media/cascade-restaurant-food.jpg","Restaurant and food service cleaning"],["/media/cascade-fleet-equipment.jpg","Fleet and equipment washing — trucks, vans and heavy equipment"]].map(p=>(
-            <a key={p[0]} href="#quote" onClick={e=>{e.preventDefault();go("quote");}} style={{display:"block",borderRadius:16,overflow:"hidden",boxShadow:"0 6px 24px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
-              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="0 18px 44px rgba(0,24,56,.18)";}}
-              onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 6px 24px rgba(0,24,56,.10)";}}>
+            <div key={p[0]} role="button" tabIndex={0} aria-label={"Enlarge: "+p[1]} onClick={()=>setLightbox(p[0])} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setLightbox(p[0]);}}} style={{display:"block",cursor:"zoom-in",borderRadius:14,overflow:"hidden",boxShadow:"0 5px 20px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
+              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 16px 38px rgba(0,24,56,.18)";}}
+              onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 5px 20px rgba(0,24,56,.10)";}}>
               <img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/>
-            </a>
+            </div>
           ))}
         </div>
       </section>
