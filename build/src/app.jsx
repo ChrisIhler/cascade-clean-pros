@@ -196,36 +196,38 @@ function App(){
         </div>
       </div>
 
-      {/* SERVICES */}
-      <section id="services" style={{maxWidth:1240,margin:"0 auto",padding:"100px 28px 60px"}}>
+      {/* RESIDENTIAL SERVICES */}
+      <section id="services" style={{maxWidth:1240,margin:"0 auto",padding:"100px 28px 40px"}}>
         <Reveal>
-          <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>What We Clean</span></div>
-          <h2 style={{fontFamily:FS,fontSize:"2.7rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Complete exterior cleaning</h2>
-          <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:580,margin:"0 auto 36px",textAlign:"center"}}>From a single driveway to a multi-building campus — the right equipment and method for every surface.</p>
+          <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>Residential</span></div>
+          <h2 style={{fontFamily:FS,fontSize:"2.7rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Homes, top to bottom</h2>
+          <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 40px",textAlign:"center"}}>Gentle, surface-safe soft washing and pressure washing for every part of your property.</p>
         </Reveal>
-        <div style={{display:"flex",justifyContent:"center",gap:5,marginBottom:44,background:C.card,borderRadius:14,padding:5,maxWidth:440,margin:"0 auto 44px",border:`1px solid ${C.line}`,boxShadow:"0 2px 12px rgba(10,38,48,.04)"}}>
-          {[["residential","Residential"],["commercial","Commercial"]].map(a=>(
-            <button key={a[0]} onClick={()=>setTab(a[0])} style={{flex:1,padding:"13px 22px",borderRadius:10,border:"none",fontFamily:F,fontSize:".94rem",fontWeight:700,cursor:"pointer",background:tab===a[0]?C.ink:"transparent",color:tab===a[0]?"#fff":C.soft,transition:"all .2s"}}>{a[1]}</button>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(440px,1fr))",gap:24}}>
+          {[["/media/cascade-house-washing.jpg","House washing — soft wash for siding, trim, soffits and exterior surfaces"],["/media/cascade-driveway-concrete.jpg","Driveway and concrete cleaning"],["/media/cascade-deck-patio.jpg","Deck and patio cleaning"],["/media/cascade-walkways-hardscape.jpg","Walkways and hardscape cleaning"],["/media/cascade-fence-cleaning.jpg","Fence cleaning"]].map(p=>(
+            <a key={p[0]} href="#quote" onClick={e=>{e.preventDefault();go("quote");}} style={{display:"block",borderRadius:16,overflow:"hidden",boxShadow:"0 6px 24px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
+              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="0 18px 44px rgba(0,24,56,.18)";}}
+              onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 6px 24px rgba(0,24,56,.10)";}}>
+              <img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/>
+            </a>
           ))}
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(330px,1fr))",gap:24}}>
-          {(tab==="residential"?RES:COMM).map((s,i)=>(
-            <Reveal key={s.title} style={{transitionDelay:`${i*60}ms`}}>
-              <div style={{background:C.card,borderRadius:16,overflow:"hidden",border:`1px solid ${C.line}`,boxShadow:"0 2px 16px rgba(10,38,48,.05)",transition:"transform .3s,box-shadow .3s",height:"100%"}}
-                onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-6px)";e.currentTarget.style.boxShadow="0 18px 40px rgba(10,38,48,.14)"}}
-                onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 2px 16px rgba(10,38,48,.05)"}}>
-                <div style={{height:200,overflow:"hidden",position:"relative"}}>
-                  <img src={s.img} alt={s.title} loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover",transition:"transform .5s"}}
-                    onMouseEnter={e=>e.target.style.transform="scale(1.07)"} onMouseLeave={e=>e.target.style.transform="scale(1)"}/>
-                  <div style={{position:"absolute",inset:0,background:`linear-gradient(180deg,transparent 55%,${C.ink}22)`}}/>
-                </div>
-                <div style={{padding:"22px 24px"}}>
-                  <h4 style={{fontSize:"1.18rem",fontWeight:700,color:C.ink,marginBottom:8,fontFamily:FS}}>{s.title}</h4>
-                  <p style={{fontSize:".9rem",color:C.soft,lineHeight:1.6,marginBottom:s.scope?12:0}}>{s.desc}</p>
-                  {s.scope&&<div style={{fontSize:".74rem",color:C.teal,fontWeight:600}}>{s.scope}</div>}
-                </div>
-              </div>
-            </Reveal>
+      </section>
+
+      {/* COMMERCIAL SERVICES */}
+      <section id="commercial-services" style={{maxWidth:1240,margin:"0 auto",padding:"60px 28px 80px"}}>
+        <Reveal>
+          <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>Commercial</span></div>
+          <h2 style={{fontFamily:FS,fontSize:"2.7rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Built for business</h2>
+          <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 40px",textAlign:"center"}}>From storefronts and restaurants to warehouses and fleets — scheduled around your operations.</p>
+        </Reveal>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(440px,1fr))",gap:24}}>
+          {[["/media/cascade-apartment-multifamily.jpg","Apartment and multi-family exterior cleaning"],["/media/cascade-retail-storefront.jpg","Retail and storefront cleaning"],["/media/cascade-industrial-warehouse.jpg","Industrial and warehouse cleaning"],["/media/cascade-office-medical.jpg","Office and medical park cleaning"],["/media/cascade-restaurant-food.jpg","Restaurant and food service cleaning"],["/media/cascade-fleet-equipment.jpg","Fleet and equipment washing — trucks, vans and heavy equipment"]].map(p=>(
+            <a key={p[0]} href="#quote" onClick={e=>{e.preventDefault();go("quote");}} style={{display:"block",borderRadius:16,overflow:"hidden",boxShadow:"0 6px 24px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
+              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="0 18px 44px rgba(0,24,56,.18)";}}
+              onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 6px 24px rgba(0,24,56,.10)";}}>
+              <img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/>
+            </a>
           ))}
         </div>
       </section>
@@ -327,29 +329,6 @@ function App(){
             {faq===i&&<div style={{padding:"0 0 22px",fontSize:".95rem",color:C.soft,lineHeight:1.7}}>{f.a}</div>}
           </div>
         ))}
-      </section>
-
-      {/* RESULTS / BEFORE-AFTER */}
-      <section style={{background:C.mist,padding:"90px 28px"}}>
-        <div style={{maxWidth:1180,margin:"0 auto"}}>
-          <div style={{textAlign:"center",maxWidth:660,margin:"0 auto"}}>
-            <div style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:700,marginBottom:14}}>The difference</div>
-            <h2 style={{fontFamily:FS,fontSize:"2.5rem",color:C.ink,fontWeight:600,lineHeight:1.12,marginBottom:14}}>See what a proper wash does</h2>
-            <p style={{color:C.soft,fontSize:"1.02rem",lineHeight:1.6}}>Each photo shows one surface — dirty on the left, cleaned on the right. Illustrative examples of the results that professional pressure and soft washing delivers.</p>
-          </div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:22,marginTop:42}}>
-            {[["/media/cascade-ba-roof.jpg","Roof — moss removal"],["/media/cascade-ba-siding.jpg","House siding — soft wash"],["/media/cascade-ba-deck.jpg","Wood deck restoration"],["/media/cascade-ba-driveway.jpg","Concrete driveway"]].map(it=>(
-              <div key={it[1]} style={{borderRadius:16,overflow:"hidden",boxShadow:"0 10px 30px rgba(0,24,56,.10)",background:"#fff"}}>
-                <div style={{position:"relative",aspectRatio:"16/9",overflow:"hidden"}}>
-                  <img src={it[0]} alt={"Before and after: "+it[1]} loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}/>
-                  <span style={{position:"absolute",top:12,left:12,background:"rgba(0,24,56,.80)",color:"#fff",fontSize:".64rem",fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 10px",borderRadius:6}}>Before</span>
-                  <span style={{position:"absolute",top:12,right:12,background:C.blue,color:"#fff",fontSize:".64rem",fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 10px",borderRadius:6}}>After</span>
-                </div>
-                <div style={{padding:"15px 18px",fontFamily:F,fontWeight:600,color:C.ink,fontSize:".96rem"}}>{it[1]}</div>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* CTA */}
