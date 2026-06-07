@@ -206,7 +206,7 @@ function App(){
       {/* RESIDENTIAL SERVICES */}
       <section id="services" style={{maxWidth:1240,margin:"0 auto",padding:"74px 28px 34px"}}>
         <Reveal>
-          <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>Residential</span></div>
+          <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>Residential</span></div>
           <h2 style={{fontFamily:FS,fontSize:"2.7rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Homes, top to bottom</h2>
           <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 8px",textAlign:"center"}}>Gentle, surface-safe soft washing and pressure washing for every part of your property.</p>
           <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap any service to enlarge.</p>
@@ -231,7 +231,7 @@ function App(){
           </div>
           <div style={{position:"relative",zIndex:2,maxWidth:1240,margin:"0 auto",padding:"56px 28px",width:"100%"}}>
             <div style={{maxWidth:620}}>
-              <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.aqua,fontWeight:800}}>Commercial Division</span>
+              <span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:C.aqua,fontWeight:800}}>Commercial Division</span>
               <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:"#fff",margin:"14px 0 18px",fontWeight:600,lineHeight:1.1}}>Built for property managers & business owners</h2>
               <p style={{fontSize:"1.08rem",color:"rgba(255,255,255,.82)",marginBottom:24,lineHeight:1.7}}>
                 Moss and algae on concrete aren't just unsightly — when wet, they become a slip-and-fall liability for your tenants and customers. We help keep your property safe, clean, and presentable. With experience on large commercial properties and full multi-building campuses, no job is too big.
