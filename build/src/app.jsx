@@ -28,6 +28,15 @@ const RES=[
   {img:"/media/cascade-fence.jpg",title:"Fence Cleaning",desc:"Remove green algae, moss & grime from wood, vinyl and metal fencing."},
 ];
 
+const ADDON_ICONS=[
+  <svg key="i0" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/></svg>,
+  <svg key="i1" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3c3.4 4.1 5.4 6.6 5.4 9.2a5.4 5.4 0 0 1-10.8 0C6.6 9.6 8.6 7.1 12 3z"/></svg>,
+  <svg key="i2" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="1.5"/><path d="M12 3.5v17M4 12h16"/></svg>,
+  <svg key="i3" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3 5 5.6v5.2c0 4.4 3 7.7 7 9.2 4-1.5 7-4.8 7-9.2V5.6L12 3z"/></svg>,
+  <svg key="i4" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M9.6 10.5V4.4a1.7 1.7 0 0 1 3.4 0v6.1"/><path d="M7.6 10.5h7.4v2.4a3.7 3.7 0 0 1-7.4 0z"/><path d="M11.3 16.3v4.2"/></svg>,
+  <svg key="i5" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3.5" y="4.5" width="12" height="5" rx="1"/><path d="M15.5 6h3.2v3h-4.7"/><path d="M11 9.5v2.4a1 1 0 0 1-1 1h-.6a1 1 0 0 0-1 1v6.1"/></svg>,
+  <svg key="i6" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M14.6 6.4a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.4-3.4a6 6 0 0 1-7.8 7.8l-6.6 6.6a2.1 2.1 0 0 1-3-3l6.6-6.6a6 6 0 0 1 7.8-7.8l-3.4 3.4z"/></svg>,
+];
 const ADDON_SERVICES=[
   {title:"Roof Cleaning & Moss Treatment",desc:"We treat, kill, and clear moss and algae from your roof, then clean up — never high-pressure washing the shingles."},
   {title:"Gutter Cleaning & Clear-Out",desc:"Full gutter and downspout clear-out so water flows freely and your foundation stays protected."},
@@ -283,7 +292,7 @@ function App(){
                 onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="0 16px 36px rgba(10,38,48,.12)"}}
                 onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 2px 16px rgba(10,38,48,.05)"}}>
                 <div style={{width:46,height:46,borderRadius:12,background:C.mist,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
-                  <div style={{width:18,height:18,borderRadius:5,background:GRAD}}/>
+                  <span style={{color:C.blue,display:"flex"}}>{ADDON_ICONS[i]}</span>
                 </div>
                 <h4 style={{fontSize:"1.12rem",fontWeight:700,color:C.ink,marginBottom:8,fontFamily:FS}}>{s.title}</h4>
                 <p style={{fontSize:".9rem",color:C.soft,lineHeight:1.65}}>{s.desc}</p>
