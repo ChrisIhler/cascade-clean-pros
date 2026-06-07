@@ -140,7 +140,7 @@ function App(){
       {/* HERO */}
       <header style={{position:"relative",display:"flex",alignItems:"center",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0}}>
-          <video autoPlay muted loop playsInline poster="/media/hero-poster.jpg" aria-hidden="true" style={{width:"100%",height:"100%",objectFit:"cover"}}>
+          <video autoPlay muted loop playsInline poster="/media/hero-poster.jpg" aria-hidden="true" className="hv" style={{width:"100%",height:"100%",objectFit:"cover"}}>
             <source src="/media/hero.mp4" type="video/mp4"/>
           </video>
           <div style={{position:"absolute",inset:0,background:`linear-gradient(105deg,${C.ink}f5 0%,${C.deep}e0 40%,${C.blue}66 72%,transparent 100%)`}}/>
@@ -167,7 +167,7 @@ function App(){
               ))}
             </div>
           </div>
-          <div style={{background:"rgba(255,255,255,.97)",borderRadius:20,padding:30,boxShadow:"0 30px 80px rgba(7,42,52,.4)",backdropFilter:"blur(10px)"}}>
+          <div className="hf" style={{background:"rgba(255,255,255,.97)",borderRadius:20,padding:30,boxShadow:"0 30px 80px rgba(7,42,52,.4)",backdropFilter:"blur(10px)"}}>
             {!sent?(<div>
               <div style={{fontSize:".66rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800,marginBottom:5}}>Free · No Obligation</div>
               <h3 style={{fontFamily:FS,fontSize:"1.5rem",marginBottom:3,color:C.ink,fontWeight:600}}>Get your quote today</h3>
@@ -191,7 +191,7 @@ function App(){
           </div>
         </div>
       </header>
-      <style>{`@media(max-width:880px){.hg{grid-template-columns:1fr !important}}`}</style>
+      <style>{`@media(max-width:880px){.hg{grid-template-columns:1fr !important}}@media(min-width:881px){.hv{transform:translateX(30px) scale(1.08)}.hf{transform:translateX(-28px)}}`}</style>
 
       {/* STATS */}
       <div style={{background:GRAD,padding:"26px 28px"}}>
