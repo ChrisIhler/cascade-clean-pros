@@ -91,6 +91,7 @@ function App(){
   const[tab,setTab]=useState("residential");
   const[lightbox,setLightbox]=useState(null);
   const[menuOpen,setMenuOpen]=useState(false);
+  const[formActive,setFormActive]=useState(false);
   const[faq,setFaq]=useState(0);
   const[form,setForm]=useState({name:"",phone:"",email:"",service:"residential",notes:""});
   const[sent,setSent]=useState(false);
@@ -113,7 +114,7 @@ function App(){
   };
   useEffect(()=>{const f=()=>setSc(window.scrollY>40);addEventListener("scroll",f);return()=>removeEventListener("scroll",f)},[]);
   useEffect(()=>{const k=e=>{if(e.key==="Escape")setLightbox(null);};addEventListener("keydown",k);return()=>removeEventListener("keydown",k)},[]);
-  const go=id=>{const el=document.getElementById(id);if(!el)return;el.scrollIntoView({behavior:"smooth",block:"start"});if(id==="quote"){el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),10000);}};
+  const go=id=>{const el=document.getElementById(id);if(!el)return;el.scrollIntoView({behavior:"smooth",block:"start"});if(id==="quote"){setFormActive(true);el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),10000);}};
 
   return(
     <div style={{fontFamily:F,color:C.text,background:C.bg,lineHeight:1.65,overflowX:"hidden"}}>
@@ -185,7 +186,7 @@ function App(){
               ))}
             </div>
           </div>
-          <div id="quote" className="hf" style={{scrollMarginTop:"95px",background:"rgba(255,255,255,.97)",borderRadius:20,padding:30,boxShadow:"0 30px 80px rgba(7,42,52,.4)"}}>
+          <div id="quote" className="hf" onClick={()=>setFormActive(true)} onFocusCapture={()=>setFormActive(true)} style={{scrollMarginTop:"95px",transition:"background .35s ease",background:formActive?"rgba(255,255,255,.97)":"rgba(255,255,255,.5)",borderRadius:20,padding:30,boxShadow:"0 30px 80px rgba(7,42,52,.4)"}}>
             {!sent?(<div>
               <div style={{fontSize:".76rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800,marginBottom:5}}>Free · No Obligation</div>
               <h3 style={{fontFamily:FS,fontSize:"1.5rem",marginBottom:3,color:C.ink,fontWeight:600}}>Get your quote today</h3>
