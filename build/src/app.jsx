@@ -175,7 +175,9 @@ function App(){
             </p>
             <div style={{display:"flex",gap:14,flexWrap:"wrap",marginBottom:40}}>
               <button onClick={()=>go("quote")} style={{background:C.aqua,color:C.ink,border:"none",padding:"17px 34px",borderRadius:11,fontWeight:700,fontSize:"1.02rem",cursor:"pointer",fontFamily:F,boxShadow:"0 8px 28px rgba(63,192,180,.45)"}}>Get a Free Estimate →</button>
-              <button onClick={()=>go("services")} style={{background:"rgba(255,255,255,.12)",color:"#fff",border:"1px solid rgba(255,255,255,.28)",padding:"17px 30px",borderRadius:11,fontWeight:600,fontSize:"1.02rem",cursor:"pointer",fontFamily:F,backdropFilter:"blur(8px)"}}>Explore Our Services</button>
+              <button onClick={()=>go("services")} style={{background:"rgba(255,255,255,.12)",color:"#fff",border:"1px solid rgba(255,255,255,.28)",padding:"13px 20px",borderRadius:10,fontWeight:600,fontSize:".92rem",cursor:"pointer",fontFamily:F}}>Residential Services</button>
+              <button onClick={()=>go("commercial")} style={{background:"rgba(255,255,255,.12)",color:"#fff",border:"1px solid rgba(255,255,255,.28)",padding:"13px 20px",borderRadius:10,fontWeight:600,fontSize:".92rem",cursor:"pointer",fontFamily:F}}>Commercial Services</button>
+              <button onClick={()=>go("addons")} style={{background:"rgba(255,255,255,.12)",color:"#fff",border:"1px solid rgba(255,255,255,.28)",padding:"13px 20px",borderRadius:10,fontWeight:600,fontSize:".92rem",cursor:"pointer",fontFamily:F}}>Other Services</button>
             </div>
             <div style={{display:"flex",gap:26,flexWrap:"wrap"}}>
               {["Eco-Friendly Methods","Free Estimates","Owner-Operated"].map(b=>(
@@ -183,7 +185,7 @@ function App(){
               ))}
             </div>
           </div>
-          <div id="quote" className="hf" style={{scrollMarginTop:"95px",background:"rgba(255,255,255,.97)",borderRadius:20,padding:30,boxShadow:"0 30px 80px rgba(7,42,52,.4)",backdropFilter:"blur(10px)"}}>
+          <div id="quote" className="hf" style={{scrollMarginTop:"95px",background:"rgba(255,255,255,.97)",borderRadius:20,padding:30,boxShadow:"0 30px 80px rgba(7,42,52,.4)"}}>
             {!sent?(<div>
               <div style={{fontSize:".76rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800,marginBottom:5}}>Free · No Obligation</div>
               <h3 style={{fontFamily:FS,fontSize:"1.5rem",marginBottom:3,color:C.ink,fontWeight:600}}>Get your quote today</h3>
