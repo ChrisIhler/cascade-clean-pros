@@ -127,32 +127,32 @@ function App(){
 
       {/* NAV */}
       <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:200,background:"#ffffff",backdropFilter:"blur(12px)",borderBottom:`1px solid ${C.line}`,transition:"all .3s",boxShadow:"0 4px 24px rgba(0,24,56,.06)"}}>
-        <div style={{maxWidth:1240,margin:"0 auto",padding:"0 28px",display:"flex",justifyContent:"space-between",alignItems:"center",height:sc?64:82,transition:"height .3s"}}>
+        <div className="nbar" style={{maxWidth:1240,margin:"0 auto",padding:"0 28px",display:"flex",justifyContent:"space-between",alignItems:"center",height:sc?64:82,transition:"height .3s"}}>
           <div style={{display:"flex",alignItems:"center",gap:11}}>
             <div style={{width:42,height:42,borderRadius:12,background:GRAD,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(0,84,180,.3)"}}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 5 9 5 14a7 7 0 0014 0c0-5-7-12-7-12z" fill="#fff" opacity=".95"/><path d="M12 2C12 2 5 9 5 14a7 7 0 0014 0c0-5-7-12-7-12z" stroke="#fff" strokeWidth="0"/></svg>
             </div>
             <div>
-              <div style={{color:C.ink,fontWeight:700,fontSize:"1.1rem",lineHeight:1.1}}>{BRAND.name}</div>
-              <div style={{color:C.blue,fontSize:".7rem",textTransform:"uppercase",letterSpacing:2.5,fontWeight:700}}>Exterior Cleaning · Puget Sound</div>
+              <div className="lname" style={{color:C.ink,fontWeight:700,fontSize:"1.1rem",lineHeight:1.1}}>{BRAND.name}</div>
+              <div className="ltag" style={{color:C.blue,fontSize:".7rem",textTransform:"uppercase",letterSpacing:2.5,fontWeight:700}}>Exterior Cleaning · Puget Sound</div>
             </div>
           </div>
-          <div style={{display:"flex",gap:30,alignItems:"center"}}>
+          <div className="nactions" style={{display:"flex",gap:30,alignItems:"center"}}>
             {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
               <button key={a[1]} onClick={()=>go(a[1])} className="nd" style={{display:"none",padding:"10px 2px",background:"none",border:"none",color:C.text,fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
             ))}
             <button className="mnav" aria-label="Open menu" onClick={()=>setMenuOpen(o=>!o)} style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:42,height:42,borderRadius:10,border:"none",background:"rgba(0,24,56,.06)",cursor:"pointer",color:C.ink,fontSize:"1.4rem",lineHeight:1}}>☰</button>
-            <a href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:".9rem"}}>{BRAND.phone}</a>
+            <a className="navphone" href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:".9rem"}}>{BRAND.phone}</a>
             <button onClick={()=>go("quote")} style={{background:GRAD,color:"#fff",border:"none",padding:"11px 22px",borderRadius:9,fontWeight:700,fontSize:".83rem",cursor:"pointer",fontFamily:F,boxShadow:"0 4px 16px rgba(0,84,180,.35)"}}>Free Quote</button>
           </div>
         </div>
-      {menuOpen&&<div className="mmenu" style={{borderTop:"1px solid "+C.line,background:"#fff",padding:"8px 22px 16px",boxShadow:"0 12px 24px rgba(0,24,56,.08)"}}>
+      {menuOpen&&<div className="mmenu" style={{borderTop:"1px solid "+C.line,background:"#fff",padding:"8px 22px 16px",boxShadow:"0 12px 24px rgba(0,24,56,.08)"}}><a href={`tel:${BRAND.tel}`} style={{display:"flex",alignItems:"center",gap:8,padding:"15px 2px",borderBottom:"1px solid "+C.line,color:C.blue,fontWeight:700,fontSize:"1rem",textDecoration:"none"}}>📞 {BRAND.phone}</a>
         {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
           <button key={a[1]} onClick={()=>{go(a[1]);setMenuOpen(false);}} style={{display:"block",width:"100%",textAlign:"left",background:"none",border:"none",borderBottom:"1px solid "+C.line,padding:"15px 2px",fontFamily:F,fontSize:"1rem",fontWeight:600,color:C.text,cursor:"pointer"}}>{a[0]}</button>
         ))}
       </div>}
       </nav>
-      <style>{`@media(min-width:920px){.nd{display:inline-block !important}.mnav{display:none !important}.mmenu{display:none !important}}`}</style>
+      <style>{`@media(min-width:920px){.nd{display:inline-block !important}.mnav{display:none !important}.mmenu{display:none !important}}@media(max-width:919px){.nbar{height:auto !important;min-height:70px;padding-top:11px !important;padding-bottom:11px !important}.navphone{display:none !important}.lname{font-size:1rem !important;white-space:nowrap}.ltag{letter-spacing:1.1px !important;font-size:.6rem !important}.nactions{gap:14px !important}}`}</style>
 
       {/* HERO */}
       <header style={{position:"relative",display:"flex",alignItems:"center",overflow:"hidden"}}>
