@@ -156,8 +156,8 @@ function App(){
 
       {/* HERO */}
       <header style={{position:"relative",display:"flex",alignItems:"center",overflow:"hidden"}}>
-        <div style={{position:"absolute",inset:0}}>
-          <video autoPlay muted loop playsInline poster="/media/hero-poster.jpg" aria-hidden="true" className="hv" style={{width:"100%",height:"100%",objectFit:"cover"}}>
+        <div className="hv" style={{position:"absolute",inset:0}}>
+          <video autoPlay muted loop playsInline poster="/media/hero-poster.jpg" aria-hidden="true" style={{width:"100%",height:"100%",objectFit:"cover"}}>
             <source src="/media/hero.mp4" type="video/mp4"/>
           </video>
           <div style={{position:"absolute",inset:0,background:`linear-gradient(105deg,${C.ink}f5 0%,${C.deep}e0 40%,${C.blue}66 72%,transparent 100%)`}}/>
