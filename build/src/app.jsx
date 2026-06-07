@@ -113,7 +113,7 @@ function App(){
   };
   useEffect(()=>{const f=()=>setSc(window.scrollY>40);addEventListener("scroll",f);return()=>removeEventListener("scroll",f)},[]);
   useEffect(()=>{const k=e=>{if(e.key==="Escape")setLightbox(null);};addEventListener("keydown",k);return()=>removeEventListener("keydown",k)},[]);
-  const go=id=>document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
+  const go=id=>{const el=document.getElementById(id);if(!el)return;el.scrollIntoView({behavior:"smooth",block:"start"});if(id==="quote"){el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1900);}};
 
   return(
     <div style={{fontFamily:F,color:C.text,background:C.bg,lineHeight:1.65,overflowX:"hidden"}}>
@@ -209,7 +209,7 @@ function App(){
           </div>
         </div>
       </header>
-      <style>{`@media(max-width:880px){.hg{grid-template-columns:1fr !important}}@media(min-width:881px){.hv{transform:translateX(30px) scale(1.08)}.hf{transform:translateX(-28px)}}`}</style>
+      <style>{`@media(max-width:880px){.hg{grid-template-columns:1fr !important}}@media(min-width:881px){.hv{transform:translateX(30px) scale(1.08)}.hf{transform:translateX(-28px)}}@keyframes formflash{0%{box-shadow:0 0 0 0 rgba(132,192,240,0),0 30px 80px rgba(7,42,52,.4)}18%{box-shadow:0 0 0 5px rgba(132,192,240,.92),0 30px 80px rgba(7,42,52,.4)}100%{box-shadow:0 0 0 0 rgba(132,192,240,0),0 30px 80px rgba(7,42,52,.4)}}.flash{animation:formflash 1.9s ease-out}`}</style>
 
       {/* STATS */}
       <div style={{background:GRAD,padding:"26px 28px"}}>
