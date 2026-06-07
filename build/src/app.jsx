@@ -128,7 +128,7 @@ function App(){
             </div>
           </div>
           <div style={{display:"flex",gap:30,alignItems:"center"}}>
-            {[["Services","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
+            {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
               <button key={a[1]} onClick={()=>go(a[1])} className="nd" style={{display:"none",padding:"10px 2px",background:"none",border:"none",color:C.text,fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
             ))}
             <button className="mnav" aria-label="Open menu" onClick={()=>setMenuOpen(o=>!o)} style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:42,height:42,borderRadius:10,border:"none",background:"rgba(0,24,56,.06)",cursor:"pointer",color:C.ink,fontSize:"1.4rem",lineHeight:1}}>☰</button>
@@ -137,7 +137,7 @@ function App(){
           </div>
         </div>
       {menuOpen&&<div className="mmenu" style={{borderTop:"1px solid "+C.line,background:"#fff",padding:"8px 22px 16px",boxShadow:"0 12px 24px rgba(0,24,56,.08)"}}>
-        {[["Services","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
+        {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
           <button key={a[1]} onClick={()=>{go(a[1]);setMenuOpen(false);}} style={{display:"block",width:"100%",textAlign:"left",background:"none",border:"none",borderBottom:"1px solid "+C.line,padding:"15px 2px",fontFamily:F,fontSize:"1rem",fontWeight:600,color:C.text,cursor:"pointer"}}>{a[0]}</button>
         ))}
       </div>}
