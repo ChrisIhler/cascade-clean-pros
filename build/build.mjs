@@ -70,6 +70,29 @@ function pageSchema(r) {
       "publisher": { "@type": "Organization", "name": "Cascade Clean Pros", "url": ORIGIN + "/" },
       "mainEntityOfPage": { "@type": "WebPage", "@id": ORIGIN + r.path }
     });
+  } else if (r.kind === "service" || r.kind === "location") {
+    const headline = r.title.replace(/\s*\|\s*Cascade Clean Pros\s*$/, "");
+    const isSvc = r.kind === "service";
+    crumbItems.push({ name: isSvc ? "Services" : "Service Areas", url: ORIGIN + (isSvc ? "/services/" : "/locations/") });
+    crumbItems.push({ name: headline, url: ORIGIN + r.path });
+    blocks.push({
+      "@context": "https://schema.org", "@type": "Service",
+      "name": headline, "description": r.description, "serviceType": "Exterior cleaning",
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "King County, Washington" },
+        { "@type": "AdministrativeArea", "name": "Snohomish County, Washington" }
+      ],
+      "provider": { "@type": "LocalBusiness", "name": "Cascade Clean Pros", "telephone": "+1-360-202-7249", "url": ORIGIN + "/" }
+    });
+  } else if (r.kind === "servicesindex" || r.kind === "locationsindex") {
+    const isSvc = r.kind === "servicesindex";
+    const url = ORIGIN + (isSvc ? "/services/" : "/locations/");
+    crumbItems.push({ name: isSvc ? "Services" : "Service Areas", url });
+    blocks.push({
+      "@context": "https://schema.org", "@type": "CollectionPage",
+      "name": isSvc ? "Services" : "Service Areas", "url": url, "description": r.description,
+      "isPartOf": { "@type": "WebSite", "name": "Cascade Clean Pros", "url": ORIGIN + "/" }
+    });
   }
   blocks.push({
     "@context": "https://schema.org", "@type": "BreadcrumbList",
@@ -116,6 +139,10 @@ ${cssBlock}
 </html>`;
 }
 
+// Prune generated section dirs first so removed routes never linger, then regenerate.
+for (const section of ["blog", "services", "locations"]) {
+  rmSync(join(ROOT, section), { recursive: true, force: true });
+}
 const written = [];
 for (const r of SUBROUTES) {
   const dir = join(ROOT, r.path);              // e.g. ../blog/ or ../blog/<slug>/

@@ -1,6 +1,7 @@
 import React from "react";
 const { useState, useEffect, useRef } = React;
 import { BLOG_POSTS } from "./blog-content.js";
+import { SERVICE_PAGES, LOCATION_PAGES } from "./page-content.js";
 
 /* ===========================================================
    PHOTO LIBRARY — every URL below was verified by reading the
@@ -527,12 +528,66 @@ function BlogIndex(){
     </Shell>
   );
 }
+function RelatedCard({p}){
+  return (
+    <a href={p.path} style={{display:"block",border:`1px solid ${C.line}`,borderRadius:12,padding:"16px 20px",textDecoration:"none",background:"#fff"}}>
+      <span style={{display:"block",fontWeight:700,color:C.ink,marginBottom:4}}>{p.title}</span>
+      <span style={{fontSize:".9rem",color:C.soft,lineHeight:1.5}}>{p.metaDescription}</span>
+    </a>
+  );
+}
 function BlogPost({post}){
+  const others = BLOG_POSTS.filter(p=>p.slug!==post.slug);
   return (
     <Shell crumbs={[{name:"Home",url:"/"},{name:"Blog",url:"/blog/"},{name:post.title}]}>
       <article className="article" dangerouslySetInnerHTML={{__html:post.html}}/>
+      {others.length>0 &&
+        <div style={{maxWidth:760,margin:"40px auto 0",padding:"0 22px"}}>
+          <h2 style={{fontFamily:FS,fontWeight:600,fontSize:"1.4rem",color:C.ink,margin:"0 0 16px"}}>Related guides</h2>
+          <div style={{display:"grid",gap:14}}>{others.map(p=><RelatedCard key={p.slug} p={p}/>)}</div>
+          <div style={{marginTop:18}}><a href="/blog/" style={{color:C.blue,fontWeight:700,textDecoration:"none"}}>← All guides</a></div>
+        </div>}
     </Shell>
   );
+}
+
+/* ===== Service + location pages (data-driven; copy lives in page-content.js) ===== */
+function CardList({heading,intro,items}){
+  return (
+    <div style={{maxWidth:760,margin:"0 auto",padding:"12px 22px 0"}}>
+      <h1 style={{fontFamily:FS,fontWeight:600,fontSize:"2.35rem",color:C.ink,margin:".2em 0 .3em",lineHeight:1.12}}>{heading}</h1>
+      <p style={{fontSize:"1.08rem",color:C.soft,margin:"0 0 30px",lineHeight:1.7}}>{intro}</p>
+      <div style={{display:"grid",gap:18}}>
+        {items.map(p=>(
+          <a key={p.slug} href={p.path} style={{display:"block",border:`1px solid ${C.line}`,borderRadius:14,padding:"22px 24px",textDecoration:"none",background:"#fff",boxShadow:"0 4px 18px rgba(0,24,56,.05)"}}>
+            <h2 style={{fontFamily:FS,fontWeight:600,fontSize:"1.35rem",color:C.ink,margin:"0 0 8px",lineHeight:1.2}}>{p.title}</h2>
+            <p style={{fontSize:".96rem",color:C.soft,margin:"0 0 12px",lineHeight:1.6}}>{p.metaDescription}</p>
+            <span style={{color:C.blue,fontWeight:700,fontSize:".9rem"}}>Read more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+function ServicePage({page}){
+  return (
+    <Shell crumbs={[{name:"Home",url:"/"},{name:"Services",url:"/services/"},{name:page.title}]}>
+      <article className="article" dangerouslySetInnerHTML={{__html:page.html}}/>
+    </Shell>
+  );
+}
+function LocationPage({page}){
+  return (
+    <Shell crumbs={[{name:"Home",url:"/"},{name:"Service Areas",url:"/locations/"},{name:page.title}]}>
+      <article className="article" dangerouslySetInnerHTML={{__html:page.html}}/>
+    </Shell>
+  );
+}
+function ServicesIndex(){
+  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Services"}]}><CardList heading="Our Services" intro="Professional pressure washing and soft washing for homes and businesses across King & Snohomish Counties — the right method matched to every surface." items={SERVICE_PAGES}/></Shell>;
+}
+function LocationsIndex(){
+  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Service Areas"}]}><CardList heading="Service Areas" intro="Owner-operated exterior cleaning across the greater Seattle–Everett corridor in King & Snohomish Counties." items={LOCATION_PAGES}/></Shell>;
 }
 
 function normPath(p){
@@ -546,6 +601,12 @@ function App({route}){
   if(path==="/blog/") return <BlogIndex/>;
   const post = BLOG_POSTS.find(p=>p.path===path);
   if(post) return <BlogPost post={post}/>;
+  if(path==="/services/" && SERVICE_PAGES.length) return <ServicesIndex/>;
+  if(path==="/locations/" && LOCATION_PAGES.length) return <LocationsIndex/>;
+  const svc = SERVICE_PAGES.find(p=>p.path===path);
+  if(svc) return <ServicePage page={svc}/>;
+  const loc = LOCATION_PAGES.find(p=>p.path===path);
+  if(loc) return <LocationPage page={loc}/>;
   return <Home/>;
 }
 
