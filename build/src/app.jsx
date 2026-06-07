@@ -70,7 +70,7 @@ const CITIES=["Lynnwood","Edmonds","Mill Creek","Everett","Mountlake Terrace","M
 const C={
   ink:"#001838", deep:"#001230", blue:"#0054b4", green:"#0060c0", teal:"#0a66cc",
   aqua:"#84c0f0", aquaDk:"#5aa0e0", bg:"#f5f9fd", card:"#ffffff",
-  text:"#0e1f3a", soft:"#48566e", mute:"#8a96ad", line:"#dde6f2", mist:"#eaf2fb"
+  text:"#0e1f3a", soft:"#48566e", mute:"#5d6a85", line:"#dde6f2", mist:"#eaf2fb"
 };
 const GRAD=`linear-gradient(135deg,${C.deep} 0%,${C.blue} 55%,${C.teal} 100%)`; // cascade navy→royal blue
 const F="'Plus Jakarta Sans','Segoe UI',-apple-system,sans-serif";
@@ -81,6 +81,7 @@ function Reveal({children,style}){const r=useRef(null);useEffect(()=>{const o=ne
 function App(){
   const[tab,setTab]=useState("residential");
   const[lightbox,setLightbox]=useState(null);
+  const[menuOpen,setMenuOpen]=useState(false);
   const[faq,setFaq]=useState(0);
   const[form,setForm]=useState({name:"",phone:"",email:"",service:"residential",notes:""});
   const[sent,setSent]=useState(false);
@@ -123,19 +124,25 @@ function App(){
             </div>
             <div>
               <div style={{color:C.ink,fontWeight:700,fontSize:"1.1rem",lineHeight:1.1}}>{BRAND.name}</div>
-              <div style={{color:C.blue,fontSize:".58rem",textTransform:"uppercase",letterSpacing:2.5,fontWeight:700}}>Exterior Cleaning · Puget Sound</div>
+              <div style={{color:C.blue,fontSize:".7rem",textTransform:"uppercase",letterSpacing:2.5,fontWeight:700}}>Exterior Cleaning · Puget Sound</div>
             </div>
           </div>
           <div style={{display:"flex",gap:30,alignItems:"center"}}>
             {[["Services","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
-              <button key={a[1]} onClick={()=>go(a[1])} className="nd" style={{display:"none",background:"none",border:"none",color:C.text,fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
+              <button key={a[1]} onClick={()=>go(a[1])} className="nd" style={{display:"none",padding:"10px 2px",background:"none",border:"none",color:C.text,fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
             ))}
+            <button className="mnav" aria-label="Open menu" onClick={()=>setMenuOpen(o=>!o)} style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:42,height:42,borderRadius:10,border:"none",background:"rgba(0,24,56,.06)",cursor:"pointer",color:C.ink,fontSize:"1.4rem",lineHeight:1}}>☰</button>
             <a href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:".9rem"}}>{BRAND.phone}</a>
             <button onClick={()=>go("quote")} style={{background:GRAD,color:"#fff",border:"none",padding:"11px 22px",borderRadius:9,fontWeight:700,fontSize:".83rem",cursor:"pointer",fontFamily:F,boxShadow:"0 4px 16px rgba(0,84,180,.35)"}}>Free Quote</button>
           </div>
         </div>
+      {menuOpen&&<div className="mmenu" style={{borderTop:"1px solid "+C.line,background:"#fff",padding:"8px 22px 16px",boxShadow:"0 12px 24px rgba(0,24,56,.08)"}}>
+        {[["Services","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
+          <button key={a[1]} onClick={()=>{go(a[1]);setMenuOpen(false);}} style={{display:"block",width:"100%",textAlign:"left",background:"none",border:"none",borderBottom:"1px solid "+C.line,padding:"15px 2px",fontFamily:F,fontSize:"1rem",fontWeight:600,color:C.text,cursor:"pointer"}}>{a[0]}</button>
+        ))}
+      </div>}
       </nav>
-      <style>{`@media(min-width:920px){.nd{display:inline-block !important}}`}</style>
+      <style>{`@media(min-width:920px){.nd{display:inline-block !important}.mnav{display:none !important}.mmenu{display:none !important}}`}</style>
 
       {/* HERO */}
       <header style={{position:"relative",display:"flex",alignItems:"center",overflow:"hidden"}}>
@@ -151,7 +158,7 @@ function App(){
               <span style={{width:8,height:8,borderRadius:"50%",background:C.aqua,boxShadow:`0 0 10px ${C.aqua}`}}/>
               <span style={{color:"rgba(255,255,255,.92)",fontSize:".8rem",fontWeight:600}}>Now booking Spring & Summer 2026</span>
             </div>
-            <h1 style={{fontFamily:FS,fontSize:"4rem",lineHeight:1.04,color:"#fff",letterSpacing:"-.02em",marginBottom:22,fontWeight:600}}>
+            <h1 style={{fontFamily:FS,fontSize:"clamp(2.3rem,6.5vw,4rem)",lineHeight:1.04,color:"#fff",letterSpacing:"-.02em",marginBottom:22,fontWeight:600}}>
               The Pacific Northwest's<br/><span style={{color:C.aqua,fontStyle:"italic"}}>exterior cleaning</span> specialists
             </h1>
             <p style={{fontSize:"1.18rem",color:"rgba(255,255,255,.8)",maxWidth:520,marginBottom:34,lineHeight:1.7}}>
@@ -169,16 +176,16 @@ function App(){
           </div>
           <div className="hf" style={{background:"rgba(255,255,255,.97)",borderRadius:20,padding:30,boxShadow:"0 30px 80px rgba(7,42,52,.4)",backdropFilter:"blur(10px)"}}>
             {!sent?(<div>
-              <div style={{fontSize:".66rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800,marginBottom:5}}>Free · No Obligation</div>
+              <div style={{fontSize:".76rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800,marginBottom:5}}>Free · No Obligation</div>
               <h3 style={{fontFamily:FS,fontSize:"1.5rem",marginBottom:3,color:C.ink,fontWeight:600}}>Get your quote today</h3>
               <p style={{fontSize:".82rem",color:C.mute,marginBottom:20}}>We respond within the hour, every business day.</p>
               {[["name","Full Name","text"],["phone","Phone","tel"],["email","Email","email"]].map(f=>(
-                <input key={f[0]} type={f[2]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:C.mist,boxSizing:"border-box",marginBottom:13}}/>
+                <input key={f[0]} type={f[2]} aria-label={f[1]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:C.mist,boxSizing:"border-box",marginBottom:13}}/>
               ))}
-              <select value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:C.mist,boxSizing:"border-box",marginBottom:13}}>
+              <select aria-label="Service type" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:C.mist,boxSizing:"border-box",marginBottom:13}}>
                 <option value="residential">Residential</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
               </select>
-              <textarea placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:C.mist,height:62,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
+              <textarea aria-label="Project details" placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:C.mist,height:62,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
               {err&&<div style={{background:"#fdecea",border:"1px solid #f5c2c0",color:"#b3261e",fontSize:".83rem",padding:"10px 13px",borderRadius:9,marginBottom:12}}>{err}</div>}
               <button onClick={submitForm} disabled={sending} style={{width:"100%",padding:15,background:GRAD,color:"#fff",border:"none",borderRadius:10,fontSize:"1rem",fontWeight:700,cursor:sending?"default":"pointer",fontFamily:F,opacity:sending?.7:1}}>{sending?"Sending…":"Request My Free Quote →"}</button>
             </div>):(
@@ -207,7 +214,7 @@ function App(){
       <section id="services" style={{maxWidth:1240,margin:"0 auto",padding:"74px 28px 34px"}}>
         <Reveal>
           <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>Residential</span></div>
-          <h2 style={{fontFamily:FS,fontSize:"2.7rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Homes, top to bottom</h2>
+          <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Homes, top to bottom</h2>
           <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 8px",textAlign:"center"}}>Gentle, surface-safe soft washing and pressure washing for every part of your property.</p>
           <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap any service to enlarge.</p>
         </Reveal>
@@ -264,7 +271,7 @@ function App(){
       <section id="addons" style={{maxWidth:1240,margin:"0 auto",padding:"74px 28px 34px"}}>
         <Reveal>
           <div style={{textAlign:"center",marginBottom:44}}>
-            <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>More Than Pressure Washing</span>
+            <span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>More Than Pressure Washing</span>
             <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,margin:"12px 0",fontWeight:600}}>Additional services</h2>
             <p style={{fontSize:"1.06rem",color:C.soft,maxWidth:580,margin:"0 auto"}}>Bundle any of these with a wash to tackle your whole exterior to-do list in one visit — and if you don't see what you need, just ask.</p>
           </div>
@@ -292,7 +299,7 @@ function App(){
       {/* PROCESS */}
       <section style={{maxWidth:1240,margin:"0 auto",padding:"66px 28px"}}>
         <Reveal><div style={{textAlign:"center",marginBottom:50}}>
-          <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>How It Works</span>
+          <span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>How It Works</span>
           <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,margin:"12px 0",fontWeight:600}}>Simple, from quote to clean</h2>
         </div></Reveal>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:16}}>
@@ -310,8 +317,8 @@ function App(){
       <section id="areas" style={{position:"relative",padding:"60px 28px",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0,background:GRAD}}/>
         <div style={{position:"relative",zIndex:2,maxWidth:1000,margin:"0 auto",textAlign:"center"}}>
-          <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:"rgba(255,255,255,.85)",fontWeight:800}}>Coverage</span>
-          <h2 style={{fontFamily:FS,fontSize:"2.5rem",color:"#fff",margin:"12px 0 8px",fontWeight:600}}>Serving King & Snohomish Counties</h2>
+          <span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:"rgba(255,255,255,.85)",fontWeight:800}}>Coverage</span>
+          <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:"#fff",margin:"12px 0 8px",fontWeight:600}}>Serving King & Snohomish Counties</h2>
           <p style={{fontSize:"1.05rem",color:"rgba(255,255,255,.85)",marginBottom:8}}>Our home turf across the greater Seattle–Everett corridor.</p>
           <p style={{fontSize:".92rem",color:"rgba(255,255,255,.7)",marginBottom:30}}>Outside the area? We're happy to travel farther for larger and commercial projects — just ask.</p>
           <div style={{display:"flex",flexWrap:"wrap",gap:9,justifyContent:"center"}}>
@@ -323,7 +330,7 @@ function App(){
       {/* FAQ */}
       <section id="faq" style={{maxWidth:820,margin:"0 auto",padding:"66px 28px"}}>
         <Reveal><div style={{textAlign:"center",marginBottom:44}}>
-          <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>Questions</span>
+          <span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>Questions</span>
           <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,margin:"12px 0",fontWeight:600}}>Good to know</h2>
         </div></Reveal>
         {FAQS.map((f,i)=>(
