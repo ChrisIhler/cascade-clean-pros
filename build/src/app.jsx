@@ -114,7 +114,7 @@ function App(){
   };
   useEffect(()=>{const f=()=>setSc(window.scrollY>40);addEventListener("scroll",f);return()=>removeEventListener("scroll",f)},[]);
   useEffect(()=>{const k=e=>{if(e.key==="Escape")setLightbox(null);};addEventListener("keydown",k);return()=>removeEventListener("keydown",k)},[]);
-  const go=id=>{const el=document.getElementById(id);if(!el)return;el.scrollIntoView({behavior:"smooth",block:"start"});if(id==="quote"){setFormActive(true);el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),10000);}};
+  const go=id=>{const el=document.getElementById(id);if(!el)return;if(id==="quote"){if(innerWidth<880){el.scrollIntoView({behavior:"smooth",block:"start"});}else{scrollTo({top:0,behavior:"smooth"});}setFormActive(true);el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),10000);}else{el.scrollIntoView({behavior:"smooth",block:"start"});}};
 
   return(
     <div style={{fontFamily:F,color:C.text,background:C.bg,lineHeight:1.65,overflowX:"hidden"}}>
@@ -213,7 +213,7 @@ function App(){
       <style>{`@media(max-width:880px){.hg{grid-template-columns:1fr !important}}@media(min-width:881px){.hv{transform:translateX(30px) scale(1.08)}.hf{transform:translateX(-28px)}}@keyframes formflash{0%,100%{box-shadow:0 0 0 0 rgba(132,192,240,0),0 30px 80px rgba(7,42,52,.4)}50%{box-shadow:0 0 0 5px rgba(132,192,240,.85),0 30px 80px rgba(7,42,52,.4)}}.flash{animation:formflash 2.5s ease-in-out 4}`}</style>
 
       {/* STATS */}
-      <div style={{background:GRAD,padding:"26px 28px"}}>
+      <div style={{background:GRAD,padding:"26px 28px",marginTop:"-1px",position:"relative"}}>
         <div style={{maxWidth:1100,margin:"0 auto",display:"flex",justifyContent:"space-around",flexWrap:"wrap",gap:"18px 30px"}}>
           {STATS.map((s,i)=>(<div key={i} style={{display:"flex",alignItems:"center",gap:10,minWidth:170}}>
             <span style={{color:"rgba(255,255,255,.85)",fontSize:"1.1rem",fontWeight:800}}>✓</span>
