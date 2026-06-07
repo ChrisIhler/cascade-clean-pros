@@ -72,6 +72,9 @@ const FAQS=[
   {q:"Do you handle wastewater and stormwater compliance?",a:"Yes. We use biodegradable solutions and follow Washington Department of Ecology and county stormwater guidelines, with water-capture practices on commercial jobs."},
   {q:"Will pressure washing damage my property?",a:"Not when done correctly. We adjust pressure, nozzle, and chemistry for each surface and are trained to spot vulnerabilities before we start."},
   {q:"What areas do you serve?",a:"Our core service area is King and Snohomish Counties — the greater Seattle–Everett corridor. For larger residential and commercial projects we're happy to travel farther; just ask when you request your quote."},
+  {q:"How much does pressure washing cost?",a:"Every property is different — size, surfaces, and condition all affect the price. That's why we give a free, no-obligation on-site estimate with a written price before any work begins."},
+  {q:"How often should I wash my home in the Pacific Northwest?",a:"In our damp climate, most homes benefit from a house wash about once a year to keep moss, algae, and mildew from taking hold. North-facing and heavily shaded areas may need it more often — we'll give you an honest recommendation at your estimate."},
+  {q:"Do I need to be home during the service?",a:"Not necessarily. As long as we have access to the areas being cleaned and an outdoor water spigot, many jobs can be done while you're away. We'll confirm the details when we schedule."},
 ];
 
 const CITIES=["Lynnwood","Edmonds","Mill Creek","Everett","Mountlake Terrace","Mukilteo","Marysville","Lake Stevens","Snohomish","Monroe","Bothell","Woodinville","Kenmore","Kirkland","Redmond","Bellevue","Shoreline","Seattle","Sammamish","Issaquah"];
