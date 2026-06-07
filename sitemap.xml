@@ -6,4 +6,7 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://cascadecleanpros.com/blog/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cascadecleanpros.com/blog/soft-wash-vs-pressure-wash/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cascadecleanpros.com/blog/moss-damage-roof-pnw/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

@@ -1,5 +1,6 @@
 import React from "react";
 const { useState, useEffect, useRef } = React;
+import { BLOG_POSTS } from "./blog-content.js";
 
 /* ===========================================================
    PHOTO LIBRARY — every URL below was verified by reading the
@@ -87,7 +88,7 @@ const FS="'Fraunces','Georgia',serif";
 
 function Reveal({children,style}){const r=useRef(null);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){e.target.classList.add("in");o.disconnect()}},{threshold:.12});if(r.current)o.observe(r.current);return()=>o.disconnect()},[]);return<div ref={r} className="fade-up" style={style}>{children}</div>}
 
-function App(){
+function Home(){
   const[tab,setTab]=useState("residential");
   const[lightbox,setLightbox]=useState(null);
   const[menuOpen,setMenuOpen]=useState(false);
@@ -138,8 +139,10 @@ function App(){
             </div>
           </div>
           <div className="nactions" style={{display:"flex",gap:30,alignItems:"center"}}>
-            {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
-              <button key={a[1]} onClick={()=>go(a[1])} className="nd" style={{display:"none",padding:"10px 2px",background:"none",border:"none",color:C.text,fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
+            {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"],["Blog","/blog/"]].map(a=>(
+              a[1][0]==="/"
+                ? <a key={a[1]} href={a[1]} className="nd" style={{display:"none",padding:"10px 2px",color:C.text,fontSize:".84rem",fontWeight:600,fontFamily:F,textDecoration:"none"}}>{a[0]}</a>
+                : <button key={a[1]} onClick={()=>go(a[1])} className="nd" style={{display:"none",padding:"10px 2px",background:"none",border:"none",color:C.text,fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
             ))}
             <button className="mnav" aria-label="Open menu" onClick={()=>setMenuOpen(o=>!o)} style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:42,height:42,borderRadius:10,border:"none",background:"rgba(0,24,56,.06)",cursor:"pointer",color:C.ink,fontSize:"1.4rem",lineHeight:1}}>☰</button>
             <a className="navphone" href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:".9rem"}}>{BRAND.phone}</a>
@@ -147,8 +150,10 @@ function App(){
           </div>
         </div>
       {menuOpen&&<div className="mmenu" style={{borderTop:"1px solid "+C.line,background:"#fff",padding:"8px 22px 16px",boxShadow:"0 12px 24px rgba(0,24,56,.08)"}}><a href={`tel:${BRAND.tel}`} style={{display:"flex",alignItems:"center",gap:8,padding:"15px 2px",borderBottom:"1px solid "+C.line,color:C.blue,fontWeight:700,fontSize:"1rem",textDecoration:"none"}}>📞 {BRAND.phone}</a>
-        {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"]].map(a=>(
-          <button key={a[1]} onClick={()=>{go(a[1]);setMenuOpen(false);}} style={{display:"block",width:"100%",textAlign:"left",background:"none",border:"none",borderBottom:"1px solid "+C.line,padding:"15px 2px",fontFamily:F,fontSize:"1rem",fontWeight:600,color:C.text,cursor:"pointer"}}>{a[0]}</button>
+        {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"],["Blog","/blog/"]].map(a=>(
+          a[1][0]==="/"
+            ? <a key={a[1]} href={a[1]} style={{display:"block",width:"100%",textAlign:"left",borderBottom:"1px solid "+C.line,padding:"15px 2px",fontFamily:F,fontSize:"1rem",fontWeight:600,color:C.text,textDecoration:"none"}}>{a[0]}</a>
+            : <button key={a[1]} onClick={()=>{go(a[1]);setMenuOpen(false);}} style={{display:"block",width:"100%",textAlign:"left",background:"none",border:"none",borderBottom:"1px solid "+C.line,padding:"15px 2px",fontFamily:F,fontSize:"1rem",fontWeight:600,color:C.text,cursor:"pointer"}}>{a[0]}</button>
         ))}
       </div>}
       </nav>
@@ -381,7 +386,7 @@ function App(){
             <p style={{fontSize:".88rem",lineHeight:1.7,maxWidth:320}}>Owner-operated exterior cleaning for the Pacific Northwest, built on years of large-scale, commercial-grade experience. Residential and commercial pressure washing and soft washing across King & Snohomish Counties — and beyond for larger projects.</p>
           </div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Services</h4>{[["House Washing","services"],["Driveway & Concrete","services"],["Roof Moss Treatment","addons"],["Gutter Clear-Out","addons"],["Commercial","commercial"]].map(s=><div key={s[0]} onClick={()=>go(s[1])} style={{fontSize:".85rem",marginBottom:9,cursor:"pointer"}}>{s[0]}</div>)}</div>
-          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Service Areas","areas"],["FAQ","faq"],["Contact","quote"]].map(s=><div key={s[0]} onClick={()=>go(s[1])} style={{fontSize:".85rem",marginBottom:9,cursor:"pointer"}}>{s[0]}</div>)}</div>
+          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Service Areas","areas"],["Blog","/blog/"],["FAQ","faq"],["Contact","quote"]].map(s=> s[1][0]==="/" ? <div key={s[0]} style={{fontSize:".85rem",marginBottom:9}}><a href={s[1]} style={{color:"inherit",textDecoration:"none"}}>{s[0]}</a></div> : <div key={s[0]} onClick={()=>go(s[1])} style={{fontSize:".85rem",marginBottom:9,cursor:"pointer"}}>{s[0]}</div>)}</div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Contact</h4><div style={{fontSize:".85rem",marginBottom:9}}><a href={`tel:${BRAND.tel}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.phone}</a></div><div style={{fontSize:".85rem",marginBottom:9}}><a href={`mailto:${BRAND.email}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.email}</a></div><div style={{fontSize:".85rem"}}>{BRAND.domain}</div></div>
         </div>
         <div style={{maxWidth:1240,margin:"40px auto 0",paddingTop:24,borderTop:"1px solid rgba(255,255,255,.12)",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>
@@ -392,6 +397,157 @@ function App(){
       <style>{`@media(max-width:820px){.fg{grid-template-columns:1fr 1fr !important}}`}</style>
     </div>
   );
+}
+
+/* ===========================================================
+   SUB-PAGE SHELL (blog / future service + location pages)
+   Static (no hooks) so prerender + hydration always match.
+   =========================================================== */
+function SubNav(){
+  return (
+    <nav style={{position:"sticky",top:0,zIndex:200,background:"#fff",borderBottom:`1px solid ${C.line}`,boxShadow:"0 4px 24px rgba(0,24,56,.06)"}}>
+      <div style={{maxWidth:1100,margin:"0 auto",padding:"12px 22px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:12}}>
+        <a href="/" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none"}}>
+          <div style={{width:38,height:38,borderRadius:11,background:GRAD,display:"flex",alignItems:"center",justifyContent:"center"}}>
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C12 2 5 9 5 14a7 7 0 0014 0c0-5-7-12-7-12z" fill="#fff" opacity=".95"/></svg>
+          </div>
+          <span style={{color:C.ink,fontWeight:800,fontSize:"1.02rem"}}>{BRAND.name}</span>
+        </a>
+        <div style={{display:"flex",alignItems:"center",gap:18}}>
+          <a href="/blog/" className="snl" style={{color:C.text,fontWeight:600,fontSize:".9rem",textDecoration:"none"}}>Blog</a>
+          <a href={`tel:${BRAND.tel}`} className="snl" style={{color:C.blue,fontWeight:700,fontSize:".9rem",textDecoration:"none"}}>{BRAND.phone}</a>
+          <a href="/#quote" style={{background:GRAD,color:"#fff",padding:"10px 18px",borderRadius:9,fontWeight:700,fontSize:".82rem",textDecoration:"none"}}>Free Quote</a>
+        </div>
+      </div>
+    </nav>
+  );
+}
+function Breadcrumbs({crumbs}){
+  return (
+    <nav aria-label="Breadcrumb" style={{maxWidth:760,margin:"0 auto",padding:"20px 22px 0",fontSize:".82rem",color:C.mute}}>
+      {crumbs.map((c,i)=>(
+        <span key={i}>
+          {i>0 && <span style={{margin:"0 7px",color:C.line}}>/</span>}
+          {c.url ? <a href={c.url} style={{color:C.mute,textDecoration:"none"}}>{c.name}</a> : <span style={{color:C.soft}}>{c.name}</span>}
+        </span>
+      ))}
+    </nav>
+  );
+}
+function QuoteCTA(){
+  return (
+    <section style={{background:GRAD,padding:"54px 22px",marginTop:56}}>
+      <div style={{maxWidth:760,margin:"0 auto",textAlign:"center"}}>
+        <h2 style={{fontFamily:FS,color:"#fff",fontSize:"2rem",fontWeight:600,margin:"0 0 10px"}}>Get a free, no-obligation estimate</h2>
+        <p style={{color:"rgba(255,255,255,.85)",fontSize:"1.02rem",margin:"0 0 26px",lineHeight:1.6}}>Owner-operated exterior cleaning across King &amp; Snohomish Counties. We respond within the hour on business days.</p>
+        <div style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap"}}>
+          <a href="/#quote" style={{background:C.aqua,color:C.ink,padding:"15px 30px",borderRadius:11,fontWeight:700,fontSize:"1rem",textDecoration:"none"}}>Request a Free Estimate →</a>
+          <a href={`tel:${BRAND.tel}`} style={{background:"rgba(255,255,255,.14)",color:"#fff",border:"1px solid rgba(255,255,255,.32)",padding:"15px 26px",borderRadius:11,fontWeight:600,fontSize:"1rem",textDecoration:"none"}}>Call {BRAND.phone}</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+function SubFooter(){
+  return (
+    <footer style={{background:C.ink,color:"rgba(255,255,255,.7)",padding:"40px 22px"}}>
+      <div style={{maxWidth:1100,margin:"0 auto",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:20}}>
+        <div style={{maxWidth:320}}>
+          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:12}}>
+            <div style={{width:34,height:34,borderRadius:10,background:GRAD,display:"flex",alignItems:"center",justifyContent:"center"}}>
+              <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2C12 2 5 9 5 14a7 7 0 0014 0c0-5-7-12-7-12z" fill="#fff" opacity=".95"/></svg>
+            </div>
+            <span style={{color:"#fff",fontWeight:700}}>{BRAND.name}</span>
+          </div>
+          <p style={{fontSize:".85rem",lineHeight:1.7}}>Owner-operated pressure &amp; soft washing serving King &amp; Snohomish Counties, WA. Free estimates.</p>
+        </div>
+        <div style={{display:"flex",gap:40,flexWrap:"wrap"}}>
+          <div>
+            <h4 style={{color:"#fff",fontSize:".8rem",textTransform:"uppercase",letterSpacing:1,marginBottom:12}}>Explore</h4>
+            <div style={{fontSize:".85rem",marginBottom:8}}><a href="/" style={{color:"inherit",textDecoration:"none"}}>Home</a></div>
+            <div style={{fontSize:".85rem",marginBottom:8}}><a href="/blog/" style={{color:"inherit",textDecoration:"none"}}>Blog</a></div>
+            <div style={{fontSize:".85rem",marginBottom:8}}><a href="/#quote" style={{color:"inherit",textDecoration:"none"}}>Free Quote</a></div>
+          </div>
+          <div>
+            <h4 style={{color:"#fff",fontSize:".8rem",textTransform:"uppercase",letterSpacing:1,marginBottom:12}}>Contact</h4>
+            <div style={{fontSize:".85rem",marginBottom:8}}><a href={`tel:${BRAND.tel}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.phone}</a></div>
+            <div style={{fontSize:".85rem",marginBottom:8}}><a href={`mailto:${BRAND.email}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.email}</a></div>
+          </div>
+        </div>
+      </div>
+      <div style={{maxWidth:1100,margin:"28px auto 0",paddingTop:18,borderTop:"1px solid rgba(255,255,255,.12)",fontSize:".76rem"}}>© 2026 {BRAND.name}. All rights reserved.</div>
+    </footer>
+  );
+}
+function Shell({crumbs,children}){
+  return (
+    <div style={{background:"#fff",minHeight:"100vh",fontFamily:F,color:C.text}}>
+      <SubNav/>
+      {crumbs && <Breadcrumbs crumbs={crumbs}/>}
+      {children}
+      <QuoteCTA/>
+      <SubFooter/>
+      <style dangerouslySetInnerHTML={{__html:`
+        .article{max-width:760px;margin:0 auto;padding:12px 22px 0;font-size:1.06rem;line-height:1.75;color:${C.text}}
+        .article h1{font-family:${FS};font-weight:600;font-size:2.35rem;line-height:1.12;color:${C.ink};margin:.3em 0 .5em}
+        .article h2{font-family:${FS};font-weight:600;font-size:1.6rem;color:${C.ink};margin:1.6em 0 .5em}
+        .article h3{font-weight:700;font-size:1.18rem;color:${C.ink};margin:1.4em 0 .4em}
+        .article p{margin:0 0 1.1em}
+        .article ul,.article ol{margin:0 0 1.1em 1.3em}
+        .article li{margin:.35em 0}
+        .article a{color:${C.blue};text-decoration:underline}
+        .article strong{color:${C.ink}}
+        .article blockquote{margin:1.3em 0;padding:16px 20px;background:${C.mist};border-left:4px solid ${C.blue};border-radius:8px}
+        .article blockquote p{margin:.4em 0}
+        .article table{width:100%;border-collapse:collapse;margin:1.4em 0;font-size:.95rem}
+        .article th,.article td{border:1px solid ${C.line};padding:10px 12px;text-align:left;vertical-align:top}
+        .article th{background:${C.mist};color:${C.ink};font-weight:700}
+        .article hr{border:none;border-top:1px solid ${C.line};margin:2em 0}
+        .article code{background:${C.mist};padding:2px 6px;border-radius:5px;font-size:.9em}
+        @media(max-width:520px){.snl{display:none}.article h1{font-size:1.8rem}.article h2{font-size:1.35rem}}
+      `}}/>
+    </div>
+  );
+}
+function BlogIndex(){
+  return (
+    <Shell crumbs={[{name:"Home",url:"/"},{name:"Blog"}]}>
+      <div style={{maxWidth:760,margin:"0 auto",padding:"12px 22px 0"}}>
+        <h1 style={{fontFamily:FS,fontWeight:600,fontSize:"2.35rem",color:C.ink,margin:".2em 0 .3em",lineHeight:1.12}}>The Cascade Clean Pros Blog</h1>
+        <p style={{fontSize:"1.08rem",color:C.soft,margin:"0 0 30px",lineHeight:1.7}}>Practical guides to exterior cleaning, soft washing, and protecting your home from moss and algae in the Pacific Northwest climate.</p>
+        <div style={{display:"grid",gap:18}}>
+          {BLOG_POSTS.map(p=>(
+            <a key={p.slug} href={p.path} style={{display:"block",border:`1px solid ${C.line}`,borderRadius:14,padding:"22px 24px",textDecoration:"none",background:"#fff",boxShadow:"0 4px 18px rgba(0,24,56,.05)"}}>
+              <h2 style={{fontFamily:FS,fontWeight:600,fontSize:"1.35rem",color:C.ink,margin:"0 0 8px",lineHeight:1.2}}>{p.title}</h2>
+              <p style={{fontSize:".96rem",color:C.soft,margin:"0 0 12px",lineHeight:1.6}}>{p.metaDescription}</p>
+              <span style={{color:C.blue,fontWeight:700,fontSize:".9rem"}}>Read more →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </Shell>
+  );
+}
+function BlogPost({post}){
+  return (
+    <Shell crumbs={[{name:"Home",url:"/"},{name:"Blog",url:"/blog/"},{name:post.title}]}>
+      <article className="article" dangerouslySetInnerHTML={{__html:post.html}}/>
+    </Shell>
+  );
+}
+
+function normPath(p){
+  if(!p) return "/";
+  p = p.split("?")[0].split("#")[0];
+  if(p.length>1 && !p.endsWith("/")) p += "/";
+  return p;
+}
+function App({route}){
+  const path = normPath(route || (typeof window!=="undefined" ? window.location.pathname : "/"));
+  if(path==="/blog/") return <BlogIndex/>;
+  const post = BLOG_POSTS.find(p=>p.path===path);
+  if(post) return <BlogPost post={post}/>;
+  return <Home/>;
 }
 
 export default App;
