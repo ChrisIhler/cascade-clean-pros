@@ -138,14 +138,14 @@ function App(){
       <style>{`@media(min-width:920px){.nd{display:inline-block !important}}`}</style>
 
       {/* HERO */}
-      <header style={{position:"relative",minHeight:"100vh",display:"flex",alignItems:"center",overflow:"hidden"}}>
+      <header style={{position:"relative",display:"flex",alignItems:"center",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0}}>
           <video autoPlay muted loop playsInline poster="/media/hero-poster.jpg" aria-hidden="true" style={{width:"100%",height:"100%",objectFit:"cover"}}>
             <source src="/media/hero.mp4" type="video/mp4"/>
           </video>
           <div style={{position:"absolute",inset:0,background:`linear-gradient(105deg,${C.ink}f5 0%,${C.deep}e0 40%,${C.blue}66 72%,transparent 100%)`}}/>
         </div>
-        <div style={{position:"relative",zIndex:2,maxWidth:1240,margin:"0 auto",padding:"120px 28px 60px",width:"100%",display:"grid",gridTemplateColumns:"1.1fr .9fr",gap:60,alignItems:"center"}} className="hg">
+        <div style={{position:"relative",zIndex:2,maxWidth:1240,margin:"0 auto",padding:"108px 28px 56px",width:"100%",display:"grid",gridTemplateColumns:"1.1fr .9fr",gap:60,alignItems:"center"}} className="hg">
           <div>
             <div style={{display:"inline-flex",alignItems:"center",gap:9,background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:100,padding:"7px 16px",marginBottom:26,backdropFilter:"blur(8px)"}}>
               <span style={{width:8,height:8,borderRadius:"50%",background:C.aqua,boxShadow:`0 0 10px ${C.aqua}`}}/>
@@ -204,7 +204,7 @@ function App(){
       </div>
 
       {/* RESIDENTIAL SERVICES */}
-      <section id="services" style={{maxWidth:1240,margin:"0 auto",padding:"100px 28px 40px"}}>
+      <section id="services" style={{maxWidth:1240,margin:"0 auto",padding:"74px 28px 34px"}}>
         <Reveal>
           <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>Residential</span></div>
           <h2 style={{fontFamily:FS,fontSize:"2.7rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Homes, top to bottom</h2>
@@ -229,7 +229,7 @@ function App(){
             <img src={P.surface} alt="Commercial pressure washing" loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover"}}/>
             <div style={{position:"absolute",inset:0,background:`linear-gradient(100deg,${C.ink}f5,${C.deep}d4 55%,${C.blue}88)`}}/>
           </div>
-          <div style={{position:"relative",zIndex:2,maxWidth:1240,margin:"0 auto",padding:"70px 28px",width:"100%"}}>
+          <div style={{position:"relative",zIndex:2,maxWidth:1240,margin:"0 auto",padding:"56px 28px",width:"100%"}}>
             <div style={{maxWidth:620}}>
               <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.aqua,fontWeight:800}}>Commercial Division</span>
               <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:"#fff",margin:"14px 0 18px",fontWeight:600,lineHeight:1.1}}>Built for property managers & business owners</h2>
@@ -245,7 +245,7 @@ function App(){
             </div>
           </div>
         </div>
-        <div style={{maxWidth:1240,margin:"0 auto",padding:"60px 28px 80px"}}>
+        <div style={{maxWidth:1240,margin:"0 auto",padding:"48px 28px 60px"}}>
           <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 8px",textAlign:"center"}}>From storefronts and restaurants to warehouses and fleets — scheduled around your operations.</p>
           <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap any service to enlarge.</p>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
@@ -261,7 +261,7 @@ function App(){
       </section>
 
       {/* ADD-ON SERVICES */}
-      <section id="addons" style={{maxWidth:1240,margin:"0 auto",padding:"100px 28px 40px"}}>
+      <section id="addons" style={{maxWidth:1240,margin:"0 auto",padding:"74px 28px 34px"}}>
         <Reveal>
           <div style={{textAlign:"center",marginBottom:44}}>
             <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>More Than Pressure Washing</span>
@@ -290,7 +290,7 @@ function App(){
       </section>
 
       {/* PROCESS */}
-      <section style={{maxWidth:1240,margin:"0 auto",padding:"90px 28px"}}>
+      <section style={{maxWidth:1240,margin:"0 auto",padding:"66px 28px"}}>
         <Reveal><div style={{textAlign:"center",marginBottom:50}}>
           <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>How It Works</span>
           <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,margin:"12px 0",fontWeight:600}}>Simple, from quote to clean</h2>
@@ -307,7 +307,7 @@ function App(){
       </section>
 
       {/* AREAS */}
-      <section id="areas" style={{position:"relative",padding:"80px 28px",overflow:"hidden"}}>
+      <section id="areas" style={{position:"relative",padding:"60px 28px",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0,background:GRAD}}/>
         <div style={{position:"relative",zIndex:2,maxWidth:1000,margin:"0 auto",textAlign:"center"}}>
           <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:"rgba(255,255,255,.85)",fontWeight:800}}>Coverage</span>
@@ -321,7 +321,7 @@ function App(){
       </section>
 
       {/* FAQ */}
-      <section id="faq" style={{maxWidth:820,margin:"0 auto",padding:"90px 28px"}}>
+      <section id="faq" style={{maxWidth:820,margin:"0 auto",padding:"66px 28px"}}>
         <Reveal><div style={{textAlign:"center",marginBottom:44}}>
           <span style={{fontSize:".72rem",textTransform:"uppercase",letterSpacing:3,color:C.teal,fontWeight:800}}>Questions</span>
           <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,margin:"12px 0",fontWeight:600}}>Good to know</h2>
@@ -337,7 +337,7 @@ function App(){
       </section>
 
       {/* CTA */}
-      <section id="quote" style={{position:"relative",padding:"100px 28px",overflow:"hidden"}}>
+      <section id="quote" style={{position:"relative",padding:"72px 28px",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0}}><img src={P.drive2} alt="" loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover"}}/><div style={{position:"absolute",inset:0,background:`linear-gradient(135deg,${C.ink}f2,${C.teal}cc)`}}/></div>
         <div style={{position:"relative",zIndex:2,maxWidth:680,margin:"0 auto",textAlign:"center"}}>
           <h2 style={{fontFamily:FS,fontSize:"2.9rem",color:"#fff",marginBottom:14,fontWeight:600,lineHeight:1.1}}>Ready for a cleaner property?</h2>
