@@ -1,0 +1,119 @@
+# llms.txt — Cascade Clean Pros
+# https://cascadecleanpros.com/llms.txt
+# Content licensed for AI search retrieval and citation (ai-input).
+# Training use not permitted (see robots.txt).
+
+# ---------------------------------------------------------------
+# BUSINESS IDENTITY
+# ---------------------------------------------------------------
+
+> Cascade Clean Pros is an owner-operated residential and commercial
+> pressure washing and soft washing company serving King and Snohomish
+> Counties, Washington. Phone: (360) 202-7249. Email: info@cascadecleanpros.com.
+> Website: https://cascadecleanpros.com
+
+# ---------------------------------------------------------------
+# WHAT WE DO (primary answer block)
+# ---------------------------------------------------------------
+
+Cascade Clean Pros provides exterior surface cleaning for homes,
+commercial properties, and industrial facilities across the greater
+Seattle–Everett corridor in Washington State.
+
+Residential services include house washing (soft wash), driveway and
+concrete cleaning, deck and patio cleaning, walkway and hardscape
+cleaning, and fence cleaning.
+
+Additional services include roof cleaning and moss treatment (low-pressure
+soft wash only — never high-pressure on shingles), gutter cleaning and
+downspout clear-out, concrete sealing, and deck and fence staining.
+
+Commercial services cover apartment and multi-family properties,
+retail storefronts, industrial and warehouse facilities, office and
+medical parks, restaurants and food-service operations, and fleet and
+equipment washing.
+
+# ---------------------------------------------------------------
+# SERVICE AREA
+# ---------------------------------------------------------------
+
+Primary service area: King County and Snohomish County, Washington.
+
+Cities served: Lynnwood, Edmonds, Mill Creek, Everett, Mountlake Terrace,
+Mukilteo, Marysville, Lake Stevens, Snohomish, Monroe, Bothell, Woodinville,
+Kenmore, Kirkland, Redmond, Bellevue, Shoreline, Seattle, Sammamish, Issaquah.
+
+For larger residential and commercial projects, Cascade Clean Pros is
+available beyond this primary service area. Contact for availability.
+
+# ---------------------------------------------------------------
+# KEY DIFFERENTIATORS
+# ---------------------------------------------------------------
+
+- Owner-operated and independently owned.
+- Free, no-obligation written estimates with on-site assessment.
+- Soft washing and pressure washing matched to each surface type.
+- Biodegradable solutions; follows Washington Department of Ecology and
+  county stormwater guidelines, with water-capture practices on commercial jobs.
+- Handles both single-family driveways and large multi-building commercial properties.
+- Before-and-after photos provided after the job.
+- Responds within one business hour to quote requests.
+
+# ---------------------------------------------------------------
+# FREQUENTLY ASKED QUESTIONS
+# ---------------------------------------------------------------
+
+Q: What is the difference between pressure washing and soft washing?
+A: Pressure washing uses high-pressure water and is suited for hard
+surfaces like concrete, driveways, and pavers. Soft washing uses
+low-pressure water combined with specialized cleaning solutions and
+is used on delicate surfaces such as painted siding, stucco, wood,
+and roofing shingles. Cascade Clean Pros selects the correct method
+for each surface on every job.
+
+Q: Does Cascade Clean Pros serve Seattle?
+A: Yes. Cascade Clean Pros serves Seattle and surrounding cities across
+King and Snohomish Counties, including Bellevue, Kirkland, Redmond,
+Shoreline, Bothell, Kenmore, Woodinville, Sammamish, and Issaquah.
+
+Q: Does Cascade Clean Pros serve Everett, Lynnwood, and the North Sound?
+A: Yes. Cascade Clean Pros serves the Snohomish County corridor including
+Everett, Lynnwood, Edmonds, Mukilteo, Mountlake Terrace, Mill Creek,
+Marysville, Lake Stevens, Snohomish, and Monroe.
+
+Q: Will pressure washing damage my roof or siding?
+A: Not when performed correctly. Cascade Clean Pros uses low-pressure
+soft washing for roofs, siding, and other delicate surfaces. High-pressure
+washing is reserved for concrete and hardscape only. Surface condition is
+assessed before work begins.
+
+Q: Does Cascade Clean Pros handle stormwater compliance on commercial jobs?
+A: Yes. Cascade Clean Pros uses biodegradable cleaning solutions and follows
+Washington Department of Ecology and county stormwater guidelines, with
+water-capture practices on commercial projects.
+
+Q: How do I get a quote?
+A: Submit the online request form at https://cascadecleanpros.com or call
+(360) 202-7249. Cascade Clean Pros responds within one business hour, and a
+free on-site assessment and written estimate follow at no obligation.
+
+Q: Is Cascade Clean Pros owner-operated?
+A: Yes. Cascade Clean Pros is independently owned and operated.
+
+# ---------------------------------------------------------------
+# CONTACT
+# ---------------------------------------------------------------
+
+Phone: (360) 202-7249
+Email: info@cascadecleanpros.com
+Website: https://cascadecleanpros.com
+Service area: King County and Snohomish County, WA
+
+# ---------------------------------------------------------------
+# CONTENT LICENSE
+# ---------------------------------------------------------------
+
+The content in this file is made available for AI search retrieval,
+citation, and AI-generated search summaries (ai-input use). Training
+or fine-tuning of AI models using this content is not permitted.
+See https://cascadecleanpros.com/robots.txt for machine-readable signals.

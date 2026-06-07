@@ -23,11 +23,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <link rel="preconnect" href="https://images.pexels.com">
-<!-- LocalBusiness structured data -->
+<link rel="preload" as="image" href="/media/hero-poster.jpg" fetchpriority="high">
+<!-- Structured data: LocalBusiness + FAQPage + WebSite -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": [
+    "CleaningService",
     "HomeAndConstructionBusiness",
     "LocalBusiness"
   ],
@@ -37,10 +39,16 @@
   "telephone": "+1-360-202-7249",
   "email": "info@cascadecleanpros.com",
   "image": "https://cascadecleanpros.com/media/hero-poster.jpg",
+  "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
     "addressRegion": "WA",
     "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 47.7582,
+    "longitude": -122.2145
   },
   "areaServed": [
     {
@@ -51,54 +59,222 @@
       "@type": "AdministrativeArea",
       "name": "Snohomish County, Washington"
     },
-    {"@type":"City","name":"Lynnwood, WA"},
-    {"@type":"City","name":"Edmonds, WA"},
-    {"@type":"City","name":"Mill Creek, WA"},
-    {"@type":"City","name":"Everett, WA"},
-    {"@type":"City","name":"Mountlake Terrace, WA"},
-    {"@type":"City","name":"Mukilteo, WA"},
-    {"@type":"City","name":"Marysville, WA"},
-    {"@type":"City","name":"Lake Stevens, WA"},
-    {"@type":"City","name":"Snohomish, WA"},
-    {"@type":"City","name":"Monroe, WA"},
-    {"@type":"City","name":"Bothell, WA"},
-    {"@type":"City","name":"Woodinville, WA"},
-    {"@type":"City","name":"Kenmore, WA"},
-    {"@type":"City","name":"Kirkland, WA"},
-    {"@type":"City","name":"Redmond, WA"},
-    {"@type":"City","name":"Bellevue, WA"},
-    {"@type":"City","name":"Shoreline, WA"},
-    {"@type":"City","name":"Seattle, WA"},
-    {"@type":"City","name":"Sammamish, WA"},
-    {"@type":"City","name":"Issaquah, WA"}
-  ],
-  "knowsAbout": [
-    "Pressure washing",
-    "Soft washing",
-    "House washing",
-    "Driveway & concrete cleaning",
-    "Commercial exterior cleaning"
+    {
+      "@type": "City",
+      "name": "Lynnwood, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Edmonds, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Mill Creek, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Everett, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Mountlake Terrace, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Mukilteo, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Marysville, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Lake Stevens, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Snohomish, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Monroe, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Bothell, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Woodinville, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Kenmore, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Kirkland, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Redmond, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Bellevue, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Shoreline, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Seattle, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Sammamish, WA"
+    },
+    {
+      "@type": "City",
+      "name": "Issaquah, WA"
+    }
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Exterior cleaning services",
+    "name": "Exterior Cleaning Services",
     "itemListElement": [
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Pressure washing"
+          "name": "Pressure Washing",
+          "description": "High-pressure water cleaning for hard surfaces including concrete, driveways, and walkways."
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Soft washing"
+          "name": "Soft Washing",
+          "description": "Low-pressure cleaning with specialized solutions safe for siding, roofs, and delicate exterior surfaces."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "House Washing",
+          "description": "Gentle soft wash that lifts dirt, mold, and mildew from siding, trim, soffits, and exterior surfaces."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Roof Cleaning (Soft Wash) & Moss Treatment",
+          "description": "Moss and algae treatment and removal from roofs using low-pressure soft washing — never high-pressure on shingles."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Gutter Cleaning & Clear-Out",
+          "description": "Full gutter and downspout clear-out so water flows freely and foundations stay protected."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Driveway & Concrete Cleaning",
+          "description": "Restores concrete, pavers, and walkways, with oil-stain treatment for tough spots."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Concrete Sealing",
+          "description": "Protective sealing after cleaning to guard concrete against stains, moisture, and wear."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Deck & Patio Cleaning",
+          "description": "Brightens wood, composite, and stone outdoor surfaces."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Fence Cleaning & Staining",
+          "description": "Removes algae, moss, and grime from wood, vinyl, and metal fencing; staining and sealing available."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Commercial & Fleet Washing",
+          "description": "Exterior cleaning for storefronts, apartment buildings, warehouses, restaurants, and commercial vehicle fleets across King and Snohomish Counties."
         }
       }
     ]
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's the difference between pressure washing and soft washing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pressure washing uses high-pressure water for hard surfaces like concrete. Soft washing uses low pressure with specialized solutions for delicate surfaces like siding and roofs. We match the method to every surface."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you handle wastewater and stormwater compliance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We use biodegradable solutions and follow Washington Department of Ecology and county stormwater guidelines, with water-capture practices on commercial jobs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will pressure washing damage my property?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not when done correctly. We adjust pressure, nozzle, and chemistry for each surface and are trained to spot vulnerabilities before we start."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What areas do you serve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our core service area is King and Snohomish Counties — the greater Seattle–Everett corridor. For larger residential and commercial projects we're happy to travel farther; just ask when you request your quote."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Cascade Clean Pros",
+  "url": "https://cascadecleanpros.com/",
+  "description": "Residential and commercial pressure washing and soft washing across King & Snohomish Counties, WA."
 }
 </script>
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
