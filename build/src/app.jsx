@@ -261,11 +261,11 @@ function App(){
                 ))}
               </div>
               <button onClick={()=>go("quote")} style={{background:C.aqua,color:C.ink,border:"none",padding:"16px 32px",borderRadius:11,fontWeight:700,fontSize:"1rem",cursor:"pointer",fontFamily:F,boxShadow:"0 8px 28px rgba(63,192,180,.4)"}}>Request a Commercial Bid →</button>
+              <p style={{fontSize:"1.05rem",color:"rgba(255,255,255,.78)",margin:"22px 0 0",maxWidth:520,lineHeight:1.6,textAlign:"left"}}>From storefronts and restaurants to warehouses and fleets — scheduled around your operations.</p>
             </div>
           </div>
         </div>
         <div style={{maxWidth:1240,margin:"0 auto",padding:"48px 28px 60px"}}>
-          <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 8px",textAlign:"center"}}>From storefronts and restaurants to warehouses and fleets — scheduled around your operations.</p>
           <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap any service to enlarge.</p>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
             {[["/media/cascade-apartment-multifamily.jpg","Apartment and multi-family exterior cleaning"],["/media/cascade-retail-storefront.jpg","Retail and storefront cleaning"],["/media/cascade-industrial-warehouse.jpg","Industrial and warehouse cleaning"],["/media/cascade-office-medical.jpg","Office and medical park cleaning"],["/media/cascade-restaurant-food.jpg","Restaurant and food service cleaning"],["/media/cascade-fleet-equipment.jpg","Fleet and equipment washing — trucks, vans and heavy equipment"]].map(p=>(
