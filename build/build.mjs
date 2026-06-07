@@ -153,21 +153,18 @@ for (const r of SUBROUTES) {
 
 rmSync(tmp, { recursive: true, force: true });
 
-// 5. Keep sitemap.xml in sync — add any new sub-page URLs not already listed.
+// 5. Rebuild the sub-route entries of sitemap.xml each run (self-healing — removes
+//    stale routes). The homepage entry (multi-line) is left untouched.
 try {
   const smPath = join(ROOT, "sitemap.xml");
   let sm = readFileSync(smPath, "utf8");
-  const urls = SUBROUTES.map(r => ORIGIN + r.path);
-  const missing = urls.filter(u => !sm.includes(`<loc>${u}</loc>`));
-  if (missing.length) {
-    const entries = missing.map(u =>
-      `  <url><loc>${u}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join("\n");
-    sm = sm.replace("</urlset>", entries + "\n</urlset>");
-    writeFileSync(smPath, sm);
-    console.log(`sitemap.xml: added ${missing.length} url(s)`);
-  } else {
-    console.log("sitemap.xml: already current");
-  }
+  // strip all previously-generated single-line sub-route entries
+  sm = sm.replace(/[ \t]*<url><loc>https:\/\/cascadecleanpros\.com\/[^<]*<\/loc><changefreq>monthly<\/changefreq><priority>0\.7<\/priority><\/url>\n?/g, "");
+  const entries = SUBROUTES.map(r =>
+    `  <url><loc>${ORIGIN + r.path}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join("\n");
+  sm = sm.replace("</urlset>", entries + (entries ? "\n" : "") + "</urlset>");
+  writeFileSync(smPath, sm);
+  console.log(`sitemap.xml: refreshed ${SUBROUTES.length} sub-route url(s)`);
 } catch (e) {
   console.log("sitemap.xml: skipped (" + e.message + ")");
 }
