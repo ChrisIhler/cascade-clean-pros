@@ -113,13 +113,12 @@ function Home(){
       setErr("Something went wrong sending your request. Please call us instead.");
     }finally{setSending(false);}
   };
-  useEffect(()=>{const f=()=>setSc(window.scrollY>40);addEventListener("scroll",f);return()=>removeEventListener("scroll",f)},[]);
+  useEffect(()=>{const f=()=>setSc(window.scrollY>40);addEventListener("scroll",f,{passive:true});return()=>removeEventListener("scroll",f)},[]);
   useEffect(()=>{const k=e=>{if(e.key==="Escape")setLightbox(null);};addEventListener("keydown",k);return()=>removeEventListener("keydown",k)},[]);
   const go=id=>{const el=document.getElementById(id);if(!el)return;if(id==="quote"){if(innerWidth<880){el.scrollIntoView({behavior:"smooth",block:"start"});}else{scrollTo({top:0,behavior:"smooth"});}setFormActive(true);el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),10000);}else{el.scrollIntoView({behavior:"smooth",block:"start"});}};
 
   return(
     <div style={{fontFamily:F,color:C.text,background:C.bg,lineHeight:1.65,overflowX:"hidden"}}>
-      <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 
       {lightbox&&<div onClick={()=>setLightbox(null)} style={{position:"fixed",inset:0,zIndex:2000,background:"rgba(0,12,28,.92)",display:"flex",alignItems:"center",justifyContent:"center",padding:"4vw",cursor:"zoom-out"}}>
         <img src={lightbox} alt="Service detail" onClick={e=>e.stopPropagation()} style={{maxWidth:"96vw",maxHeight:"92vh",width:"auto",height:"auto",borderRadius:12,boxShadow:"0 30px 90px rgba(0,0,0,.55)",cursor:"default"}}/>
@@ -385,8 +384,8 @@ function Home(){
             </div>
             <p style={{fontSize:".88rem",lineHeight:1.7,maxWidth:320}}>Owner-operated exterior cleaning for the Pacific Northwest, built on years of large-scale, commercial-grade experience. Residential and commercial pressure washing and soft washing across King & Snohomish Counties — and beyond for larger projects.</p>
           </div>
-          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Services</h4>{[["House Washing","services"],["Driveway & Concrete","services"],["Roof Moss Treatment","addons"],["Gutter Clear-Out","addons"],["Commercial","commercial"]].map(s=><div key={s[0]} onClick={()=>go(s[1])} style={{fontSize:".85rem",marginBottom:9,cursor:"pointer"}}>{s[0]}</div>)}</div>
-          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Service Areas","areas"],["Blog","/blog/"],["FAQ","faq"],["Contact","quote"]].map(s=> s[1][0]==="/" ? <div key={s[0]} style={{fontSize:".85rem",marginBottom:9}}><a href={s[1]} style={{color:"inherit",textDecoration:"none"}}>{s[0]}</a></div> : <div key={s[0]} onClick={()=>go(s[1])} style={{fontSize:".85rem",marginBottom:9,cursor:"pointer"}}>{s[0]}</div>)}</div>
+          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Services</h4>{[["House Washing","services"],["Driveway & Concrete","services"],["Roof Moss Treatment","addons"],["Gutter Clear-Out","addons"],["Commercial","commercial"]].map(s=><a key={s[0]} href={"/#"+s[1]} onClick={e=>{e.preventDefault();go(s[1]);}} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none",cursor:"pointer"}}>{s[0]}</a>)}</div>
+          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Service Areas","areas"],["Blog","/blog/"],["FAQ","faq"],["Contact","quote"]].map(s=>{const u=s[1][0]==="/";return <a key={s[0]} href={u?s[1]:"/#"+s[1]} onClick={u?undefined:e=>{e.preventDefault();go(s[1]);}} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none",cursor:"pointer"}}>{s[0]}</a>;})}</div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Contact</h4><div style={{fontSize:".85rem",marginBottom:9}}><a href={`tel:${BRAND.tel}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.phone}</a></div><div style={{fontSize:".85rem",marginBottom:9}}><a href={`mailto:${BRAND.email}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.email}</a></div><div style={{fontSize:".85rem"}}>{BRAND.domain}</div></div>
         </div>
         <div style={{maxWidth:1240,margin:"40px auto 0",paddingTop:24,borderTop:"1px solid rgba(255,255,255,.12)",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>

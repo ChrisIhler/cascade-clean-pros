@@ -2,3 +2,6 @@ node_modules/
 .build/
 .DS_Store
 *.log
+
+# Internal marketing docs — stored here for convenience, never deployed
+cascade-marketing/

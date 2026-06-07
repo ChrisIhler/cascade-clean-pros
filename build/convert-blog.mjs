@@ -5,7 +5,7 @@ import { marked } from "marked";
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
-const SRC = join(process.env.HOME, "cascade-marketing", "blog");
+const SRC = join(process.env.HOME, "Desktop", "Cascade Clean Pros", "Cascade-Clean-Pros-Business", "Marketing", "blog");
 const order = ["soft-wash-vs-pressure-wash", "moss-damage-roof-pnw",
   "how-often-wash-house-pacific-northwest", "does-pressure-washing-damage-vinyl-siding"];
 
@@ -45,6 +45,10 @@ posts.sort((a, b) => {
   return (i < 0 ? 99 : i) - (j < 0 ? 99 : j);
 });
 
+if (posts.length === 0) {
+  console.error("convert-blog: found 0 markdown posts in " + SRC + " — refusing to overwrite src/blog-content.js (would wipe the live blog).");
+  process.exit(1);
+}
 const out = "// AUTO-GENERATED from ~/cascade-marketing/blog/*.md by convert-blog.mjs — do not edit by hand.\n" +
   "export const BLOG_POSTS = " + JSON.stringify(posts, null, 2) + ";\n";
 writeFileSync(join(process.cwd(), "src", "blog-content.js"), out);
