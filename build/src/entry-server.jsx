@@ -23,6 +23,7 @@ export const SUBROUTES = [
     slug: p.slug,
     title: `${p.title} | Cascade Clean Pros`,
     description: p.metaDescription,
+    iso: p.dateISO,
   })),
   ...(SERVICE_PAGES.length ? [{
     path: "/services/",

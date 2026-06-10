@@ -32,7 +32,9 @@ for (const f of files) {
     .replace(/^\s*\[(?:IMAGE|CHART):[^\]]*\]\s*$/gim, "")
     .replace(/\[(?:IMAGE|CHART):[^\]]*\]/gi, "")
     .replace(/\[(?:UNIQUE INSIGHT|PERSONAL EXPERIENCE)\]\s*/gi, "");
-  const html = marked.parse(cleaned, { gfm: true }).trim();
+  let html = marked.parse(cleaned, { gfm: true }).trim();
+  // visible publish date under the <h1> (SEO freshness + matches schema datePublished)
+  if (meta.date) html = html.replace(/(<\/h1>)/, `$1\n<p style="font-size:.85rem;color:#5d6a85;margin:-.2em 0 1.4em">Published ${meta.date}</p>`);
   const slug = meta.slug || f.replace(/\.md$/, "");
   posts.push({
     slug,
@@ -40,6 +42,7 @@ for (const f of files) {
     title: meta.title || slug,
     metaDescription: meta.metaDescription || "",
     primaryKeyword: meta.primaryKeyword || "",
+    dateISO: meta.dateISO || "",
     html,
   });
 }

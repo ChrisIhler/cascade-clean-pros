@@ -64,7 +64,7 @@ function pageSchema(r, img = "/media/hero-poster.jpg") {
     blocks.push({
       "@context": "https://schema.org", "@type": "BlogPosting",
       "headline": headline, "description": r.description,
-      "datePublished": TODAY, "dateModified": TODAY,
+      "datePublished": r.iso || TODAY, "dateModified": TODAY,
       "image": ORIGIN + img,
       "author": { "@type": "Organization", "name": "Cascade Clean Pros" },
       "publisher": { "@type": "Organization", "name": "Cascade Clean Pros", "url": ORIGIN + "/" },
