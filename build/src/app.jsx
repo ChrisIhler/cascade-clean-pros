@@ -119,6 +119,8 @@ function Home(){
   };
   useEffect(()=>{const f=()=>setSc(window.scrollY>40);addEventListener("scroll",f,{passive:true});return()=>removeEventListener("scroll",f)},[]);
   useEffect(()=>{const k=e=>{if(e.key==="Escape")setLightbox(null);};addEventListener("keydown",k);return()=>removeEventListener("keydown",k)},[]);
+  const heroRef=useRef(null);
+  useEffect(()=>{if(typeof matchMedia==="function"&&matchMedia("(prefers-reduced-motion: reduce)").matches&&heroRef.current)heroRef.current.pause();},[]);
   const go=id=>{const el=document.getElementById(id);if(!el)return;if(id==="quote"){if(innerWidth<880){el.scrollIntoView({behavior:"smooth",block:"start"});}else{scrollTo({top:0,behavior:"smooth"});}setFormActive(true);el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),10000);}else{el.scrollIntoView({behavior:"smooth",block:"start"});}};
 
   return(
@@ -167,7 +169,7 @@ function Home(){
       {/* HERO */}
       <header style={{position:"relative",display:"flex",alignItems:"center",overflow:"hidden"}}>
         <div className="hv" style={{position:"absolute",inset:0}}>
-          <video autoPlay muted loop playsInline poster="/media/hero-poster.jpg" aria-hidden="true" style={{width:"100%",height:"100%",objectFit:"cover"}}>
+          <video ref={heroRef} autoPlay muted loop playsInline poster="/media/hero-poster.jpg" aria-hidden="true" style={{width:"100%",height:"100%",objectFit:"cover"}}>
             <source src="/media/hero.mp4" type="video/mp4"/>
           </video>
           <div style={{position:"absolute",inset:0,background:`linear-gradient(105deg,${C.ink}f5 0%,${C.deep}e0 40%,${C.blue}66 72%,transparent 100%)`}}/>
@@ -238,7 +240,7 @@ function Home(){
           <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>Residential</span></div>
           <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Homes, top to bottom</h2>
           <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 8px",textAlign:"center"}}>Gentle, surface-safe soft washing and pressure washing for every part of your property.</p>
-          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap any service to enlarge.</p>
+          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap or click any service to enlarge.</p>
         </Reveal>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
           {[["/media/cascade-house-washing.jpg","House washing — soft wash for siding, trim, soffits and exterior surfaces"],["/media/cascade-driveway-concrete.jpg","Driveway and concrete cleaning"],["/media/cascade-deck-patio.jpg","Deck and patio cleaning"],["/media/cascade-walkways-hardscape.jpg","Walkways and hardscape cleaning"],["/media/cascade-fence-cleaning.jpg","Fence cleaning"]].map(p=>(
@@ -276,7 +278,7 @@ function Home(){
           </div>
         </div>
         <div style={{maxWidth:1240,margin:"0 auto",padding:"48px 28px 60px"}}>
-          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap any service to enlarge.</p>
+          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap or click any service to enlarge.</p>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
             {[["/media/cascade-apartment-multifamily.jpg","Apartment and multi-family exterior cleaning"],["/media/cascade-retail-storefront.jpg","Retail and storefront cleaning"],["/media/cascade-industrial-warehouse.jpg","Industrial and warehouse cleaning"],["/media/cascade-office-medical.jpg","Office and medical park cleaning"],["/media/cascade-restaurant-food.jpg","Restaurant and food service cleaning"],["/media/cascade-fleet-equipment.jpg","Fleet and equipment washing — trucks, vans and heavy equipment"]].map(p=>(
               <div key={p[0]} role="button" tabIndex={0} aria-label={"Enlarge: "+p[1]} onClick={()=>setLightbox(p[0])} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setLightbox(p[0]);}}} style={{display:"block",cursor:"zoom-in",borderRadius:14,overflow:"hidden",boxShadow:"0 5px 20px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
