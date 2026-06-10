@@ -380,6 +380,18 @@ function Home(){
         </div>
       </section>
 
+      {/* MEET THE OWNERS */}
+      <section id="owners" style={{maxWidth:1240,margin:"0 auto",padding:"56px 28px"}}>
+        <div style={{background:C.mist,border:`1px solid ${C.line}`,borderRadius:20,padding:"36px 32px",display:"flex",gap:28,alignItems:"center",flexWrap:"wrap"}}>
+          <div style={{width:96,height:96,borderRadius:24,background:GRAD,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"0 8px 24px rgba(0,84,180,.3)"}}>
+            <svg width="48" height="48" viewBox="0 0 24 24"><path d="M12 2C12 2 5 9 5 14a7 7 0 0014 0c0-5-7-12-7-12z" fill="#fff" opacity=".95"/></svg>
+          </div>
+          <div style={{flex:"1 1 320px"}}>
+            <h2 style={{fontFamily:FS,fontSize:"1.7rem",fontWeight:600,color:C.ink,margin:"0 0 10px"}}>Meet Chris &amp; Corey Ihler</h2>
+            <p style={{fontSize:"1.02rem",color:C.soft,lineHeight:1.7,margin:0}}>Cascade Clean Pros is owner-operated by twin brothers Chris and Corey Ihler. They're hands-on with every project — from the free on-site estimate to the final walkthrough — matching the right pressure and method to each surface. Local, family-run, and serving homes and businesses across King &amp; Snohomish Counties.</p>
+          </div>
+        </div>
+      </section>
       </main>
       {/* FOOTER */}
       <footer style={{background:C.deep,color:"rgba(255,255,255,.55)",padding:"56px 28px 32px"}}>
