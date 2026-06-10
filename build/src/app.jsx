@@ -113,12 +113,15 @@ function Home(){
     try{
       await fetch(FORM_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(form)});
       setSent(true);
+      if(window.fbq)window.fbq("track","Lead");
+      if(window.gtag)window.gtag("event","generate_lead");
     }catch(e){
       setErr("Something went wrong sending your request. Please call us instead.");
     }finally{setSending(false);}
   };
   useEffect(()=>{const f=()=>setSc(window.scrollY>40);addEventListener("scroll",f,{passive:true});return()=>removeEventListener("scroll",f)},[]);
   useEffect(()=>{const k=e=>{if(e.key==="Escape")setLightbox(null);};addEventListener("keydown",k);return()=>removeEventListener("keydown",k)},[]);
+  useEffect(()=>{const h=e=>{const a=e.target&&e.target.closest&&e.target.closest('a[href^="tel:"]');if(a){if(window.gtag)window.gtag("event","phone_call_click");if(window.fbq)window.fbq("track","Contact");}};addEventListener("click",h);return()=>removeEventListener("click",h)},[]);
   const heroRef=useRef(null);
   useEffect(()=>{if(typeof matchMedia==="function"&&matchMedia("(prefers-reduced-motion: reduce)").matches&&heroRef.current)heroRef.current.pause();},[]);
   const go=id=>{const el=document.getElementById(id);if(!el)return;if(id==="quote"){if(innerWidth<880){el.scrollIntoView({behavior:"smooth",block:"start"});}else{scrollTo({top:0,behavior:"smooth"});}setFormActive(true);el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),10000);}else{el.scrollIntoView({behavior:"smooth",block:"start"});}};
