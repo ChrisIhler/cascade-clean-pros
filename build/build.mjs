@@ -14,7 +14,7 @@ const ROOT = join(__dirname, "..");                          // repo root (deplo
 const require = createRequire(import.meta.url);
 const PROD = { "process.env.NODE_ENV": '"production"' };
 const ORIGIN = "https://cascadecleanpros.com";
-const TODAY = "2026-06-06";
+const TODAY = "2026-06-09";
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // 1. Client hydration bundle -> ../app.js
@@ -159,9 +159,9 @@ try {
   const smPath = join(ROOT, "sitemap.xml");
   let sm = readFileSync(smPath, "utf8");
   // strip all previously-generated single-line sub-route entries
-  sm = sm.replace(/[ \t]*<url><loc>https:\/\/cascadecleanpros\.com\/[^<]*<\/loc><changefreq>monthly<\/changefreq><priority>0\.7<\/priority><\/url>\n?/g, "");
+  sm = sm.replace(/[ \t]*<url><loc>https:\/\/cascadecleanpros\.com\/[^<]*<\/loc>(?:<lastmod>[^<]*<\/lastmod>)?<changefreq>monthly<\/changefreq><priority>0\.7<\/priority><\/url>\n?/g, "");
   const entries = SUBROUTES.map(r =>
-    `  <url><loc>${ORIGIN + r.path}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join("\n");
+    `  <url><loc>${ORIGIN + r.path}</loc><lastmod>${TODAY}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join("\n");
   sm = sm.replace("</urlset>", entries + (entries ? "\n" : "") + "</urlset>");
   writeFileSync(smPath, sm);
   console.log(`sitemap.xml: refreshed ${SUBROUTES.length} sub-route url(s)`);

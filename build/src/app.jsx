@@ -160,7 +160,7 @@ function Home(){
         ))}
       </div>}
       </nav>
-      <style>{`@media(min-width:920px){.nd{display:inline-block !important}.mnav{display:none !important}.mmenu{display:none !important}}@media(max-width:919px){.nbar{height:auto !important;min-height:70px;padding-top:11px !important;padding-bottom:11px !important}.navphone{display:none !important}.lname{font-size:1rem !important;white-space:nowrap}.ltag{letter-spacing:1.1px !important;font-size:.6rem !important}.nactions{gap:14px !important}}`}</style>
+      <style>{`@media(min-width:768px){.nd{display:inline-block !important}.mnav{display:none !important}.mmenu{display:none !important}}@media(min-width:768px) and (max-width:1024px){.nactions{gap:13px !important}.nd{font-size:.78rem !important;padding:10px 0 !important}.navphone{font-size:.82rem !important}.ltag{font-size:.62rem !important;letter-spacing:1.4px !important}}@media(max-width:767px){.nbar{height:auto !important;min-height:70px;padding-top:11px !important;padding-bottom:11px !important}.navphone{display:none !important}.lname{font-size:1rem !important;white-space:nowrap}.ltag{letter-spacing:1.1px !important;font-size:.6rem !important}.nactions{gap:14px !important}}`}</style>
 
       {/* HERO */}
       <header style={{position:"relative",display:"flex",alignItems:"center",overflow:"hidden"}}>
@@ -378,7 +378,7 @@ function Home(){
 
       {/* FOOTER */}
       <footer style={{background:C.deep,color:"rgba(255,255,255,.55)",padding:"56px 28px 32px"}}>
-        <div style={{maxWidth:1240,margin:"0 auto",display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr",gap:40}} className="fg">
+        <div style={{maxWidth:1240,margin:"0 auto",display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr 1fr",gap:40}} className="fg">
           <div>
             <div style={{display:"flex",alignItems:"center",gap:11,marginBottom:16}}>
               <div style={{width:40,height:40,borderRadius:11,background:GRAD,display:"flex",alignItems:"center",justifyContent:"center"}}>
@@ -388,8 +388,9 @@ function Home(){
             </div>
             <p style={{fontSize:".88rem",lineHeight:1.7,maxWidth:320}}>Owner-operated exterior cleaning for the Pacific Northwest, built on years of large-scale, commercial-grade experience. Residential and commercial pressure washing and soft washing across King & Snohomish Counties — and beyond for larger projects.</p>
           </div>
-          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Services</h4>{[["House Washing","services"],["Driveway & Concrete","services"],["Roof Moss Treatment","addons"],["Gutter Clear-Out","addons"],["Commercial","commercial"]].map(s=><a key={s[0]} href={"/#"+s[1]} onClick={e=>{e.preventDefault();go(s[1]);}} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none",cursor:"pointer"}}>{s[0]}</a>)}</div>
-          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Service Areas","areas"],["Blog","/blog/"],["FAQ","faq"],["Contact","quote"]].map(s=>{const u=s[1][0]==="/";return <a key={s[0]} href={u?s[1]:"/#"+s[1]} onClick={u?undefined:e=>{e.preventDefault();go(s[1]);}} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none",cursor:"pointer"}}>{s[0]}</a>;})}</div>
+          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Services</h4>{[["House Washing","/services/house-washing/"],["Roof Cleaning","/services/roof-cleaning/"],["Commercial & Fleet","/services/commercial-fleet-washing/"],["Driveway & Concrete","/services/driveway-concrete-cleaning/"]].map(s=><a key={s[0]} href={s[1]} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none"}}>{s[0]}</a>)}</div>
+          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Service Areas</h4>{[["Lynnwood, WA","/locations/lynnwood-wa/"],["Everett, WA","/locations/everett-wa/"],["Kirkland, WA","/locations/kirkland-wa/"],["Mill Creek, WA","/locations/mill-creek-wa/"]].map(s=><a key={s[0]} href={s[1]} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none"}}>{s[0]}</a>)}</div>
+          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Blog","/blog/"],["FAQ","faq"],["Contact","quote"]].map(s=>{const u=s[1][0]==="/";return <a key={s[0]} href={u?s[1]:"/#"+s[1]} onClick={u?undefined:e=>{e.preventDefault();go(s[1]);}} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none",cursor:"pointer"}}>{s[0]}</a>;})}</div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Contact</h4><div style={{fontSize:".85rem",marginBottom:9}}><a href={`tel:${BRAND.tel}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.phone}</a></div><div style={{fontSize:".85rem",marginBottom:9}}><a href={`mailto:${BRAND.email}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.email}</a></div><div style={{fontSize:".85rem"}}>{BRAND.domain}</div></div>
         </div>
         <div style={{maxWidth:1240,margin:"40px auto 0",paddingTop:24,borderTop:"1px solid rgba(255,255,255,.12)",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>

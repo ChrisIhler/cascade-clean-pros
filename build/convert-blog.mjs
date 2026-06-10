@@ -25,10 +25,13 @@ const posts = [];
 for (const f of files) {
   const txt = readFileSync(join(SRC, f), "utf8");
   const { meta, body } = frontmatter(txt);
-  // strip unbuilt internal-link placeholder markers (whole-line and inline)
+  // strip unbuilt editorial/asset placeholder markers (whole-line and inline) so they never render as text
   const cleaned = body
     .replace(/^\s*\[INTERNAL-LINK:[^\]]*\]\s*$/gim, "")
-    .replace(/\[INTERNAL-LINK:[^\]]*\]/gi, "");
+    .replace(/\[INTERNAL-LINK:[^\]]*\]/gi, "")
+    .replace(/^\s*\[(?:IMAGE|CHART):[^\]]*\]\s*$/gim, "")
+    .replace(/\[(?:IMAGE|CHART):[^\]]*\]/gi, "")
+    .replace(/\[(?:UNIQUE INSIGHT|PERSONAL EXPERIENCE)\]\s*/gi, "");
   const html = marked.parse(cleaned, { gfm: true }).trim();
   const slug = meta.slug || f.replace(/\.md$/, "");
   posts.push({
