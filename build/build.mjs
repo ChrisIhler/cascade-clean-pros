@@ -46,7 +46,7 @@ writeFileSync(join(ROOT, "index.html"), homeHtml);
 const cssBlock = (tpl.match(/<style>[\s\S]*?<\/style>/) || [""])[0];
 const favicons = (tpl.match(/<link rel="(?:icon|apple-touch-icon)[^>]*>/g) || []).join("\n");
 
-function pageSchema(r) {
+function pageSchema(r, img = "/media/hero-poster.jpg") {
   const blocks = [];
   const crumbItems = [{ name: "Home", url: ORIGIN + "/" }];
   if (r.kind === "blogindex") {
@@ -65,7 +65,7 @@ function pageSchema(r) {
       "@context": "https://schema.org", "@type": "BlogPosting",
       "headline": headline, "description": r.description,
       "datePublished": TODAY, "dateModified": TODAY,
-      "image": ORIGIN + "/media/hero-poster.jpg",
+      "image": ORIGIN + img,
       "author": { "@type": "Organization", "name": "Cascade Clean Pros" },
       "publisher": { "@type": "Organization", "name": "Cascade Clean Pros", "url": ORIGIN + "/" },
       "mainEntityOfPage": { "@type": "WebPage", "@id": ORIGIN + r.path }
@@ -78,6 +78,7 @@ function pageSchema(r) {
     blocks.push({
       "@context": "https://schema.org", "@type": "Service",
       "name": headline, "description": r.description, "serviceType": "Exterior cleaning",
+      "url": ORIGIN + r.path, "image": ORIGIN + img,
       "areaServed": [
         { "@type": "AdministrativeArea", "name": "King County, Washington" },
         { "@type": "AdministrativeArea", "name": "Snohomish County, Washington" }
@@ -106,6 +107,7 @@ function pageSchema(r) {
 function subpageHtml(r) {
   const canonical = ORIGIN + r.path;
   const prerender = render(r.path);
+  const ogImg = (prerender.match(/<img[^>]+src="(\/media\/[^"]+)"/) || [])[1] || "/media/hero-poster.jpg";
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,15 +122,15 @@ function subpageHtml(r) {
 <meta property="og:title" content="${esc(r.title)}">
 <meta property="og:description" content="${esc(r.description)}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${ORIGIN}/media/hero-poster.jpg">
+<meta property="og:image" content="${ORIGIN}${ogImg}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(r.title)}">
 <meta name="twitter:description" content="${esc(r.description)}">
-<meta name="twitter:image" content="${ORIGIN}/media/hero-poster.jpg">
+<meta name="twitter:image" content="${ORIGIN}${ogImg}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-${pageSchema(r)}
+${pageSchema(r, ogImg)}
 ${favicons}
 ${cssBlock}
 </head>

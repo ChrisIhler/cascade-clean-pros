@@ -123,6 +123,7 @@ function Home(){
 
   return(
     <div style={{fontFamily:F,color:C.text,background:C.bg,lineHeight:1.65,overflowX:"hidden"}}>
+      <a href="#homemain" className="skiplink">Skip to content</a>
 
       {lightbox&&<div onClick={()=>setLightbox(null)} style={{position:"fixed",inset:0,zIndex:2000,background:"rgba(0,12,28,.92)",display:"flex",alignItems:"center",justifyContent:"center",padding:"4vw",cursor:"zoom-out"}}>
         <img src={lightbox} alt="Service detail" onClick={e=>e.stopPropagation()} style={{maxWidth:"96vw",maxHeight:"92vh",width:"auto",height:"auto",borderRadius:12,boxShadow:"0 30px 90px rgba(0,0,0,.55)",cursor:"default"}}/>
@@ -147,12 +148,12 @@ function Home(){
                 ? <a key={a[1]} href={a[1]} className="nd" style={{display:"none",padding:"10px 2px",color:C.text,fontSize:".84rem",fontWeight:600,fontFamily:F,textDecoration:"none"}}>{a[0]}</a>
                 : <button key={a[1]} onClick={()=>go(a[1])} className="nd" style={{display:"none",padding:"10px 2px",background:"none",border:"none",color:C.text,fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
             ))}
-            <button className="mnav" aria-label="Open menu" onClick={()=>setMenuOpen(o=>!o)} style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:42,height:42,borderRadius:10,border:"none",background:"rgba(0,24,56,.06)",cursor:"pointer",color:C.ink,fontSize:"1.4rem",lineHeight:1}}>☰</button>
+            <button className="mnav" aria-label="Open menu" aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={()=>setMenuOpen(o=>!o)} style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:42,height:42,borderRadius:10,border:"none",background:"rgba(0,24,56,.06)",cursor:"pointer",color:C.ink,fontSize:"1.4rem",lineHeight:1}}>☰</button>
             <a className="navphone" href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:".9rem"}}>{BRAND.phone}</a>
             <button onClick={()=>go("quote")} style={{background:GRAD,color:"#fff",border:"none",padding:"11px 22px",borderRadius:9,fontWeight:700,fontSize:".83rem",cursor:"pointer",fontFamily:F,boxShadow:"0 4px 16px rgba(0,84,180,.35)"}}>Free Quote</button>
           </div>
         </div>
-      {menuOpen&&<div className="mmenu" style={{borderTop:"1px solid "+C.line,background:"#fff",padding:"8px 22px 16px",boxShadow:"0 12px 24px rgba(0,24,56,.08)"}}><a href={`tel:${BRAND.tel}`} style={{display:"flex",alignItems:"center",gap:8,padding:"15px 2px",borderBottom:"1px solid "+C.line,color:C.blue,fontWeight:700,fontSize:"1rem",textDecoration:"none"}}>📞 {BRAND.phone}</a>
+      {menuOpen&&<div className="mmenu" id="mobile-menu" style={{borderTop:"1px solid "+C.line,background:"#fff",padding:"8px 22px 16px",boxShadow:"0 12px 24px rgba(0,24,56,.08)"}}><a href={`tel:${BRAND.tel}`} style={{display:"flex",alignItems:"center",gap:8,padding:"15px 2px",borderBottom:"1px solid "+C.line,color:C.blue,fontWeight:700,fontSize:"1rem",textDecoration:"none"}}>📞 {BRAND.phone}</a>
         {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"],["Blog","/blog/"]].map(a=>(
           a[1][0]==="/"
             ? <a key={a[1]} href={a[1]} style={{display:"block",width:"100%",textAlign:"left",borderBottom:"1px solid "+C.line,padding:"15px 2px",fontFamily:F,fontSize:"1rem",fontWeight:600,color:C.text,textDecoration:"none"}}>{a[0]}</a>
@@ -160,8 +161,9 @@ function Home(){
         ))}
       </div>}
       </nav>
-      <style>{`@media(min-width:768px){.nd{display:inline-block !important}.mnav{display:none !important}.mmenu{display:none !important}}@media(min-width:768px) and (max-width:1024px){.nactions{gap:13px !important}.nd{font-size:.78rem !important;padding:10px 0 !important}.navphone{font-size:.82rem !important}.ltag{font-size:.62rem !important;letter-spacing:1.4px !important}}@media(max-width:767px){.nbar{height:auto !important;min-height:70px;padding-top:11px !important;padding-bottom:11px !important}.navphone{display:none !important}.lname{font-size:1rem !important;white-space:nowrap}.ltag{letter-spacing:1.1px !important;font-size:.6rem !important}.nactions{gap:14px !important}}`}</style>
+      <style>{`@media(min-width:768px){.nd{display:inline-block !important}.mnav{display:none !important}.mmenu{display:none !important}}@media(min-width:768px) and (max-width:1024px){.nactions{gap:13px !important}.nd{font-size:.78rem !important;padding:10px 0 !important}.navphone{font-size:.82rem !important}.ltag{font-size:.62rem !important;letter-spacing:1.4px !important}}@media(max-width:767px){.nbar{height:auto !important;min-height:70px;padding-top:11px !important;padding-bottom:11px !important}.navphone{display:none !important}.lname{font-size:1rem !important;white-space:nowrap}.ltag{letter-spacing:1.1px !important;font-size:.6rem !important}.nactions{gap:14px !important}}.skiplink{position:absolute;left:-9999px}.skiplink:focus{position:fixed;left:8px;top:8px;z-index:9999;background:#fff;color:${C.blue};padding:10px 14px;border-radius:8px;box-shadow:0 4px 16px rgba(0,24,56,.2);font-weight:700;text-decoration:none}`}</style>
 
+      <main id="homemain">
       {/* HERO */}
       <header style={{position:"relative",display:"flex",alignItems:"center",overflow:"hidden"}}>
         <div className="hv" style={{position:"absolute",inset:0}}>
@@ -199,13 +201,13 @@ function Home(){
               <div style={{fontSize:".76rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800,marginBottom:5}}>Free · No Obligation</div>
               <h3 style={{fontFamily:FS,fontSize:"1.5rem",marginBottom:3,color:C.ink,fontWeight:600}}>Get your quote today</h3>
               <p style={{fontSize:".82rem",color:C.mute,marginBottom:20}}>We respond within the hour, every business day.</p>
-              {[["name","Full Name","text"],["phone","Phone","tel"],["email","Email","email"]].map(f=>(
-                <input key={f[0]} type={f[2]} aria-label={f[1]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}/>
+              {[["name","Full Name","text","name"],["phone","Phone","tel","tel"],["email","Email","email","email"]].map(f=>(
+                <input key={f[0]} type={f[2]} autoComplete={f[3]} aria-label={f[1]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}/>
               ))}
               <select aria-label="Service type" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}>
                 <option value="residential">Residential</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
               </select>
-              <textarea aria-label="Project details" placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",height:62,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
+              <textarea aria-label="Project details" placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",height:100,minHeight:80,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
               {err&&<div style={{background:"#fdecea",border:"1px solid #f5c2c0",color:"#b3261e",fontSize:".83rem",padding:"10px 13px",borderRadius:9,marginBottom:12}}>{err}</div>}
               <button onClick={submitForm} disabled={sending} style={{width:"100%",padding:15,background:GRAD,color:"#fff",border:"none",borderRadius:10,fontSize:"1rem",fontWeight:700,cursor:sending?"default":"pointer",fontFamily:F,opacity:sending?.7:1}}>{sending?"Sending…":"Request My Free Quote →"}</button><div style={{textAlign:"center",marginTop:16,fontSize:".84rem",color:C.soft,lineHeight:1.5}}>Prefer to call or email?<div style={{marginTop:6}}><a href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:"1.02rem",textDecoration:"none",whiteSpace:"nowrap"}}>{BRAND.phone}</a></div><div style={{marginTop:3}}><a href={`mailto:${BRAND.email}`} style={{color:C.blue,fontWeight:700,textDecoration:"none",wordBreak:"break-word"}}>{BRAND.email}</a></div></div>
             </div>):(
@@ -376,6 +378,7 @@ function Home(){
         </div>
       </section>
 
+      </main>
       {/* FOOTER */}
       <footer style={{background:C.deep,color:"rgba(255,255,255,.55)",padding:"56px 28px 32px"}}>
         <div style={{maxWidth:1240,margin:"0 auto",display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr 1fr",gap:40}} className="fg">
@@ -418,6 +421,8 @@ function SubNav(){
           <span style={{color:C.ink,fontWeight:800,fontSize:"1.02rem"}}>{BRAND.name}</span>
         </a>
         <div style={{display:"flex",alignItems:"center",gap:18}}>
+          <a href="/services/" className="snl" style={{color:C.text,fontWeight:600,fontSize:".9rem",textDecoration:"none"}}>Services</a>
+          <a href="/locations/" className="snl" style={{color:C.text,fontWeight:600,fontSize:".9rem",textDecoration:"none"}}>Areas</a>
           <a href="/blog/" className="snl" style={{color:C.text,fontWeight:600,fontSize:".9rem",textDecoration:"none"}}>Blog</a>
           <a href={`tel:${BRAND.tel}`} className="snl" style={{color:C.blue,fontWeight:700,fontSize:".9rem",textDecoration:"none"}}>{BRAND.phone}</a>
           <a href="/#quote" style={{background:GRAD,color:"#fff",padding:"10px 18px",borderRadius:9,fontWeight:700,fontSize:".82rem",textDecoration:"none"}}>Free Quote</a>
@@ -486,12 +491,16 @@ function SubFooter(){
 function Shell({crumbs,children}){
   return (
     <div style={{background:"#fff",minHeight:"100vh",fontFamily:F,color:C.text}}>
+      <a href="#main" className="skiplink">Skip to content</a>
       <SubNav/>
+      <main id="main">
       {crumbs && <Breadcrumbs crumbs={crumbs}/>}
       {children}
       <QuoteCTA/>
+      </main>
       <SubFooter/>
       <style dangerouslySetInnerHTML={{__html:`
+        .skiplink{position:absolute;left:-9999px}.skiplink:focus{position:fixed;left:8px;top:8px;z-index:9999;background:#fff;color:${C.blue};padding:10px 14px;border-radius:8px;box-shadow:0 4px 16px rgba(0,24,56,.2);font-weight:700;text-decoration:none}
         .article{max-width:760px;margin:0 auto;padding:12px 22px 0;font-size:1.06rem;line-height:1.75;color:${C.text}}
         .article h1{font-family:${FS};font-weight:600;font-size:2.35rem;line-height:1.12;color:${C.ink};margin:.3em 0 .5em}
         .article h2{font-family:${FS};font-weight:600;font-size:1.6rem;color:${C.ink};margin:1.6em 0 .5em}
@@ -588,10 +597,10 @@ function LocationPage({page}){
   );
 }
 function ServicesIndex(){
-  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Services"}]}><CardList heading="Our Services" intro="Professional pressure washing and soft washing for homes and businesses across King & Snohomish Counties — the right method matched to every surface." items={SERVICE_PAGES}/></Shell>;
+  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Services"}]}><CardList heading="Exterior Cleaning Services — King & Snohomish County" intro="Professional pressure washing and soft washing for homes and businesses across King & Snohomish Counties — the right method matched to every surface." items={SERVICE_PAGES}/></Shell>;
 }
 function LocationsIndex(){
-  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Service Areas"}]}><CardList heading="Service Areas" intro="Owner-operated exterior cleaning across the greater Seattle–Everett corridor in King & Snohomish Counties." items={LOCATION_PAGES}/></Shell>;
+  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Service Areas"}]}><CardList heading="Pressure Washing Service Areas — King & Snohomish County, WA" intro="Owner-operated exterior cleaning across the greater Seattle–Everett corridor in King & Snohomish Counties." items={LOCATION_PAGES}/></Shell>;
 }
 
 function normPath(p){

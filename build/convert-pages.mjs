@@ -28,7 +28,10 @@ for (const f of files) {
   const type = (meta.type || (/-wa$/.test(slug) ? "location" : "service")).toLowerCase();
   const cleaned = body
     .replace(/^\s*\[INTERNAL-LINK:[^\]]*\]\s*$/gim, "")
-    .replace(/\[INTERNAL-LINK:[^\]]*\]/gi, "");
+    .replace(/\[INTERNAL-LINK:[^\]]*\]/gi, "")
+    .replace(/^\s*\[(?:IMAGE|CHART):[^\]]*\]\s*$/gim, "")
+    .replace(/\[(?:IMAGE|CHART):[^\]]*\]/gi, "")
+    .replace(/\[(?:UNIQUE INSIGHT|PERSONAL EXPERIENCE)\]\s*/gi, "");
   const html = marked.parse(cleaned, { gfm: true }).trim();
   const base = type === "location" ? "/locations/" : "/services/";
   const rec = { slug, path: base + slug + "/", title: meta.title || slug,
