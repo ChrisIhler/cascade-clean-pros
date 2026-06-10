@@ -178,7 +178,7 @@ function Home(){
           <div>
             <div style={{display:"inline-flex",alignItems:"center",gap:9,background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",borderRadius:100,padding:"7px 16px",marginBottom:26,backdropFilter:"blur(8px)"}}>
               <span style={{width:8,height:8,borderRadius:"50%",background:C.aqua,boxShadow:`0 0 10px ${C.aqua}`}}/>
-              <span style={{color:"rgba(255,255,255,.92)",fontSize:".8rem",fontWeight:600}}>Now booking Spring & Summer 2026</span>
+              <span style={{color:"rgba(255,255,255,.92)",fontSize:".8rem",fontWeight:600}}>Now booking — free on-site estimates</span>
             </div>
             <h1 style={{fontFamily:FS,fontSize:"clamp(2.3rem,6.5vw,4rem)",lineHeight:1.04,color:"#fff",letterSpacing:"-.02em",marginBottom:22,fontWeight:600}}>
               The Pacific Northwest's<br/><span style={{color:C.aqua,fontStyle:"italic"}}>exterior cleaning</span> specialists
@@ -611,10 +611,10 @@ function LocationPage({page}){
   );
 }
 function ServicesIndex(){
-  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Services"}]}><CardList heading="Exterior Cleaning Services — King & Snohomish County" intro="Professional pressure washing and soft washing for homes and businesses across King & Snohomish Counties — the right method matched to every surface." items={SERVICE_PAGES}/></Shell>;
+  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Services"}]}><CardList heading="Exterior Cleaning Services — King & Snohomish County" intro="Professional pressure washing and soft washing for homes and businesses across King & Snohomish Counties — the right method matched to every surface. From house washing and roof soft-washing to driveways, decks, and full commercial exteriors, every job starts with a free on-site estimate and an honest recommendation. Owner-operated, local, and surface-safe." items={SERVICE_PAGES}/></Shell>;
 }
 function LocationsIndex(){
-  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Service Areas"}]}><CardList heading="Pressure Washing Service Areas — King & Snohomish County, WA" intro="Owner-operated exterior cleaning across the greater Seattle–Everett corridor in King & Snohomish Counties." items={LOCATION_PAGES}/></Shell>;
+  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Service Areas"}]}><CardList heading="Pressure Washing Service Areas — King & Snohomish County, WA" intro="Owner-operated exterior cleaning across the greater Seattle–Everett corridor in King & Snohomish Counties. We serve 20+ cities — from Lynnwood, Everett, and Mill Creek to Kirkland, Bellevue, and Seattle — and travel farther for larger residential and commercial projects. Every job starts with a free on-site estimate." items={LOCATION_PAGES}/></Shell>;
 }
 
 function normPath(p){
