@@ -1,0 +1,5 @@
+# Cascade Clean Pros — allow all crawlers (incl. AI search) + point to the sitemap.
+User-agent: *
+Allow: /
+
+Sitemap: https://cascadecleanpros.com/sitemap.xml
