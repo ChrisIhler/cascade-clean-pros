@@ -113,6 +113,9 @@ function subpageHtml(r) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J357S4KMQ5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J357S4KMQ5');</script>
 <title>${esc(r.title)}</title>
 <meta name="description" content="${esc(r.description)}">
 <link rel="canonical" href="${canonical}">
