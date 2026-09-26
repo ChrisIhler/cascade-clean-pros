@@ -97,7 +97,7 @@ function ServicePicker({form,setForm}){
   const toggle=o=>setForm(p=>({...p,services:p.services.includes(o)?p.services.filter(x=>x!==o):[...p.services,o]}));
   return (
     <fieldset style={{border:"none",padding:0,margin:"0 0 13px"}}>
-      <legend style={{fontSize:".82rem",fontWeight:700,color:C.ink,marginBottom:8,textAlign:"left"}}>What can we help with? <span style={{fontWeight:400,color:C.soft}}>(check all that apply)</span></legend>
+      <legend style={{fontSize:".82rem",fontWeight:700,color:C.ink,marginBottom:8,textAlign:"left"}}>What can we help with? <span style={{fontWeight:500,color:C.text}}>(check all that apply)</span></legend>
       <div style={{display:"flex",flexWrap:"wrap",gap:7}}>
         {SERVICE_OPTIONS.map(o=>{const on=form.services.includes(o);return(
           <label key={o} style={{display:"inline-flex",alignItems:"center",gap:6,padding:"7px 11px",borderRadius:999,border:`1.5px solid ${on?C.blue:C.line}`,background:on?C.mist:"#fff",color:on?C.blue:C.text,fontSize:".8rem",fontWeight:on?700:500,cursor:"pointer",userSelect:"none"}}>
@@ -109,7 +109,7 @@ function ServicePicker({form,setForm}){
 }
 const CONSENT_VERSION="2026.09.25.v1";
 function ConsentBlock({form,setForm}){
-  const lab={display:"flex",alignItems:"flex-start",gap:9,fontSize:".74rem",lineHeight:1.5,color:C.soft,marginBottom:9,cursor:"pointer",textAlign:"left"};
+  const lab={display:"flex",alignItems:"flex-start",gap:9,fontSize:".76rem",lineHeight:1.5,color:C.text,marginBottom:9,cursor:"pointer",textAlign:"left"};
   const cb={marginTop:3,flexShrink:0,accentColor:C.blue};
   const a={color:C.blue,textDecoration:"underline"};
   const set=k=>e=>setForm(p=>({...p,[k]:e.target.checked}));
@@ -238,7 +238,7 @@ function Home(){
             {!sent?(<div>
               <div style={{fontSize:".76rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800,marginBottom:5}}>Free · No Obligation</div>
               <h3 style={{fontFamily:FS,fontSize:"1.5rem",marginBottom:3,color:C.ink,fontWeight:600}}>Get your quote today</h3>
-              <p style={{fontSize:".82rem",color:C.mute,marginBottom:20}}>We respond within the hour, every business day.</p>
+              <p style={{fontSize:".92rem",color:C.ink,fontWeight:600,marginBottom:20}}>We respond within the hour, every business day.</p>
               {[["name","Full Name","text","name"],["phone","Phone","tel","tel"],["email","Email","email","email"]].map(f=>(
                 <input key={f[0]} type={f[2]} autoComplete={f[3]} aria-label={f[1]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}/>
               ))}
@@ -249,7 +249,7 @@ function Home(){
               <textarea aria-label="Project details" placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",height:100,minHeight:80,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
               <ConsentBlock form={form} setForm={setForm}/>
               {err&&<div style={{background:"#fdecea",border:"1px solid #f5c2c0",color:"#b3261e",fontSize:".83rem",padding:"10px 13px",borderRadius:9,marginBottom:12}}>{err}</div>}
-              <button onClick={submitForm} disabled={sending} style={{width:"100%",padding:15,background:GRAD,color:"#fff",border:"none",borderRadius:10,fontSize:"1rem",fontWeight:700,cursor:sending?"default":"pointer",fontFamily:F,opacity:sending?.7:1}}>{sending?"Sending…":"Request My Free Quote →"}</button><div style={{textAlign:"center",marginTop:16,fontSize:".84rem",color:C.soft,lineHeight:1.5}}>Prefer to call or email?<div style={{marginTop:6}}><a href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:"1.02rem",textDecoration:"none",whiteSpace:"nowrap"}}>{BRAND.phone}</a></div><div style={{marginTop:3}}><a href={`mailto:${BRAND.email}`} style={{color:C.blue,fontWeight:700,textDecoration:"none",wordBreak:"break-word"}}>{BRAND.email}</a></div></div>
+              <button onClick={submitForm} disabled={sending} style={{width:"100%",padding:15,background:GRAD,color:"#fff",border:"none",borderRadius:10,fontSize:"1rem",fontWeight:700,cursor:sending?"default":"pointer",fontFamily:F,opacity:sending?.7:1}}>{sending?"Sending…":"Request My Free Quote →"}</button><div style={{textAlign:"center",marginTop:16,fontSize:".92rem",color:C.ink,fontWeight:600,lineHeight:1.5}}>Prefer to call or email?<div style={{marginTop:6}}><a href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:"1.02rem",textDecoration:"none",whiteSpace:"nowrap"}}>{BRAND.phone}</a></div><div style={{marginTop:3}}><a href={`mailto:${BRAND.email}`} style={{color:C.blue,fontWeight:700,textDecoration:"none",wordBreak:"break-word"}}>{BRAND.email}</a></div></div>
             </div>):(
             <div style={{textAlign:"center",padding:"30px 0"}}>
               <div style={{width:60,height:60,borderRadius:"50%",background:GRAD,margin:"0 auto 14px",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:"1.8rem"}}>✓</div>
