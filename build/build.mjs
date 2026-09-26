@@ -16,7 +16,7 @@ const PROD = { "process.env.NODE_ENV": '"production"' };
 const ORIGIN = "https://cascadecleanpros.com";
 const TODAY = "2026-06-09";
 // Per-route sitemap lastmod for pages changed after TODAY.
-const LASTMOD = Object.fromEntries(["/services/","/services/gutter-cleaning/","/services/house-washing/","/services/roof-cleaning/","/services/driveway-concrete-cleaning/","/services/commercial-fleet-washing/","/privacy/"].map(p => [p, "2026-09-25"]));
+const LASTMOD = Object.fromEntries(["/services/","/services/gutter-cleaning/","/services/house-washing/","/services/roof-cleaning/","/services/driveway-concrete-cleaning/","/services/commercial-fleet-washing/","/privacy/","/terms/"].map(p => [p, "2026-09-25"]));
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // 1. Client hydration bundle -> ../app.js
@@ -94,6 +94,13 @@ function pageSchema(r, img = "/media/hero-poster.jpg") {
       "name": "Privacy Policy", "url": ORIGIN + "/privacy/", "description": r.description,
       "isPartOf": { "@type": "WebSite", "name": "Cascade Clean Pros", "url": ORIGIN + "/" }
     });
+  } else if (r.kind === "terms") {
+    crumbItems.push({ name: "Terms", url: ORIGIN + "/terms/" });
+    blocks.push({
+      "@context": "https://schema.org", "@type": "WebPage",
+      "name": "Terms of Use and Messaging Terms", "url": ORIGIN + "/terms/", "description": r.description,
+      "isPartOf": { "@type": "WebSite", "name": "Cascade Clean Pros", "url": ORIGIN + "/" }
+    });
   } else if (r.kind === "servicesindex" || r.kind === "locationsindex") {
     const isSvc = r.kind === "servicesindex";
     const url = ORIGIN + (isSvc ? "/services/" : "/locations/");
@@ -155,7 +162,7 @@ ${cssBlock}
 }
 
 // Prune generated section dirs first so removed routes never linger, then regenerate.
-for (const section of ["blog", "services", "locations", "privacy"]) {
+for (const section of ["blog", "services", "locations", "privacy", "terms"]) {
   rmSync(join(ROOT, section), { recursive: true, force: true });
 }
 const written = [];

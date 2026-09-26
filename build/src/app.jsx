@@ -92,13 +92,30 @@ const FS="'Fraunces','Georgia',serif";
 
 function Reveal({children,style}){const r=useRef(null);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){e.target.classList.add("in");o.disconnect()}},{threshold:.12});if(r.current)o.observe(r.current);return()=>o.disconnect()},[]);return<div ref={r} className="fade-up" style={style}>{children}</div>}
 
+const CONSENT_VERSION="2026.09.25.v1";
+function ConsentBlock({form,setForm}){
+  const lab={display:"flex",alignItems:"flex-start",gap:9,fontSize:".74rem",lineHeight:1.5,color:C.soft,marginBottom:9,cursor:"pointer",textAlign:"left"};
+  const cb={marginTop:3,flexShrink:0,accentColor:C.blue};
+  const a={color:C.blue,textDecoration:"underline"};
+  const set=k=>e=>setForm(p=>({...p,[k]:e.target.checked}));
+  return (
+    <div style={{background:"rgba(234,242,251,.6)",border:`1px solid ${C.line}`,borderRadius:10,padding:"12px 13px 4px",marginBottom:14}}>
+      <label style={lab}><input type="checkbox" checked={form.consent_contact} onChange={set("consent_contact")} style={cb} aria-required="true"/>
+        <span><strong style={{color:C.ink}}>Required.</strong> I authorize {BRAND.name} to contact me by phone and email at the information I provided about my estimate request. This consent is not a condition of any purchase.</span></label>
+      <label style={lab}><input type="checkbox" checked={form.consent_sms_ai} onChange={set("consent_sms_ai")} style={cb}/>
+        <span><strong style={{color:C.ink}}>Optional: text messages (including AI-assisted).</strong> I agree to receive text messages from {BRAND.name}, including messages that may be automated or AI-assisted, about my estimate, scheduling, appointment reminders, and related services. Message frequency varies (typically 2–10/month). Message and data rates may apply. Reply <strong>STOP</strong> to unsubscribe or <strong>HELP</strong> for help. Consent is not a condition of purchase. See our <a href="/privacy/" style={a}>Privacy Policy</a> and <a href="/terms/" style={a}>Terms</a>.</span></label>
+      <label style={lab}><input type="checkbox" checked={form.consent_voice_ai} onChange={set("consent_voice_ai")} style={cb}/>
+        <span><strong style={{color:C.ink}}>Optional: automated and AI voice calls.</strong> I agree that {BRAND.name} may call me at the number I provided using automated technology or prerecorded or AI-generated voices about my estimate and related services. Calls may be recorded. I can revoke this consent at any time. Consent is not a condition of purchase.</span></label>
+    </div>
+  );
+}
 function Home(){
   const[tab,setTab]=useState("residential");
   const[lightbox,setLightbox]=useState(null);
   const[menuOpen,setMenuOpen]=useState(false);
   const[formActive,setFormActive]=useState(false);
   const[faq,setFaq]=useState(0);
-  const[form,setForm]=useState({name:"",phone:"",email:"",service:"residential",notes:""});
+  const[form,setForm]=useState({name:"",phone:"",email:"",service:"residential",notes:"",consent_contact:false,consent_sms_ai:false,consent_voice_ai:false});
   const[sent,setSent]=useState(false);
   const[sending,setSending]=useState(false);
   const[err,setErr]=useState("");
@@ -109,9 +126,10 @@ function Home(){
     if(!form.name.trim()){setErr("Please enter your name.");return;}
     if(!form.phone.trim()&&!form.email.trim()){setErr("Please add a phone or email so we can reach you.");return;}
     if(form.email.trim()&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())){setErr("That email doesn't look right — please check it.");return;}
+    if(!form.consent_contact){setErr("Please check the box allowing us to contact you about your estimate.");return;}
     setSending(true);
     try{
-      await fetch(FORM_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(form)});
+      await fetch(FORM_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...form,consent_contact:form.consent_contact?"yes":"no",consent_sms_ai:form.consent_sms_ai?"yes":"no",consent_voice_ai:form.consent_voice_ai?"yes":"no",consent_version:CONSENT_VERSION,consent_source_url:(typeof location!=="undefined"?location.href:"https://cascadecleanpros.com/"),consent_captured_at:new Date().toISOString(),consent_user_agent:(typeof navigator!=="undefined"?navigator.userAgent:"")})});
       setSent(true);
       if(window.fbq)window.fbq("track","Lead");
       if(window.gtag){window.gtag("event","generate_lead");window.gtag("event","conversion",{send_to:"AW-18227655988/NZVWCNiu08McELTqz_ND"});}
@@ -213,6 +231,7 @@ function Home(){
                 <option value="residential">Residential</option><option>Gutter Cleaning</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
               </select>
               <textarea aria-label="Project details" placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",height:100,minHeight:80,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
+              <ConsentBlock form={form} setForm={setForm}/>
               {err&&<div style={{background:"#fdecea",border:"1px solid #f5c2c0",color:"#b3261e",fontSize:".83rem",padding:"10px 13px",borderRadius:9,marginBottom:12}}>{err}</div>}
               <button onClick={submitForm} disabled={sending} style={{width:"100%",padding:15,background:GRAD,color:"#fff",border:"none",borderRadius:10,fontSize:"1rem",fontWeight:700,cursor:sending?"default":"pointer",fontFamily:F,opacity:sending?.7:1}}>{sending?"Sending…":"Request My Free Quote →"}</button><div style={{textAlign:"center",marginTop:16,fontSize:".84rem",color:C.soft,lineHeight:1.5}}>Prefer to call or email?<div style={{marginTop:6}}><a href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:"1.02rem",textDecoration:"none",whiteSpace:"nowrap"}}>{BRAND.phone}</a></div><div style={{marginTop:3}}><a href={`mailto:${BRAND.email}`} style={{color:C.blue,fontWeight:700,textDecoration:"none",wordBreak:"break-word"}}>{BRAND.email}</a></div></div>
             </div>):(
@@ -431,7 +450,7 @@ function Home(){
           </div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Services</h4>{[["House Washing","/services/house-washing/"],["Roof Cleaning","/services/roof-cleaning/"],["Commercial & Fleet","/services/commercial-fleet-washing/"],["Driveway & Concrete","/services/driveway-concrete-cleaning/"]].map(s=><a key={s[0]} href={s[1]} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none"}}>{s[0]}</a>)}</div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Service Areas</h4>{[["Lynnwood, WA","/locations/lynnwood-wa/"],["Everett, WA","/locations/everett-wa/"],["Kirkland, WA","/locations/kirkland-wa/"],["Mill Creek, WA","/locations/mill-creek-wa/"]].map(s=><a key={s[0]} href={s[1]} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none"}}>{s[0]}</a>)}</div>
-          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Blog","/blog/"],["FAQ","faq"],["Contact","quote"],["Privacy","/privacy/"]].map(s=>{const u=s[1][0]==="/";return <a key={s[0]} href={u?s[1]:"/#"+s[1]} onClick={u?undefined:e=>{e.preventDefault();go(s[1]);}} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none",cursor:"pointer"}}>{s[0]}</a>;})}</div>
+          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Blog","/blog/"],["FAQ","faq"],["Contact","quote"],["Privacy","/privacy/"],["Terms","/terms/"]].map(s=>{const u=s[1][0]==="/";return <a key={s[0]} href={u?s[1]:"/#"+s[1]} onClick={u?undefined:e=>{e.preventDefault();go(s[1]);}} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none",cursor:"pointer"}}>{s[0]}</a>;})}</div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Contact</h4><div style={{fontSize:".85rem",marginBottom:9}}><a href={`tel:${BRAND.tel}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.phone}</a></div><div style={{fontSize:".85rem",marginBottom:9}}><a href={`mailto:${BRAND.email}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.email}</a></div><div style={{fontSize:".85rem"}}>{BRAND.domain}</div></div>
         </div>
         <div style={{maxWidth:1240,margin:"40px auto 0",paddingTop:24,borderTop:"1px solid rgba(255,255,255,.12)",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>
@@ -514,7 +533,7 @@ function SubFooter(){
             <div style={{fontSize:".85rem",marginBottom:8}}><a href="/" style={{color:"inherit",textDecoration:"none"}}>Home</a></div>
             <div style={{fontSize:".85rem",marginBottom:8}}><a href="/blog/" style={{color:"inherit",textDecoration:"none"}}>Blog</a></div>
             <div style={{fontSize:".85rem",marginBottom:8}}><a href="/#quote" style={{color:"inherit",textDecoration:"none"}}>Free Quote</a></div>
-            <div style={{fontSize:".85rem",marginBottom:8}}><a href="/privacy/" style={{color:"inherit",textDecoration:"none"}}>Privacy</a></div>
+            <div style={{fontSize:".85rem",marginBottom:8}}><a href="/privacy/" style={{color:"inherit",textDecoration:"none"}}>Privacy</a> · <a href="/terms/" style={{color:"inherit",textDecoration:"none"}}>Terms</a></div>
           </div>
           <div>
             <h4 style={{color:"#fff",fontSize:".8rem",textTransform:"uppercase",letterSpacing:1,marginBottom:12}}>Contact</h4>
@@ -568,7 +587,7 @@ function PrivacyPage(){
     <Shell crumbs={[{name:"Home",url:"/"},{name:"Privacy Policy"}]} nocta>
       <article className="article">
         <h1>Privacy Policy</h1>
-        <p><strong>Effective date: September 25, 2026</strong></p>
+        <p><strong>Effective date: September 25, 2026 · Last updated: September 25, 2026</strong></p>
         <p>This page explains, in plain language, what information {BRAND.name} collects, why we collect it, and how you can ask us to delete it.</p>
         <h2>What we collect</h2>
         <p>We only collect what you choose to send us when you ask for an estimate:</p>
@@ -577,6 +596,7 @@ function PrivacyPage(){
           <li><strong>From our Facebook and Instagram lead forms:</strong> your name, phone number, email address, zip code, and any answers you give on the form.</li>
         </ul>
         <p>If you call, text, or email us, we also have whatever you share in that conversation.</p>
+        <p><strong>Consent records:</strong> when you submit our quote form, we also save which consent boxes you checked, the version of the consent wording shown, the page you submitted from, the date and time, and your browser type. This is our record of the permission you gave us.</p>
         <h2>Why we collect it</h2>
         <p>We use your information to contact you about the estimate you requested — to answer questions, schedule a visit, and give you a quote. We don't add you to a mailing list or use your information for anything unrelated to your request.</p>
         <h2>Analytics and advertising tools</h2>
@@ -587,8 +607,22 @@ function PrivacyPage(){
           <li><strong>Meta Pixel</strong> (Facebook and Instagram) — tells us when someone who saw our Meta ads visits the site or sends a quote request, and helps show our ads to people in our area.</li>
         </ul>
         <p>These tools use cookies and similar technology, and the companies that run them process that data under their own privacy policies. You can manage how Google and Meta use your data for ads at <a href="https://adssettings.google.com" style={a}>Google's ad settings</a> and in your <a href="https://www.facebook.com/adpreferences" style={a}>Facebook ad preferences</a>. You can also block or clear cookies in your browser settings.</p>
+        <h2>Text messages (SMS)</h2>
+        <p>We only send text messages if you gave us permission, for example by checking the optional text message box on our quote form. Texts are about your estimate, scheduling, appointment reminders, and related services. Message frequency varies (typically 2–10 per month). Message and data rates may apply.</p>
+        <ul>
+          <li><strong>To stop:</strong> reply <strong>STOP</strong> to any text. We'll send one message confirming you've been unsubscribed, and then stop.</li>
+          <li><strong>For help:</strong> reply <strong>HELP</strong>, call <a href={`tel:${BRAND.tel}`} style={a}>{BRAND.phone}</a>, or email <a href={`mailto:${BRAND.email}`} style={a}>{BRAND.email}</a>.</li>
+          <li>Carriers are not liable for delayed or undelivered messages.</li>
+        </ul>
+        <p><strong>We do not share or sell your mobile phone number or your text message opt-in with third parties or affiliates for their marketing purposes.</strong> Text messaging opt-in data and consent are never shared with anyone else, except with the service providers that deliver messages on our behalf.</p>
+        <h2>Automated and AI-assisted communication</h2>
+        <p>We use a customer management and messaging platform to organize estimate requests and follow up with you. Some texts, emails, and calls may be automated, AI-assisted, or use a prerecorded or AI-generated voice, but only for channels you've agreed to. A real person on our team is available whenever you ask. Calls may be recorded for quality. You can opt out of automated calls or texts at any time by telling us, or by replying STOP to a text.</p>
+        <h2>Who we share information with</h2>
+        <p>We share your information only with service providers that help us run the business, such as our website host, form and spreadsheet tools, our customer management and messaging platform, and our phone and email providers. They may only use it to provide those services to us. We may also share information if the law requires it.</p>
         <h2>We don't sell your information</h2>
         <p>We don't sell or rent your personal information to anyone.</p>
+        <h2>How long we keep it</h2>
+        <p>We keep estimate requests and job records as long as we need them to serve you and keep normal business records, then delete them. Consent records are kept as long as needed to show you gave permission.</p>
         <h2>Deleting your information</h2>
         <p>If you'd like us to delete the information you've sent us, just ask:</p>
         <ul>
@@ -598,6 +632,41 @@ function PrivacyPage(){
         <p>You can use the same contact info for any questions about this policy.</p>
         <h2>Changes to this policy</h2>
         <p>If we change this policy, we'll update this page and the effective date at the top.</p>
+      </article>
+    </Shell>
+  );
+}
+function TermsPage(){
+  const a={color:C.blue};
+  return (
+    <Shell crumbs={[{name:"Home",url:"/"},{name:"Terms"}]} nocta>
+      <article className="article">
+        <h1>Terms of Use and Messaging Terms</h1>
+        <p><strong>Effective date: September 25, 2026</strong></p>
+        <p>These terms apply when you use cascadecleanpros.com, request an estimate, or receive calls, emails, or text messages from {BRAND.name}. Our <a href="/privacy/" style={a}>Privacy Policy</a> explains how we handle your information.</p>
+        <h2>Estimates and scheduling</h2>
+        <p>Prices and offers on this website are for general information. Your final price is the written estimate we give you after we see the job. Scheduling depends on weather and availability, and we'll confirm dates with you directly.</p>
+        <h2>Text message program</h2>
+        <ul>
+          <li><strong>Program:</strong> {BRAND.name} customer care and estimate follow-up.</li>
+          <li><strong>What you'll receive:</strong> messages about your estimate request, scheduling, appointment reminders, and related services. Some messages may be automated or AI-assisted.</li>
+          <li><strong>How you join:</strong> by checking the optional text message box on our quote form, or by texting us first and agreeing to receive replies.</li>
+          <li><strong>Frequency:</strong> varies, typically 2–10 messages per month.</li>
+          <li><strong>Cost:</strong> message and data rates may apply.</li>
+          <li><strong>Opt out:</strong> reply <strong>STOP</strong> at any time. You'll get one confirmation message and no more texts unless you join again.</li>
+          <li><strong>Help:</strong> reply <strong>HELP</strong>, call <a href={`tel:${BRAND.tel}`} style={a}>{BRAND.phone}</a>, or email <a href={`mailto:${BRAND.email}`} style={a}>{BRAND.email}</a>.</li>
+          <li>Consent to texts is not a condition of any purchase.</li>
+          <li>Carriers are not liable for delayed or undelivered messages.</li>
+          <li>We do not share or sell your mobile number or text opt-in with third parties or affiliates for their marketing.</li>
+        </ul>
+        <h2>Calls</h2>
+        <p>If you agreed to automated or AI voice calls, we may call using automated technology or prerecorded or AI-generated voices about your estimate and related services. Calls may be recorded. Tell us any time to stop.</p>
+        <h2>Website use</h2>
+        <p>The content on this site is for general information about our services. Please don't misuse the site or its forms. Photos may include stock or illustrative images.</p>
+        <h2>Contact</h2>
+        <p>Questions about these terms: email <a href={`mailto:${BRAND.email}`} style={a}>{BRAND.email}</a> or call <a href={`tel:${BRAND.tel}`} style={a}>{BRAND.phone}</a>.</p>
+        <h2>Changes</h2>
+        <p>If we change these terms, we'll update this page and the effective date above.</p>
       </article>
     </Shell>
   );
@@ -902,6 +971,7 @@ function App({route}){
   const path = normPath(route || (typeof window!=="undefined" ? window.location.pathname : "/"));
   if(path==="/blog/") return <BlogIndex/>;
   if(path==="/privacy/") return <PrivacyPage/>;
+  if(path==="/terms/") return <TermsPage/>;
   const post = BLOG_POSTS.find(p=>p.path===path);
   if(post) return <BlogPost post={post}/>;
   if(path==="/services/" && SERVICE_PAGES.length) return <ServicesIndex/>;

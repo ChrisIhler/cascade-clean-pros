@@ -23,6 +23,12 @@ export const SUBROUTES = [
     title: "Privacy Policy | Cascade Clean Pros",
     description: "What information Cascade Clean Pros collects from quote requests, how we use it, the analytics and ad tools on our site, and how to ask us to delete your info.",
   },
+  {
+    path: "/terms/",
+    kind: "terms",
+    title: "Terms of Use and Messaging Terms | Cascade Clean Pros",
+    description: "Terms for using cascadecleanpros.com and for Cascade Clean Pros text messages: frequency, rates, STOP and HELP, and how we handle opt-ins.",
+  },
   ...BLOG_POSTS.map(p => ({
     path: p.path,
     kind: "post",
