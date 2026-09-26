@@ -244,7 +244,7 @@ function Home(){
             <div style={{flex:"1 1 420px"}}>
               <span style={{fontSize:".95rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>New This Fall · Gutter Cleaning</span>
               <h2 style={{fontFamily:FS,fontSize:"2rem",color:C.ink,margin:"8px 0 10px",fontWeight:600,lineHeight:1.15}}>Beat the rains: gutters cleared from $99</h2>
-              <p style={{fontSize:"1.02rem",color:C.soft,margin:0}}>Fall intro pricing: <strong style={{color:C.ink}}>$99 one-story, $149 two-story.</strong> Debris hauled away, downspouts checked, before and after photos, and a 30-day overflow guarantee. Serving Lynnwood and nearby.</p>
+              <p style={{fontSize:"1.02rem",color:C.soft,margin:0}}>Intro pricing for our first 10 gutter cleanings this fall: <strong style={{color:C.ink}}>$99 one-story, $149 two-story.</strong> Debris hauled away, downspouts checked, before and after photos, and a 30-day overflow guarantee. Serving Lynnwood and nearby.</p>
             </div>
             <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
               <a href={`tel:${BRAND.tel}`} style={{display:"inline-flex",alignItems:"center",gap:8,background:GRAD,color:"#fff",padding:"15px 26px",borderRadius:11,fontWeight:700,fontSize:"1rem"}}>Call or Text {BRAND.phone}</a>
@@ -674,7 +674,7 @@ const SERVICE_FACTS={
     price:"Free on-site estimate",priceNote:"Priced after we see your roof's pitch and condition",time:"Confirmed on your estimate"},
   "gutter-cleaning":{icon:"gutter",summary:"Fall gutter clear-out so the first big storm goes down the downspout, not over the edge.",
     included:["Leaves, needles and moss removed by hand","Water flush to confirm drainage","Downspouts checked and cleared","Debris bagged and hauled away","Before and after photos"],
-    price:"From $99",priceNote:"$99 one-story · $149 two-story (fall intro pricing)",time:"1–2 hours for most homes",photoCredit:GUTTER_CREDIT,photo:"/media/stock-gutter-unsplash.jpg",photoAlt:"Stock photo of a mossy, dirty gutter below a tile roof"},
+    price:"From $99",priceNote:"$99 one-story · $149 two-story (first 10 gutter cleanings this fall)",time:"1–2 hours for most homes",photoCredit:GUTTER_CREDIT,photo:"/media/stock-gutter-unsplash.jpg",photoAlt:"Stock photo of a mossy, dirty gutter below a tile roof"},
   "driveway-concrete-cleaning":{icon:"drive",summary:"Concrete cleaned at the right pressure, then sealed if it's worth it for your slab.",
     included:["Driveways, walkways, steps and patios","Algae, moss, tire marks and stains","Pavers cleaned without blowing out joint sand","Optional penetrating sealer once dry","Final look-over with you"],
     price:"Free on-site estimate",priceNote:"Including a straight answer on whether sealing is worth it",time:"Confirmed on your estimate — sealing waits until the concrete is dry"},
