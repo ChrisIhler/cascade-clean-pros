@@ -92,6 +92,21 @@ const FS="'Fraunces','Georgia',serif";
 
 function Reveal({children,style}){const r=useRef(null);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){e.target.classList.add("in");o.disconnect()}},{threshold:.12});if(r.current)o.observe(r.current);return()=>o.disconnect()},[]);return<div ref={r} className="fade-up" style={style}>{children}</div>}
 
+const SERVICE_OPTIONS=["House Washing","Roof Cleaning & Moss","Gutter Cleaning","Driveway & Concrete","Deck & Patio","Fence Cleaning","Walkways & Hardscape","Window Cleaning","Commercial / Fleet","Other"];
+function ServicePicker({form,setForm}){
+  const toggle=o=>setForm(p=>({...p,services:p.services.includes(o)?p.services.filter(x=>x!==o):[...p.services,o]}));
+  return (
+    <fieldset style={{border:"none",padding:0,margin:"0 0 13px"}}>
+      <legend style={{fontSize:".82rem",fontWeight:700,color:C.ink,marginBottom:8,textAlign:"left"}}>What can we help with? <span style={{fontWeight:400,color:C.soft}}>(check all that apply)</span></legend>
+      <div style={{display:"flex",flexWrap:"wrap",gap:7}}>
+        {SERVICE_OPTIONS.map(o=>{const on=form.services.includes(o);return(
+          <label key={o} style={{display:"inline-flex",alignItems:"center",gap:6,padding:"7px 11px",borderRadius:999,border:`1.5px solid ${on?C.blue:C.line}`,background:on?C.mist:"#fff",color:on?C.blue:C.text,fontSize:".8rem",fontWeight:on?700:500,cursor:"pointer",userSelect:"none"}}>
+            <input type="checkbox" checked={on} onChange={()=>toggle(o)} style={{margin:0,accentColor:C.blue}}/>{o}
+          </label>);})}
+      </div>
+    </fieldset>
+  );
+}
 const CONSENT_VERSION="2026.09.25.v1";
 function ConsentBlock({form,setForm}){
   const lab={display:"flex",alignItems:"flex-start",gap:9,fontSize:".74rem",lineHeight:1.5,color:C.soft,marginBottom:9,cursor:"pointer",textAlign:"left"};
@@ -115,7 +130,7 @@ function Home(){
   const[menuOpen,setMenuOpen]=useState(false);
   const[formActive,setFormActive]=useState(false);
   const[faq,setFaq]=useState(0);
-  const[form,setForm]=useState({name:"",phone:"",email:"",service:"residential",notes:"",consent_contact:false,consent_sms_ai:false,consent_voice_ai:false});
+  const[form,setForm]=useState({name:"",phone:"",email:"",service:"residential",notes:"",services:[],consent_contact:false,consent_sms_ai:false,consent_voice_ai:false});
   const[sent,setSent]=useState(false);
   const[sending,setSending]=useState(false);
   const[err,setErr]=useState("");
@@ -129,7 +144,7 @@ function Home(){
     if(!form.consent_contact){setErr("Please check the box allowing us to contact you about your estimate.");return;}
     setSending(true);
     try{
-      await fetch(FORM_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...form,consent_contact:form.consent_contact?"yes":"no",consent_sms_ai:form.consent_sms_ai?"yes":"no",consent_voice_ai:form.consent_voice_ai?"yes":"no",consent_version:CONSENT_VERSION,consent_source_url:(typeof location!=="undefined"?location.href:"https://cascadecleanpros.com/"),consent_captured_at:new Date().toISOString(),consent_user_agent:(typeof navigator!=="undefined"?navigator.userAgent:"")})});
+      await fetch(FORM_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...form,services:form.services.join(", "),consent_contact:form.consent_contact?"yes":"no",consent_sms_ai:form.consent_sms_ai?"yes":"no",consent_voice_ai:form.consent_voice_ai?"yes":"no",consent_version:CONSENT_VERSION,consent_source_url:(typeof location!=="undefined"?location.href:"https://cascadecleanpros.com/"),consent_captured_at:new Date().toISOString(),consent_user_agent:(typeof navigator!=="undefined"?navigator.userAgent:"")})});
       setSent(true);
       if(window.fbq)window.fbq("track","Lead");
       if(window.gtag){window.gtag("event","generate_lead");window.gtag("event","conversion",{send_to:"AW-18227655988/NZVWCNiu08McELTqz_ND"});}
@@ -227,8 +242,9 @@ function Home(){
               {[["name","Full Name","text","name"],["phone","Phone","tel","tel"],["email","Email","email","email"]].map(f=>(
                 <input key={f[0]} type={f[2]} autoComplete={f[3]} aria-label={f[1]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}/>
               ))}
-              <select aria-label="Service type" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}>
-                <option value="residential">Residential</option><option>Gutter Cleaning</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
+              <ServicePicker form={form} setForm={setForm}/>
+              <select aria-label="Property type" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}>
+                <option value="residential">Residential</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
               </select>
               <textarea aria-label="Project details" placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",height:100,minHeight:80,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
               <ConsentBlock form={form} setForm={setForm}/>
@@ -267,7 +283,7 @@ function Home(){
             </div>
             <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
               <a href={`tel:${BRAND.tel}`} style={{display:"inline-flex",alignItems:"center",gap:8,background:GRAD,color:"#fff",padding:"15px 26px",borderRadius:11,fontWeight:700,fontSize:"1rem"}}>Call or Text {BRAND.phone}</a>
-              <button onClick={()=>{setForm(p=>({...p,service:"Gutter Cleaning"}));go("quote");}} style={{background:"#fff",color:C.blue,border:`1.5px solid ${C.blue}`,padding:"15px 24px",borderRadius:11,fontWeight:700,fontSize:"1rem",cursor:"pointer",fontFamily:F}}>Book Online</button>
+              <button onClick={()=>{setForm(p=>({...p,services:p.services.includes("Gutter Cleaning")?p.services:[...p.services,"Gutter Cleaning"]}));go("quote");}} style={{background:"#fff",color:C.blue,border:`1.5px solid ${C.blue}`,padding:"15px 24px",borderRadius:11,fontWeight:700,fontSize:"1rem",cursor:"pointer",fontFamily:F}}>Book Online</button>
               <a href="/services/gutter-cleaning/" style={{display:"inline-flex",alignItems:"center",color:C.blue,padding:"15px 6px",fontWeight:700,fontSize:"1rem"}}>Details →</a>
             </div>
           </div>
