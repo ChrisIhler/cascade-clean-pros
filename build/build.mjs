@@ -16,7 +16,7 @@ const PROD = { "process.env.NODE_ENV": '"production"' };
 const ORIGIN = "https://cascadecleanpros.com";
 const TODAY = "2026-06-09";
 // Per-route sitemap lastmod for pages changed after TODAY.
-const LASTMOD = { "/services/": "2026-09-25", "/services/gutter-cleaning/": "2026-09-25" };
+const LASTMOD = Object.fromEntries(["/services/","/services/gutter-cleaning/","/services/house-washing/","/services/roof-cleaning/","/services/driveway-concrete-cleaning/","/services/commercial-fleet-washing/"].map(p => [p, "2026-09-25"]));
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // 1. Client hydration bundle -> ../app.js

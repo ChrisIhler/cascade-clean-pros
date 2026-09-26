@@ -40,10 +40,10 @@ const ADDON_ICONS=[
   <svg key="i6" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M14.6 6.4a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.4-3.4a6 6 0 0 1-7.8 7.8l-6.6 6.6a2.1 2.1 0 0 1-3-3l6.6-6.6a6 6 0 0 1 7.8-7.8l-3.4 3.4z"/></svg>,
 ];
 const ADDON_SERVICES=[
-  {title:"Roof Cleaning & Moss Treatment",desc:"We treat, kill, and clear moss and algae from your roof, then clean up — never high-pressure washing the shingles."},
-  {title:"Gutter Cleaning & Clear-Out",desc:"Full gutter and downspout clear-out so water flows freely and your foundation stays protected."},
+  {href:"/services/roof-cleaning/",title:"Roof Cleaning & Moss Treatment",desc:"We treat, kill, and clear moss and algae from your roof, then clean up — never high-pressure washing the shingles."},
+  {href:"/services/gutter-cleaning/",title:"Gutter Cleaning & Clear-Out",desc:"Full gutter and downspout clear-out so water flows freely and your foundation stays protected."},
   {title:"Window Cleaning",desc:"Streak-free interior and exterior windows, with screen and track cleaning on request."},
-  {title:"Concrete Sealing",desc:"Protective sealing after cleaning to guard concrete against stains, moisture, and wear."},
+  {href:"/services/driveway-concrete-cleaning/",title:"Concrete Sealing",desc:"Protective sealing after cleaning to guard concrete against stains, moisture, and wear."},
   {title:"Deck & Fence Staining",desc:"Refresh and protect wood after cleaning with quality stain or sealer for lasting color."},
   {title:"Exterior Painting Touch-Ups",desc:"Light exterior painting and touch-up work to finish off your property's refresh."},
   {title:"Odd Jobs — Just Ask",desc:"Got something else on your list? Debris haul-away and other small exterior tasks — ask us, we can likely help."},
@@ -147,26 +147,26 @@ function Home(){
               <div className="ltag" style={{color:C.blue,fontSize:".7rem",textTransform:"uppercase",letterSpacing:2.5,fontWeight:700}}>Exterior Cleaning · Puget Sound</div>
             </div>
           </div>
-          <div className="nactions" style={{display:"flex",gap:30,alignItems:"center"}}>
-            {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"],["Blog","/blog/"]].map(a=>(
+          <div className="nactions" style={{display:"flex",gap:22,alignItems:"center"}}>
+            {[["Services","/services/"],["Residential","services"],["Commercial","commercial"],["More Services","addons"],["Areas","areas"],["FAQ","faq"],["Blog","/blog/"]].map(a=>(
               a[1][0]==="/"
-                ? <a key={a[1]} href={a[1]} className="nd" style={{display:"none",padding:"10px 2px",color:C.text,fontSize:".84rem",fontWeight:600,fontFamily:F,textDecoration:"none"}}>{a[0]}</a>
-                : <button key={a[1]} onClick={()=>go(a[1])} className="nd" style={{display:"none",padding:"10px 2px",background:"none",border:"none",color:C.text,fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
+                ? <a key={a[1]} href={a[1]} className="nd" style={{display:"none",whiteSpace:"nowrap",padding:"10px 2px",color:C.text,fontSize:".84rem",fontWeight:600,fontFamily:F,textDecoration:"none"}}>{a[0]}</a>
+                : <button key={a[1]} onClick={()=>go(a[1])} className={a[1]==="services"||a[1]==="commercial"?"nd nd-opt":"nd"} style={{display:"none",whiteSpace:"nowrap",padding:"10px 2px",background:"none",border:"none",color:C.text,fontSize:".84rem",fontWeight:600,cursor:"pointer",fontFamily:F}}>{a[0]}</button>
             ))}
             <button className="mnav" aria-label="Open menu" aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={()=>setMenuOpen(o=>!o)} style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:42,height:42,borderRadius:10,border:"none",background:"rgba(0,24,56,.06)",cursor:"pointer",color:C.ink,fontSize:"1.4rem",lineHeight:1}}>☰</button>
-            <a className="navphone" href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:".9rem"}}>{BRAND.phone}</a>
-            <button onClick={()=>go("quote")} style={{background:GRAD,color:"#fff",border:"none",padding:"11px 22px",borderRadius:9,fontWeight:700,fontSize:".83rem",cursor:"pointer",fontFamily:F,boxShadow:"0 4px 16px rgba(0,84,180,.35)"}}>Free Quote</button>
+            <a className="navphone" href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:".9rem",whiteSpace:"nowrap"}}>{BRAND.phone}</a>
+            <button onClick={()=>go("quote")} style={{background:GRAD,color:"#fff",border:"none",padding:"11px 22px",borderRadius:9,fontWeight:700,fontSize:".83rem",cursor:"pointer",fontFamily:F,boxShadow:"0 4px 16px rgba(0,84,180,.35)",whiteSpace:"nowrap"}}>Free Quote</button>
           </div>
         </div>
       {menuOpen&&<div className="mmenu" id="mobile-menu" style={{borderTop:"1px solid "+C.line,background:"#fff",padding:"8px 22px 16px",boxShadow:"0 12px 24px rgba(0,24,56,.08)"}}><a href={`tel:${BRAND.tel}`} style={{display:"flex",alignItems:"center",gap:8,padding:"15px 2px",borderBottom:"1px solid "+C.line,color:C.blue,fontWeight:700,fontSize:"1rem",textDecoration:"none"}}>📞 {BRAND.phone}</a>
-        {[["Residential","services"],["Commercial","commercial"],["Add-Ons","addons"],["Areas","areas"],["FAQ","faq"],["Blog","/blog/"]].map(a=>(
+        {[["Services","/services/"],["Residential","services"],["Commercial","commercial"],["More Services","addons"],["Areas","areas"],["FAQ","faq"],["Blog","/blog/"]].map(a=>(
           a[1][0]==="/"
             ? <a key={a[1]} href={a[1]} style={{display:"block",width:"100%",textAlign:"left",borderBottom:"1px solid "+C.line,padding:"15px 2px",fontFamily:F,fontSize:"1rem",fontWeight:600,color:C.text,textDecoration:"none"}}>{a[0]}</a>
             : <button key={a[1]} onClick={()=>{go(a[1]);setMenuOpen(false);}} style={{display:"block",width:"100%",textAlign:"left",background:"none",border:"none",borderBottom:"1px solid "+C.line,padding:"15px 2px",fontFamily:F,fontSize:"1rem",fontWeight:600,color:C.text,cursor:"pointer"}}>{a[0]}</button>
         ))}
       </div>}
       </nav>
-      <style>{`@media(min-width:768px){.nd{display:inline-block !important}.mnav{display:none !important}.mmenu{display:none !important}}@media(min-width:768px) and (max-width:1024px){.nactions{gap:13px !important}.nd{font-size:.78rem !important;padding:10px 0 !important}.navphone{font-size:.82rem !important}.ltag{font-size:.62rem !important;letter-spacing:1.4px !important}}@media(max-width:767px){.nbar{height:auto !important;min-height:70px;padding-top:11px !important;padding-bottom:11px !important}.navphone{display:none !important}.lname{font-size:1rem !important;white-space:nowrap}.ltag{letter-spacing:1.1px !important;font-size:.6rem !important}.nactions{gap:14px !important}}.skiplink{position:absolute;left:-9999px}.skiplink:focus{position:fixed;left:8px;top:8px;z-index:9999;background:#fff;color:${C.blue};padding:10px 14px;border-radius:8px;box-shadow:0 4px 16px rgba(0,24,56,.2);font-weight:700;text-decoration:none}`}</style>
+      <style>{`@media(min-width:768px){.nd{display:inline-block !important}.mnav{display:none !important}.mmenu{display:none !important}}@media(max-width:1240px){.nd-opt{display:none !important}}@media(min-width:768px) and (max-width:1024px){.nactions{gap:13px !important}.nd{font-size:.78rem !important;padding:10px 0 !important}.navphone{font-size:.82rem !important}.ltag{font-size:.62rem !important;letter-spacing:1.4px !important}}@media(max-width:767px){.nbar{height:auto !important;min-height:70px;padding-top:11px !important;padding-bottom:11px !important}.navphone{display:none !important}.lname{font-size:1rem !important;white-space:nowrap}.ltag{letter-spacing:1.1px !important;font-size:.6rem !important}.nactions{gap:14px !important}}.skiplink{position:absolute;left:-9999px}.skiplink:focus{position:fixed;left:8px;top:8px;z-index:9999;background:#fff;color:${C.blue};padding:10px 14px;border-radius:8px;box-shadow:0 4px 16px rgba(0,24,56,.2);font-weight:700;text-decoration:none}`}</style>
 
       <main id="homemain">
       {/* HERO */}
@@ -193,7 +193,7 @@ function Home(){
               <button onClick={()=>go("quote")} style={{background:C.aqua,color:C.ink,border:"none",padding:"17px 34px",borderRadius:11,fontWeight:700,fontSize:"1.02rem",cursor:"pointer",fontFamily:F,boxShadow:"0 8px 28px rgba(63,192,180,.45)"}}>Get a Free Estimate →</button>
               <button onClick={()=>go("services")} style={{background:"rgba(255,255,255,.12)",color:"#fff",border:"1px solid rgba(255,255,255,.28)",padding:"13px 20px",borderRadius:10,fontWeight:600,fontSize:".92rem",cursor:"pointer",fontFamily:F}}>Residential Services</button>
               <button onClick={()=>go("commercial")} style={{background:"rgba(255,255,255,.12)",color:"#fff",border:"1px solid rgba(255,255,255,.28)",padding:"13px 20px",borderRadius:10,fontWeight:600,fontSize:".92rem",cursor:"pointer",fontFamily:F}}>Commercial Services</button>
-              <button onClick={()=>go("addons")} style={{background:"rgba(255,255,255,.12)",color:"#fff",border:"1px solid rgba(255,255,255,.28)",padding:"13px 20px",borderRadius:10,fontWeight:600,fontSize:".92rem",cursor:"pointer",fontFamily:F}}>Other Services</button>
+              <button onClick={()=>go("addons")} style={{background:"rgba(255,255,255,.12)",color:"#fff",border:"1px solid rgba(255,255,255,.28)",padding:"13px 20px",borderRadius:10,fontWeight:600,fontSize:".92rem",cursor:"pointer",fontFamily:F}}>More Services</button>
             </div>
             <div style={{display:"flex",gap:26,flexWrap:"wrap"}}>
               {["Eco-Friendly Methods","Free Estimates","Owner-Operated"].map(b=>(
@@ -261,14 +261,15 @@ function Home(){
           <div style={{textAlign:"center",marginBottom:14}}><span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>Residential</span></div>
           <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,textAlign:"center",marginBottom:14,fontWeight:600}}>Homes, top to bottom</h2>
           <p style={{fontSize:"1.08rem",color:C.soft,maxWidth:600,margin:"0 auto 8px",textAlign:"center"}}>Gentle, surface-safe soft washing and pressure washing for every part of your property.</p>
-          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap or click any service to enlarge.</p>
+          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap a photo to enlarge, or open a service for details and pricing.</p>
         </Reveal>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
-          {[["/media/cascade-house-washing.jpg","House washing — soft wash for siding, trim, soffits and exterior surfaces"],["/media/cascade-driveway-concrete.jpg","Driveway and concrete cleaning"],["/media/cascade-deck-patio.jpg","Deck and patio cleaning"],["/media/cascade-walkways-hardscape.jpg","Walkways and hardscape cleaning"],["/media/cascade-fence-cleaning.jpg","Fence cleaning"]].map(p=>(
-            <div key={p[0]} role="button" tabIndex={0} aria-label={"Enlarge: "+p[1]} onClick={()=>setLightbox(p[0])} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setLightbox(p[0]);}}} style={{display:"block",cursor:"zoom-in",borderRadius:14,overflow:"hidden",boxShadow:"0 5px 20px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
+          {[["/media/cascade-house-washing.jpg","House washing — soft wash for siding, trim, soffits and exterior surfaces","/services/house-washing/","House Washing"],["/media/cascade-driveway-concrete.jpg","Driveway and concrete cleaning","/services/driveway-concrete-cleaning/","Driveway & Concrete"],["/media/cascade-deck-patio.jpg","Deck and patio cleaning",null,"Deck & Patio"],["/media/cascade-walkways-hardscape.jpg","Walkways and hardscape cleaning","/services/driveway-concrete-cleaning/","Walkways & Hardscape"],["/media/cascade-fence-cleaning.jpg","Fence cleaning",null,"Fence Cleaning"]].map(p=>(
+            <div key={p[0]} style={{borderRadius:14,overflow:"hidden",background:"#fff",boxShadow:"0 5px 20px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
               onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 16px 38px rgba(0,24,56,.18)";}}
               onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 5px 20px rgba(0,24,56,.10)";}}>
-              <img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/>
+              <div role="button" tabIndex={0} aria-label={"Enlarge: "+p[1]} onClick={()=>setLightbox(p[0])} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setLightbox(p[0]);}}} style={{cursor:"zoom-in"}}><img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/></div>
+                <a href={p[2]||"#quote"} onClick={p[2]?undefined:e=>{e.preventDefault();go("quote");}} style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:10,padding:"13px 16px",color:C.ink,fontWeight:700,fontSize:".95rem",textDecoration:"none",borderTop:`1px solid ${C.line}`}}><span>{p[3]}</span><span style={{color:C.blue,whiteSpace:"nowrap"}}>{p[2]?"See details →":"Get a quote →"}</span></a>
             </div>
           ))}
         </div>
@@ -299,32 +300,33 @@ function Home(){
           </div>
         </div>
         <div style={{maxWidth:1240,margin:"0 auto",padding:"48px 28px 60px"}}>
-          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap or click any service to enlarge.</p>
+          <p style={{fontSize:".82rem",color:C.mute,textAlign:"center",marginBottom:38}}>Tap a photo to enlarge, or open a service for details and pricing.</p>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
-            {[["/media/cascade-apartment-multifamily.jpg","Apartment and multi-family exterior cleaning"],["/media/cascade-retail-storefront.jpg","Retail and storefront cleaning"],["/media/cascade-industrial-warehouse.jpg","Industrial and warehouse cleaning"],["/media/cascade-office-medical.jpg","Office and medical park cleaning"],["/media/cascade-restaurant-food.jpg","Restaurant and food service cleaning"],["/media/cascade-fleet-equipment.jpg","Fleet and equipment washing — trucks, vans and heavy equipment"]].map(p=>(
-              <div key={p[0]} role="button" tabIndex={0} aria-label={"Enlarge: "+p[1]} onClick={()=>setLightbox(p[0])} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setLightbox(p[0]);}}} style={{display:"block",cursor:"zoom-in",borderRadius:14,overflow:"hidden",boxShadow:"0 5px 20px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
+            {[["/media/cascade-apartment-multifamily.jpg","Apartment and multi-family exterior cleaning","/services/commercial-fleet-washing/","Apartment & Multi-Family"],["/media/cascade-retail-storefront.jpg","Retail and storefront cleaning","/services/commercial-fleet-washing/","Retail & Storefront"],["/media/cascade-industrial-warehouse.jpg","Industrial and warehouse cleaning","/services/commercial-fleet-washing/","Industrial & Warehouse"],["/media/cascade-office-medical.jpg","Office and medical park cleaning","/services/commercial-fleet-washing/","Office & Medical Parks"],["/media/cascade-restaurant-food.jpg","Restaurant and food service cleaning","/services/commercial-fleet-washing/","Restaurant & Food Service"],["/media/cascade-fleet-equipment.jpg","Fleet and equipment washing — trucks, vans and heavy equipment","/services/commercial-fleet-washing/","Fleet & Equipment"]].map(p=>(
+              <div key={p[0]} style={{borderRadius:14,overflow:"hidden",background:"#fff",boxShadow:"0 5px 20px rgba(0,24,56,.10)",transition:"transform .3s,box-shadow .3s"}}
                 onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 16px 38px rgba(0,24,56,.18)";}}
                 onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 5px 20px rgba(0,24,56,.10)";}}>
-                <img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/>
+                <div role="button" tabIndex={0} aria-label={"Enlarge: "+p[1]} onClick={()=>setLightbox(p[0])} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setLightbox(p[0]);}}} style={{cursor:"zoom-in"}}><img src={p[0]} alt={p[1]} loading="lazy" decoding="async" style={{width:"100%",display:"block"}}/></div>
+                <a href={p[2]||"#quote"} onClick={p[2]?undefined:e=>{e.preventDefault();go("quote");}} style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:10,padding:"13px 16px",color:C.ink,fontWeight:700,fontSize:".95rem",textDecoration:"none",borderTop:`1px solid ${C.line}`}}><span>{p[3]}</span><span style={{color:C.blue,whiteSpace:"nowrap"}}>{p[2]?"See details →":"Get a quote →"}</span></a>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ADD-ON SERVICES */}
+      {/* MORE SERVICES (formerly "Add-Ons") */}
       <section id="addons" style={{maxWidth:1240,margin:"0 auto",padding:"74px 28px 34px"}}>
         <Reveal>
           <div style={{textAlign:"center",marginBottom:44}}>
             <span style={{fontSize:"1.15rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>More Than Pressure Washing</span>
-            <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,margin:"12px 0",fontWeight:600}}>Additional services</h2>
+            <h2 style={{fontFamily:FS,fontSize:"2.6rem",color:C.ink,margin:"12px 0",fontWeight:600}}>More services</h2>
             <p style={{fontSize:"1.06rem",color:C.soft,maxWidth:580,margin:"0 auto"}}>Bundle any of these with a wash to tackle your whole exterior to-do list in one visit — and if you don't see what you need, just ask.</p>
           </div>
         </Reveal>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",gap:20}}>
           {ADDON_SERVICES.map((s,i)=>(
             <Reveal key={s.title} style={{transitionDelay:`${i*70}ms`}}>
-              <div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:16,padding:"28px 26px",height:"100%",boxShadow:"0 2px 16px rgba(10,38,48,.05)",transition:"transform .3s,box-shadow .3s"}}
+              <a href={s.href||undefined} style={{display:"block",textDecoration:"none",color:"inherit",background:C.card,border:`1px solid ${C.line}`,borderRadius:16,padding:"28px 26px",height:"100%",boxShadow:"0 2px 16px rgba(10,38,48,.05)",transition:"transform .3s,box-shadow .3s"}}
                 onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="0 16px 36px rgba(10,38,48,.12)"}}
                 onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 2px 16px rgba(10,38,48,.05)"}}>
                 <div style={{width:46,height:46,borderRadius:12,background:C.mist,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
@@ -332,12 +334,13 @@ function Home(){
                 </div>
                 <h4 style={{fontSize:"1.12rem",fontWeight:700,color:C.ink,marginBottom:8,fontFamily:FS}}>{s.title}</h4>
                 <p style={{fontSize:".9rem",color:C.soft,lineHeight:1.65}}>{s.desc}</p>
-              </div>
+                {s.href&&<span style={{display:"inline-block",marginTop:12,color:C.blue,fontWeight:700,fontSize:".9rem"}}>See details →</span>}
+              </a>
             </Reveal>
           ))}
         </div>
         <div style={{textAlign:"center",marginTop:36}}>
-          <button onClick={()=>go("quote")} style={{background:GRAD,color:"#fff",border:"none",padding:"15px 32px",borderRadius:11,fontWeight:700,fontSize:"1rem",cursor:"pointer",fontFamily:F}}>Ask About Add-On Services →</button>
+          <button onClick={()=>go("quote")} style={{background:GRAD,color:"#fff",border:"none",padding:"15px 32px",borderRadius:11,fontWeight:700,fontSize:"1rem",cursor:"pointer",fontFamily:F}}>Ask About More Services →</button>
         </div>
       </section>
 
@@ -456,7 +459,7 @@ function SubNav(){
           <span style={{color:C.ink,fontWeight:800,fontSize:"1.02rem"}}>{BRAND.name}</span>
         </a>
         <div style={{display:"flex",alignItems:"center",gap:18}}>
-          <a href="/services/" className="snl" style={{color:C.text,fontWeight:600,fontSize:".9rem",textDecoration:"none"}}>Services</a>
+          <a href="/services/" className="snl snl-keep" style={{color:C.text,fontWeight:600,fontSize:".9rem",textDecoration:"none"}}>Services</a>
           <a href="/locations/" className="snl" style={{color:C.text,fontWeight:600,fontSize:".9rem",textDecoration:"none"}}>Areas</a>
           <a href="/blog/" className="snl" style={{color:C.text,fontWeight:600,fontSize:".9rem",textDecoration:"none"}}>Blog</a>
           <a href={`tel:${BRAND.tel}`} className="snl" style={{color:C.blue,fontWeight:700,fontSize:".9rem",textDecoration:"none"}}>{BRAND.phone}</a>
@@ -466,9 +469,9 @@ function SubNav(){
     </nav>
   );
 }
-function Breadcrumbs({crumbs}){
+function Breadcrumbs({crumbs,width=760}){
   return (
-    <nav aria-label="Breadcrumb" style={{maxWidth:760,margin:"0 auto",padding:"20px 22px 0",fontSize:".82rem",color:C.mute}}>
+    <nav aria-label="Breadcrumb" style={{maxWidth:width,margin:"0 auto",padding:"20px 22px 0",fontSize:".82rem",color:C.mute}}>
       {crumbs.map((c,i)=>(
         <span key={i}>
           {i>0 && <span style={{margin:"0 7px",color:C.line}}>/</span>}
@@ -523,18 +526,19 @@ function SubFooter(){
     </footer>
   );
 }
-function Shell({crumbs,children}){
+function Shell({crumbs,children,sticky,wide}){
   return (
-    <div style={{background:"#fff",minHeight:"100vh",fontFamily:F,color:C.text}}>
+    <div className={sticky?"has-sticky":undefined} style={{background:"#fff",minHeight:"100vh",fontFamily:F,color:C.text}}>
       <a href="#main" className="skiplink">Skip to content</a>
       <SubNav/>
       <main id="main">
-      {crumbs && <Breadcrumbs crumbs={crumbs}/>}
+      {crumbs && <Breadcrumbs crumbs={crumbs} width={wide||760}/>}
       {children}
       <QuoteCTA/>
       </main>
       <SubFooter/>
-      <style dangerouslySetInnerHTML={{__html:`
+      {sticky && <StickyCall/>}
+      <style dangerouslySetInnerHTML={{__html:SVC_CSS+`
         .skiplink{position:absolute;left:-9999px}.skiplink:focus{position:fixed;left:8px;top:8px;z-index:9999;background:#fff;color:${C.blue};padding:10px 14px;border-radius:8px;box-shadow:0 4px 16px rgba(0,24,56,.2);font-weight:700;text-decoration:none}
         .article{max-width:760px;margin:0 auto;padding:12px 22px 0;font-size:1.06rem;line-height:1.75;color:${C.text}}
         .article h1{font-family:${FS};font-weight:600;font-size:2.35rem;line-height:1.12;color:${C.ink};margin:.3em 0 .5em}
@@ -552,7 +556,7 @@ function Shell({crumbs,children}){
         .article th{background:${C.mist};color:${C.ink};font-weight:700}
         .article hr{border:none;border-top:1px solid ${C.line};margin:2em 0}
         .article code{background:${C.mist};padding:2px 6px;border-radius:5px;font-size:.9em}
-        @media(max-width:520px){.snl{display:none}.article h1{font-size:1.8rem}.article h2{font-size:1.35rem}}
+        @media(max-width:520px){.snl{display:none}.snl-keep{display:inline !important}.article h1{font-size:1.8rem}.article h2{font-size:1.35rem}}
       `}}/>
     </div>
   );
@@ -599,6 +603,130 @@ function BlogPost({post}){
   );
 }
 
+/* ===== Service catalog: icons, card photos, quick facts =====
+   Card photos in /media/cards/ are crops of the site's service graphics (title
+   text trimmed off). The gutter photo is an Unsplash stock image — it is
+   credited as stock wherever it appears and never captioned as our own job. */
+const ICO={
+  house:["M3 10.5 12 3l9 7.5","M5.5 9.5V20h13V9.5","M10 20v-5h4v5"],
+  roof:["M2 13 12 4l10 9","M5 11v9h14v-9","M8 8.5l1-1M12 7l1-1M15.5 9l1-1"],
+  gutter:["M3 6h18l-1.5 4h-15z","M17 10v7a3 3 0 0 1-3 3h-2","M8 14c-.8 1.2-1.2 2-1.2 2.6a1.2 1.2 0 0 0 2.4 0c0-.6-.4-1.4-1.2-2.6z"],
+  drive:["M8 3 5 21","M16 3l3 18","M12 4v2.5M12 10v2.5M12 16v3"],
+  deck:["M3 9h18","M3 13h18","M3 17h18","M6 17v4M18 17v4","M5 9V5h14v4"],
+  path:["M9 21c0-4 6-5 6-9s-4-5-4-9","M5 21c0-5 6-6 6-10","M19 21c0-4-3-6-3-9"],
+  fence:["M4.5 21V7l1.5-2 1.5 2v14","M10.5 21V7l1.5-2 1.5 2v14","M16.5 21V7l1.5-2 1.5 2v14","M3 11.5h18","M3 16.5h18"],
+  apt:["M4 21V4h10v17","M14 9h6v12","M7 8h1M10 8h1M7 12h1M10 12h1M7 16h1M10 16h1M17 13h0M17 17h0","M2 21h20"],
+  store:["M3 9l1.5-5h15L21 9","M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0","M5 12v9h14v-9","M10 21v-5h4v5"],
+  warehouse:["M2 21V9l10-5 10 5v12","M6 21v-8h12v8","M6 16h12"],
+  office:["M5 21V3h14v18","M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2","M3 21h18"],
+  food:["M7 3v8a2 2 0 0 0 4 0V3","M9 11v10","M16 3c-1.7 1.5-2.5 3.7-2.5 6.5V13H17V3z","M17 13v8"],
+  truck:["M2 6h12v10H2z","M14 10h4l3 3v3h-7","M6 19a2 2 0 1 0 0-.01M17 19a2 2 0 1 0 0-.01"],
+  window:["M4 3h16v18H4z","M12 3v18M4 12h16"],
+  seal:["M12 3 5 5.6v5.2c0 4.4 3 7.7 7 9.2 4-1.5 7-4.8 7-9.2V5.6L12 3z","M9 12l2 2 4-4"],
+  brush:["M4 14h9l1 3H3z","M8.5 14V5a2 2 0 0 1 4 0v9","M18 4v10","M16 9h4"],
+  paint:["M4 4h13v5H4z","M17 6.5h2.5V12H11v3","M9.5 15h3v6h-3z"],
+  wrench:["M14.6 6.4a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.4-3.4a6 6 0 0 1-7.8 7.8l-6.6 6.6a2.1 2.1 0 0 1-3-3l6.6-6.6a6 6 0 0 1 7.8-7.8l-3.4 3.4z"],
+  phone:["M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"],
+  chat:["M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"],
+  check:["M5 12.5l4.5 4.5L19 7.5"],
+  clock:["M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z","M12 7v5l3 2"],
+  tag:["M3 12V4h8l10 10-8 8z","M7.5 8.5h0"],
+};
+function Icon({name,size=24,color="currentColor",sw=1.8}){
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{(ICO[name]||[]).map((d,i)=><path key={i} d={d}/>)}</svg>;
+}
+const GUTTER_CREDIT = {text:"Stock photo · Aleksi Partanen / Unsplash", url:"https://unsplash.com/@aleksi_p"};
+const FREE_EST = "Free estimate";
+const SERVICE_GROUPS=[
+  {id:"residential",label:"Residential",title:"For your home",intro:"Soft washing for the delicate stuff, pressure washing where concrete can take it.",items:[
+    {name:"House Washing",icon:"house",img:"/media/cards/house-washing.jpg",line:"Soft wash for siding, trim and soffits — lifts dirt, mold and mildew.",price:FREE_EST,href:"/services/house-washing/"},
+    {name:"Roof Cleaning & Moss Treatment",icon:"roof",img:"/media/cards/roof-cleaning.jpg",line:"Moss and algae treated at the root — never high pressure on shingles.",price:FREE_EST,href:"/services/roof-cleaning/"},
+    {name:"Gutter Cleaning",icon:"gutter",img:"/media/cards/gutter-cleaning.jpg",line:"Gutters and downspouts cleared, debris hauled away.",price:"From $99",href:"/services/gutter-cleaning/",stock:true},
+    {name:"Driveway & Concrete",icon:"drive",img:"/media/cards/driveway-concrete.jpg",line:"Algae, moss and stains lifted from concrete and pavers, with optional sealing.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
+    {name:"Walkways & Hardscape",icon:"path",img:"/media/cards/walkways-hardscape.jpg",line:"Slick, mossy paths, steps and pavers made safe to walk on again.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
+    {name:"Deck & Patio",icon:"deck",img:"/media/cards/deck-patio.jpg",line:"Wood, composite and stone brightened with the right pressure for each.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
+    {name:"Fence Cleaning",icon:"fence",img:"/media/cards/fence-cleaning.jpg",line:"Green algae, moss and grime cleared from wood, vinyl and metal fencing.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
+  ]},
+  {id:"commercial",label:"Commercial",title:"For your business or property",intro:"Written bids, scheduling around your hours, and water-capture practices on commercial sites.",items:[
+    {name:"Apartment & Multi-Family",icon:"apt",img:"/media/cards/apartment-multifamily.jpg",line:"Breezeways, stairwells, siding and shared walkways.",price:FREE_EST,href:"/services/commercial-fleet-washing/"},
+    {name:"Retail & Storefront",icon:"store",img:"/media/cards/retail-storefront.jpg",line:"Sidewalks and entrances clean before customers arrive.",price:FREE_EST,href:"/services/commercial-fleet-washing/"},
+    {name:"Restaurant & Food Service",icon:"food",img:"/media/cards/restaurant-food.jpg",line:"Dumpster pads, drive-thru lanes and patios.",price:FREE_EST,href:"/services/commercial-fleet-washing/"},
+    {name:"Office & Medical Parks",icon:"office",img:"/media/cards/office-medical.jpg",line:"Building exteriors, walkways and parking areas.",price:FREE_EST,href:"/services/commercial-fleet-washing/"},
+    {name:"Industrial & Warehouse",icon:"warehouse",img:"/media/cards/industrial-warehouse.jpg",line:"Loading docks, equipment pads and large elevations.",price:FREE_EST,href:"/services/commercial-fleet-washing/"},
+    {name:"Fleet & Equipment",icon:"truck",img:"/media/cards/fleet-equipment.jpg",line:"On-site washing for trucks, vans and heavy equipment.",price:FREE_EST,href:"/services/commercial-fleet-washing/"},
+  ]},
+  {id:"more",label:"More Services",title:"Finish the whole to-do list",intro:"Add any of these to a wash, or ask about them on their own.",items:[
+    {name:"Window Cleaning",icon:"window",line:"Interior and exterior windows, with screens and tracks on request.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
+    {name:"Concrete Sealing",icon:"seal",line:"Penetrating sealer after cleaning to slow stains, moss and freeze-thaw damage.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
+    {name:"Deck & Fence Staining",icon:"brush",line:"Stain or sealer on freshly cleaned wood for lasting color.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
+    {name:"Exterior Painting Touch-Ups",icon:"paint",line:"Light touch-up work to finish off your exterior refresh.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
+    {name:"Odd Jobs — Just Ask",icon:"wrench",line:"Debris haul-away and other small exterior tasks.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
+  ]},
+];
+// Quick facts shown at the top of each service page. Pulled from each page's own
+// copy — typical times are only stated where the page itself states one.
+const SERVICE_FACTS={
+  "house-washing":{icon:"house",summary:"A low-pressure soft wash that cleans siding without forcing water behind it.",
+    included:["Soft wash of siding on all accessible sides","Algae, mold and mildew treatment","Trim, soffits and gutter faces","Plants pre-wetted and protected","Final rinse and walkthrough with you"],
+    price:"Free on-site estimate",priceNote:"Written price before any work starts",time:"Confirmed on your estimate"},
+  "roof-cleaning":{icon:"roof",summary:"Moss and algae killed at the root with a soft wash — never a pressure wand on your shingles.",
+    included:["Soft wash matched to asphalt, cedar or metal","Moss, algae and lichen treated at the root","Care around flashing, valleys and vents","Plants and surfaces below protected","Straight talk on the die-back timeline"],
+    price:"Free on-site estimate",priceNote:"Priced after we see your roof's pitch and condition",time:"Confirmed on your estimate"},
+  "gutter-cleaning":{icon:"gutter",summary:"Fall gutter clear-out so the first big storm goes down the downspout, not over the edge.",
+    included:["Leaves, needles and moss removed by hand","Water flush to confirm drainage","Downspouts checked and cleared","Debris bagged and hauled away","Before and after photos"],
+    price:"From $99",priceNote:"$99 one-story · $149 two-story (fall intro pricing)",time:"1–2 hours for most homes",photoCredit:GUTTER_CREDIT,photo:"/media/stock-gutter-unsplash.jpg",photoAlt:"Stock photo of a mossy, dirty gutter below a tile roof"},
+  "driveway-concrete-cleaning":{icon:"drive",summary:"Concrete cleaned at the right pressure, then sealed if it's worth it for your slab.",
+    included:["Driveways, walkways, steps and patios","Algae, moss, tire marks and stains","Pavers cleaned without blowing out joint sand","Optional penetrating sealer once dry","Final look-over with you"],
+    price:"Free on-site estimate",priceNote:"Including a straight answer on whether sealing is worth it",time:"Confirmed on your estimate — sealing waits until the concrete is dry"},
+  "commercial-fleet-washing":{icon:"warehouse",summary:"Building exteriors, hardscape and fleet vehicles — one vendor, scheduled around your hours.",
+    included:["Soft washing of building exteriors","Sidewalks, entries, parking and dumpster pads","On-site truck, van and equipment washing","Water-capture practices on commercial sites","One-time or recurring service"],
+    price:"Free written bid",priceNote:"After an on-site assessment",time:"Early mornings, evenings or off-peak"},
+};
+
+function ServiceCard({s}){
+  const internal = s.href.startsWith("/services/");
+  return (
+    <a href={s.href} className="svc-card" style={{display:"flex",flexDirection:"column",background:"#fff",border:`1px solid ${C.line}`,borderRadius:16,overflow:"hidden",textDecoration:"none",color:C.text,boxShadow:"0 4px 18px rgba(0,24,56,.06)"}}>
+      {s.img
+        ? <div style={{position:"relative",aspectRatio:"16/10",background:C.mist,overflow:"visible",minHeight:0}}>
+            <div style={{position:"absolute",inset:0,overflow:"hidden"}}>
+            <img src={s.img} alt="" loading="lazy" decoding="async" width="800" height="483" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}/></div>
+            <span style={{position:"absolute",left:14,bottom:-22,width:46,height:46,borderRadius:12,background:GRAD,color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 6px 16px rgba(0,84,180,.35)",border:"3px solid #fff"}}><Icon name={s.icon} size={22}/></span>
+            {s.stock && <span style={{position:"absolute",right:8,top:8,background:"rgba(0,18,48,.7)",color:"#fff",fontSize:".68rem",padding:"3px 8px",borderRadius:6}}>Stock photo</span>}
+          </div>
+        : <div style={{padding:"22px 20px 0"}}><span style={{width:50,height:50,borderRadius:13,background:C.mist,color:C.blue,display:"flex",alignItems:"center",justifyContent:"center"}}><Icon name={s.icon} size={26}/></span></div>}
+      <div style={{padding:s.img?"32px 20px 20px":"14px 20px 20px",display:"flex",flexDirection:"column",flex:1}}>
+        <h3 style={{fontFamily:FS,fontWeight:600,fontSize:"1.22rem",color:C.ink,margin:"0 0 6px",lineHeight:1.2}}>{s.name}</h3>
+        <p style={{fontSize:".94rem",color:C.soft,lineHeight:1.55,margin:"0 0 16px",flex:1}}>{s.line}</p>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,flexWrap:"wrap"}}>
+          <span style={{fontSize:".86rem",fontWeight:700,color:s.price===FREE_EST?C.soft:C.blue,background:s.price===FREE_EST?C.bg:C.mist,border:`1px solid ${C.line}`,padding:"5px 11px",borderRadius:100}}>{s.price}</span>
+          <span className="svc-btn" style={{fontSize:".9rem",fontWeight:700,color:C.blue}}>{s.cta || (internal ? "See details" : "Get a quote")} →</span>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function StickyCall(){
+  return (
+    <div className="stickycall" style={{position:"fixed",left:0,right:0,bottom:0,zIndex:300,background:"#fff",borderTop:`1px solid ${C.line}`,boxShadow:"0 -6px 20px rgba(0,24,56,.12)",padding:"10px 12px calc(10px + env(safe-area-inset-bottom))",gap:10}}>
+      <a href={`tel:+1${BRAND.tel}`} style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",gap:8,background:GRAD,color:"#fff",padding:"14px 10px",borderRadius:11,fontWeight:700,fontSize:"1rem",textDecoration:"none"}}><Icon name="phone" size={18}/> Call</a>
+      <a href={`sms:+1${BRAND.tel}`} style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",gap:8,background:C.mist,color:C.blue,border:`1.5px solid ${C.blue}`,padding:"12.5px 10px",borderRadius:11,fontWeight:700,fontSize:"1rem",textDecoration:"none"}}><Icon name="chat" size={18}/> Text</a>
+    </div>
+  );
+}
+const SVC_CSS = `
+  .svc-card{transition:transform .25s,box-shadow .25s}
+  .svc-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,24,56,.14) !important}
+  .svc-card:hover .svc-btn{text-decoration:underline}
+  .svc-card:focus-visible{outline:3px solid ${C.aquaDk};outline-offset:3px}
+  .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
+  .stickycall{display:none}
+  @media(max-width:767px){.stickycall{display:flex}.has-sticky{padding-bottom:78px}}
+  .qf{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:start}
+  @media(max-width:860px){.qf{grid-template-columns:1fr}.qf-photo{order:2}}
+`;
+
 /* ===== Service + location pages (data-driven; copy lives in page-content.js) ===== */
 function CardList({heading,intro,items}){
   return (
@@ -617,10 +745,73 @@ function CardList({heading,intro,items}){
     </div>
   );
 }
-function ServicePage({page}){
+// Split the generated article into its H1, its leading photo (if any) and the rest,
+// so the quick-facts box can sit directly under the H1.
+function splitArticle(html){
+  let rest = html, h1 = null, img = null;
+  const m = rest.match(/^\s*<h1>([\s\S]*?)<\/h1>\s*/);
+  if(m){ h1 = m[1]; rest = rest.slice(m[0].length); }
+  const f = rest.match(/^<figure[^>]*>\s*<img[^>]*src="([^"]+)"[^>]*alt="([^"]*)"[^>]*\/?>\s*<\/figure>\s*/);
+  if(f){ img = {src:f[1], alt:f[2]}; rest = rest.slice(f[0].length); }
+  return {h1, img, rest};
+}
+function QuickFacts({facts}){
+  const row = (icon,label,val,note) => (
+    <div style={{display:"flex",gap:12,alignItems:"flex-start",padding:"12px 0",borderTop:`1px solid ${C.line}`}}>
+      <span style={{color:C.blue,flexShrink:0,marginTop:2}}><Icon name={icon} size={20}/></span>
+      <div><div style={{fontSize:".76rem",textTransform:"uppercase",letterSpacing:1.2,fontWeight:800,color:C.soft}}>{label}</div>
+        <div style={{fontWeight:700,color:C.ink,fontSize:"1.05rem"}}>{val}</div>
+        {note && <div style={{fontSize:".86rem",color:C.soft,lineHeight:1.45}}>{note}</div>}</div>
+    </div>
+  );
   return (
-    <Shell crumbs={[{name:"Home",url:"/"},{name:"Services",url:"/services/"},{name:page.title}]}>
-      <article className="article" dangerouslySetInnerHTML={{__html:page.html}}/>
+    <aside aria-label="Quick facts" style={{background:C.mist,border:`1px solid ${C.line}`,borderRadius:18,padding:"22px 22px 20px"}}>
+      <div style={{fontSize:".8rem",textTransform:"uppercase",letterSpacing:2,fontWeight:800,color:C.teal,marginBottom:10}}>Quick facts</div>
+      <div style={{fontWeight:700,color:C.ink,marginBottom:8}}>What's included</div>
+      <ul style={{listStyle:"none",padding:0,margin:"0 0 12px"}}>
+        {facts.included.map(x=><li key={x} style={{display:"flex",gap:9,alignItems:"flex-start",margin:"0 0 7px",fontSize:".95rem",lineHeight:1.45,color:C.text}}><span style={{color:C.blue,flexShrink:0,marginTop:1}}><Icon name="check" size={18} sw={2.4}/></span>{x}</li>)}
+      </ul>
+      {row("tag","Price",facts.price,facts.priceNote)}
+      {row("clock","Typical time",facts.time)}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginTop:14}}>
+        <a href={`tel:+1${BRAND.tel}`} style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",background:GRAD,color:"#fff",padding:"12px 8px",borderRadius:11,fontWeight:700,textDecoration:"none",textAlign:"center",lineHeight:1.25}}><span style={{fontSize:"1rem"}}>Call / Text</span><span style={{fontSize:".86rem",fontWeight:600,opacity:.92,whiteSpace:"nowrap"}}>{BRAND.phone}</span></a>
+        <a href="/#quote" style={{display:"flex",alignItems:"center",justifyContent:"center",background:"#fff",color:C.blue,border:`1.5px solid ${C.blue}`,padding:"12px 8px",borderRadius:11,fontWeight:700,fontSize:"1rem",textDecoration:"none",textAlign:"center"}}>Get a Quote</a>
+      </div>
+    </aside>
+  );
+}
+function ServicePage({page}){
+  const {h1, img, rest} = splitArticle(page.html);
+  const facts = SERVICE_FACTS[page.slug];
+  if(!facts || !h1){
+    return (
+      <Shell crumbs={[{name:"Home",url:"/"},{name:"Services",url:"/services/"},{name:page.title}]}>
+        <article className="article" dangerouslySetInnerHTML={{__html:page.html}}/>
+      </Shell>
+    );
+  }
+  const photo = facts.photo ? {src:facts.photo, alt:facts.photoAlt} : img;
+  return (
+    <Shell crumbs={[{name:"Home",url:"/"},{name:"Services",url:"/services/"},{name:page.title}]} wide={1060} sticky>
+      <div style={{maxWidth:1060,margin:"0 auto",padding:"10px 22px 0"}}>
+        <div style={{display:"flex",alignItems:"center",gap:14,margin:".3em 0 .4em"}}>
+          <span style={{width:52,height:52,borderRadius:14,background:GRAD,color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"0 6px 16px rgba(0,84,180,.3)"}}><Icon name={facts.icon} size={26}/></span>
+          <h1 style={{fontFamily:FS,fontWeight:600,fontSize:"clamp(1.75rem,4vw,2.35rem)",lineHeight:1.12,color:C.ink,margin:0}} dangerouslySetInnerHTML={{__html:h1}}/>
+        </div>
+        <p style={{fontSize:"1.12rem",color:C.soft,margin:"0 0 22px",lineHeight:1.6,maxWidth:720}}>{facts.summary}</p>
+        <div className="qf">
+          <QuickFacts facts={facts}/>
+          {photo && <figure className="qf-photo" style={{margin:0}}>
+            <img src={photo.src} alt={photo.alt} width="1400" height="933" style={{width:"100%",height:"auto",borderRadius:16,display:"block",boxShadow:"0 10px 30px rgba(0,24,56,.14)"}}/>
+            {facts.photoCredit && <figcaption style={{fontSize:".78rem",color:C.mute,marginTop:8}}><a href={facts.photoCredit.url} rel="noopener" style={{color:C.mute}}>{facts.photoCredit.text}</a></figcaption>}
+          </figure>}
+        </div>
+      </div>
+      <div style={{maxWidth:760,margin:"40px auto 0",padding:"0 22px"}}>
+        <div style={{fontSize:".8rem",textTransform:"uppercase",letterSpacing:2,fontWeight:800,color:C.teal,borderTop:`1px solid ${C.line}`,paddingTop:26}}>The full details</div>
+      </div>
+      <article className="article" dangerouslySetInnerHTML={{__html:rest}}/>
+      <div style={{maxWidth:760,margin:"30px auto 0",padding:"0 22px"}}><a href="/services/" style={{color:C.blue,fontWeight:700,textDecoration:"none"}}>← All services</a></div>
     </Shell>
   );
 }
@@ -632,7 +823,29 @@ function LocationPage({page}){
   );
 }
 function ServicesIndex(){
-  return <Shell crumbs={[{name:"Home",url:"/"},{name:"Services"}]}><CardList heading="Exterior Cleaning Services — King & Snohomish County" intro="Professional pressure washing and soft washing for homes and businesses across King & Snohomish Counties — the right method matched to every surface. From house washing and roof soft-washing to driveways, decks, and full commercial exteriors, every job starts with a free on-site estimate and an honest recommendation. Owner-operated, local, and surface-safe." items={SERVICE_PAGES}/></Shell>;
+  return (
+    <Shell crumbs={[{name:"Home",url:"/"},{name:"Services"}]} wide={1180} sticky>
+      <div style={{maxWidth:1180,margin:"0 auto",padding:"10px 22px 0"}}>
+        <h1 style={{fontFamily:FS,fontWeight:600,fontSize:"clamp(1.9rem,4.5vw,2.6rem)",color:C.ink,margin:".2em 0 .25em",lineHeight:1.1}}>Exterior Cleaning Services — King &amp; Snohomish County</h1>
+        <p style={{fontSize:"1.1rem",color:C.soft,margin:"0 0 20px",lineHeight:1.6,maxWidth:720}}>Pick a service to see what's included and how pricing works. Every job starts with a free estimate and the right method for each surface.</p>
+        <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:10}}>
+          {SERVICE_GROUPS.map(g=><a key={g.id} href={"#"+g.id} style={{background:C.mist,color:C.blue,border:`1px solid ${C.line}`,padding:"9px 16px",borderRadius:100,fontWeight:700,fontSize:".9rem",textDecoration:"none"}}>{g.label}</a>)}
+          <a href={`tel:+1${BRAND.tel}`} style={{background:GRAD,color:"#fff",padding:"9px 16px",borderRadius:100,fontWeight:700,fontSize:".9rem",textDecoration:"none"}}>Call / Text {BRAND.phone}</a>
+        </div>
+        {SERVICE_GROUPS.map(g=>(
+          <section key={g.id} id={g.id} style={{scrollMarginTop:80,paddingTop:34}}>
+            <div style={{display:"flex",alignItems:"baseline",gap:"4px 14px",flexWrap:"wrap",marginBottom:4}}>
+              <span style={{fontSize:".85rem",textTransform:"uppercase",letterSpacing:2,fontWeight:800,color:C.teal}}>{g.label}</span>
+              <h2 style={{fontFamily:FS,fontWeight:600,fontSize:"1.75rem",color:C.ink,margin:0}}>{g.title}</h2>
+            </div>
+            <p style={{color:C.soft,margin:"0 0 20px",fontSize:"1rem"}}>{g.intro}</p>
+            <div className="svc-grid">{g.items.map(s=><ServiceCard key={s.name} s={s}/>)}</div>
+          </section>
+        ))}
+        <p style={{fontSize:".8rem",color:C.mute,marginTop:22}}>Gutter photo: <a href={GUTTER_CREDIT.url} rel="noopener" style={{color:C.mute}}>stock image by Aleksi Partanen on Unsplash</a>.</p>
+      </div>
+    </Shell>
+  );
 }
 function LocationsIndex(){
   return <Shell crumbs={[{name:"Home",url:"/"},{name:"Service Areas"}]}><CardList heading="Pressure Washing Service Areas — King & Snohomish County, WA" intro="Owner-operated exterior cleaning across the greater Seattle–Everett corridor in King & Snohomish Counties. We serve 20+ cities — from Lynnwood, Everett, and Mill Creek to Kirkland, Bellevue, and Seattle — and travel farther for larger residential and commercial projects. Every job starts with a free on-site estimate." items={LOCATION_PAGES}/></Shell>;
