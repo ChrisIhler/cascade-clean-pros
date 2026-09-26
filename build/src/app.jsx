@@ -47,8 +47,8 @@ const ADDON_SERVICES=[
   {href:"/services/driveway-concrete-cleaning/",title:"Concrete Sealing",desc:"Protective sealing after cleaning to guard concrete against stains, moisture, and wear."},
   {title:"Deck & Fence Staining",desc:"Refresh and protect wood after cleaning with quality stain or sealer for lasting color."},
   {title:"Exterior Painting Touch-Ups",desc:"Light exterior painting and touch-up work to finish off your property's refresh."},
-  {title:"Junk Removal & Haul-Away",desc:"Old furniture, yard debris, and household junk hauled away. Tell us what you have and we'll give you a price."},
-  {title:"Odd Jobs — Just Ask",desc:"Got something else on your list? Debris haul-away and other small exterior tasks — ask us, we can likely help."},
+  {href:"/services/junk-removal/",title:"Junk Removal & Haul-Away",desc:"Old furniture, yard debris, and household junk loaded and hauled away with our truck and dump trailer. Text us photos for a price."},
+  {title:"Odd Jobs — Just Ask",desc:"Got something else on your list? Small exterior tasks — ask us, we can likely help."},
 ];
 
 const COMM=[
@@ -289,8 +289,8 @@ function Home(){
         <Reveal>
           <div style={{background:C.mist,border:`1.5px solid ${C.aqua}`,borderRadius:18,padding:"30px 30px",display:"flex",flexWrap:"wrap",alignItems:"center",justifyContent:"space-between",gap:"22px 30px"}}>
             <div style={{flex:"1 1 420px"}}>
-              <span style={{fontSize:".95rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>New This Fall · Gutter Cleaning</span>
-              <h2 style={{fontFamily:FS,fontSize:"2rem",color:C.ink,margin:"8px 0 10px",fontWeight:600,lineHeight:1.15}}>Beat the rains: gutters cleared from $99</h2>
+              <span style={{fontSize:".95rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>Fall Gutter Special</span>
+              <h2 style={{fontFamily:FS,fontSize:"2rem",color:C.ink,margin:"8px 0 10px",fontWeight:600,lineHeight:1.15}}>Gutter cleaning from $99</h2>
               <p style={{fontSize:"1.02rem",color:C.soft,margin:0}}>Intro pricing for our first 10 gutter cleanings this fall: <strong style={{color:C.ink}}>$99 one-story, $149 two-story.</strong> Debris hauled away, downspouts checked, before and after photos, and a 30-day overflow guarantee. Serving Lynnwood and nearby.</p>
             </div>
             <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
@@ -743,8 +743,7 @@ function BlogPost({post}){
 
 /* ===== Service catalog: icons, card photos, quick facts =====
    Card photos in /media/cards/ are crops of the site's service graphics (title
-   text trimmed off). The gutter photo is an Unsplash stock image — it is
-   credited as stock wherever it appears and never captioned as our own job. */
+   text trimmed off). */
 const ICO={
   house:["M3 10.5 12 3l9 7.5","M5.5 9.5V20h13V9.5","M10 20v-5h4v5"],
   roof:["M2 13 12 4l10 9","M5 11v9h14v-9","M8 8.5l1-1M12 7l1-1M15.5 9l1-1"],
@@ -773,17 +772,17 @@ const ICO={
 function Icon({name,size=24,color="currentColor",sw=1.8}){
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{(ICO[name]||[]).map((d,i)=><path key={i} d={d}/>)}</svg>;
 }
-const GUTTER_CREDIT = {text:"Stock photo · Aleksi Partanen / Unsplash", url:"https://unsplash.com/@aleksi_p"};
 const FREE_EST = "Free estimate";
 const SERVICE_GROUPS=[
   {id:"residential",label:"Residential",title:"For your home",intro:"Soft washing for the delicate stuff, pressure washing where concrete can take it.",items:[
     {name:"House Washing",icon:"house",img:"/media/cards/house-washing.jpg",line:"Soft wash for siding, trim and soffits — lifts dirt, mold and mildew.",price:FREE_EST,href:"/services/house-washing/"},
     {name:"Roof Cleaning & Moss Treatment",icon:"roof",img:"/media/cards/roof-cleaning.jpg",line:"Moss and algae treated at the root — never high pressure on shingles.",price:FREE_EST,href:"/services/roof-cleaning/"},
-    {name:"Gutter Cleaning",icon:"gutter",img:"/media/cards/gutter-cleaning.jpg",line:"Gutters and downspouts cleared, debris hauled away.",price:"From $99",href:"/services/gutter-cleaning/",stock:true},
+    {name:"Gutter Cleaning",icon:"gutter",img:"/media/cards/gutter-cleaning.jpg",line:"Gutters and downspouts cleared, debris hauled away.",price:"From $99",href:"/services/gutter-cleaning/"},
     {name:"Driveway & Concrete",icon:"drive",img:"/media/cards/driveway-concrete.jpg",line:"Algae, moss and stains lifted from concrete and pavers, with optional sealing.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
     {name:"Walkways & Hardscape",icon:"path",img:"/media/cards/walkways-hardscape.jpg",line:"Slick, mossy paths, steps and pavers made safe to walk on again.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
     {name:"Deck & Patio",icon:"deck",img:"/media/cards/deck-patio.jpg",line:"Wood, composite and stone brightened with the right pressure for each.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
     {name:"Fence Cleaning",icon:"fence",img:"/media/cards/fence-cleaning.jpg",line:"Green algae, moss and grime cleared from wood, vinyl and metal fencing.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
+    {name:"Junk Removal & Haul-Away",icon:"truck",img:"/media/cards/junk-removal.jpg",line:"Furniture, yard debris, cleanouts — we load it and haul it away.",price:"Free quote",href:"/services/junk-removal/"},
   ]},
   {id:"commercial",label:"Commercial",title:"For your business or property",intro:"Written bids, scheduling around your hours, and water-capture practices on commercial sites.",items:[
     {name:"Apartment & Multi-Family",icon:"apt",img:"/media/cards/apartment-multifamily.jpg",line:"Breezeways, stairwells, siding and shared walkways.",price:FREE_EST,href:"/services/commercial-fleet-washing/"},
@@ -798,8 +797,7 @@ const SERVICE_GROUPS=[
     {name:"Concrete Sealing",icon:"seal",line:"Penetrating sealer after cleaning to slow stains, moss and freeze-thaw damage.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
     {name:"Deck & Fence Staining",icon:"brush",line:"Stain or sealer on freshly cleaned wood for lasting color.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
     {name:"Exterior Painting Touch-Ups",icon:"paint",line:"Light touch-up work to finish off your exterior refresh.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
-    {name:"Junk Removal & Haul-Away",icon:"truck",line:"Furniture, yard debris and household junk hauled away.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
-    {name:"Odd Jobs — Just Ask",icon:"wrench",line:"Debris haul-away and other small exterior tasks.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
+    {name:"Odd Jobs — Just Ask",icon:"wrench",line:"Other small exterior tasks — ask and we can likely help.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
   ]},
 ];
 // Quick facts shown at the top of each service page. Pulled from each page's own
@@ -813,7 +811,10 @@ const SERVICE_FACTS={
     price:"Free on-site estimate",priceNote:"Priced after we see your roof's pitch and condition",time:"Confirmed on your estimate"},
   "gutter-cleaning":{icon:"gutter",summary:"Fall gutter clear-out so the first big storm goes down the downspout, not over the edge.",
     included:["Leaves, needles and moss removed by hand","Water flush to confirm drainage","Downspouts checked and cleared","Debris bagged and hauled away","Before and after photos"],
-    price:"From $99",priceNote:"$99 one-story · $149 two-story (first 10 gutter cleanings this fall)",photoCredit:GUTTER_CREDIT,photo:"/media/stock-gutter-unsplash.jpg",photoAlt:"Stock photo of a mossy, dirty gutter below a tile roof"},
+    price:"From $99",priceNote:"$99 one-story · $149 two-story (first 10 gutter cleanings this fall)",photo:"/media/gutter-clean.jpg",photoAlt:"Clean, clear gutter along a shingle roof"},
+  "junk-removal":{icon:"truck",summary:"Furniture, yard debris and cleanouts loaded and hauled away — you point, we lift.",
+    included:["All lifting and loading done for you","Furniture, yard debris and household junk","Garage, shed and move-out cleanouts","Truck and large dump trailer","Area swept when we're done"],
+    price:"Free quote",priceNote:"Priced by trailer space — text photos to (360) 202-7249",photo:"/media/junk-removal.jpg",photoAlt:"Truck and dump trailer loaded with old furniture and yard debris"},
   "driveway-concrete-cleaning":{icon:"drive",summary:"Concrete cleaned at the right pressure, then sealed if it's worth it for your slab.",
     included:["Driveways, walkways, steps and patios","Algae, moss, tire marks and stains","Pavers cleaned without blowing out joint sand","Optional penetrating sealer once dry","Final look-over with you"],
     price:"Free on-site estimate",priceNote:"Including a straight answer on whether sealing is worth it",time:"Confirmed on your estimate — sealing waits until the concrete is dry"},
@@ -981,7 +982,6 @@ function ServicesIndex(){
             <div className="svc-grid">{g.items.map(s=><ServiceCard key={s.name} s={s}/>)}</div>
           </section>
         ))}
-        <p style={{fontSize:".8rem",color:C.mute,marginTop:22}}>Gutter photo: <a href={GUTTER_CREDIT.url} rel="noopener" style={{color:C.mute}}>stock image by Aleksi Partanen on Unsplash</a>.</p>
       </div>
     </Shell>
   );
