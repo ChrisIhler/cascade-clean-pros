@@ -114,7 +114,7 @@ function Home(){
       await fetch(FORM_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(form)});
       setSent(true);
       if(window.fbq)window.fbq("track","Lead");
-      if(window.gtag)window.gtag("event","generate_lead");
+      if(window.gtag){window.gtag("event","generate_lead");window.gtag("event","conversion",{send_to:"AW-18227655988/NZVWCNiu08McELTqz_ND"});}
     }catch(e){
       setErr("Something went wrong sending your request. Please call us instead.");
     }finally{setSending(false);}
