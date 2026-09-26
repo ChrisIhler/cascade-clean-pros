@@ -431,7 +431,7 @@ function Home(){
           </div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Services</h4>{[["House Washing","/services/house-washing/"],["Roof Cleaning","/services/roof-cleaning/"],["Commercial & Fleet","/services/commercial-fleet-washing/"],["Driveway & Concrete","/services/driveway-concrete-cleaning/"]].map(s=><a key={s[0]} href={s[1]} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none"}}>{s[0]}</a>)}</div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Service Areas</h4>{[["Lynnwood, WA","/locations/lynnwood-wa/"],["Everett, WA","/locations/everett-wa/"],["Kirkland, WA","/locations/kirkland-wa/"],["Mill Creek, WA","/locations/mill-creek-wa/"]].map(s=><a key={s[0]} href={s[1]} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none"}}>{s[0]}</a>)}</div>
-          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Blog","/blog/"],["FAQ","faq"],["Contact","quote"]].map(s=>{const u=s[1][0]==="/";return <a key={s[0]} href={u?s[1]:"/#"+s[1]} onClick={u?undefined:e=>{e.preventDefault();go(s[1]);}} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none",cursor:"pointer"}}>{s[0]}</a>;})}</div>
+          <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Company</h4>{[["Commercial Bids","commercial"],["Blog","/blog/"],["FAQ","faq"],["Contact","quote"],["Privacy","/privacy/"]].map(s=>{const u=s[1][0]==="/";return <a key={s[0]} href={u?s[1]:"/#"+s[1]} onClick={u?undefined:e=>{e.preventDefault();go(s[1]);}} style={{display:"block",color:"inherit",fontSize:".85rem",marginBottom:9,textDecoration:"none",cursor:"pointer"}}>{s[0]}</a>;})}</div>
           <div><h4 style={{color:"#fff",fontSize:".82rem",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Contact</h4><div style={{fontSize:".85rem",marginBottom:9}}><a href={`tel:${BRAND.tel}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.phone}</a></div><div style={{fontSize:".85rem",marginBottom:9}}><a href={`mailto:${BRAND.email}`} style={{color:"inherit",textDecoration:"none"}}>{BRAND.email}</a></div><div style={{fontSize:".85rem"}}>{BRAND.domain}</div></div>
         </div>
         <div style={{maxWidth:1240,margin:"40px auto 0",paddingTop:24,borderTop:"1px solid rgba(255,255,255,.12)",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>
@@ -514,6 +514,7 @@ function SubFooter(){
             <div style={{fontSize:".85rem",marginBottom:8}}><a href="/" style={{color:"inherit",textDecoration:"none"}}>Home</a></div>
             <div style={{fontSize:".85rem",marginBottom:8}}><a href="/blog/" style={{color:"inherit",textDecoration:"none"}}>Blog</a></div>
             <div style={{fontSize:".85rem",marginBottom:8}}><a href="/#quote" style={{color:"inherit",textDecoration:"none"}}>Free Quote</a></div>
+            <div style={{fontSize:".85rem",marginBottom:8}}><a href="/privacy/" style={{color:"inherit",textDecoration:"none"}}>Privacy</a></div>
           </div>
           <div>
             <h4 style={{color:"#fff",fontSize:".8rem",textTransform:"uppercase",letterSpacing:1,marginBottom:12}}>Contact</h4>
@@ -526,7 +527,7 @@ function SubFooter(){
     </footer>
   );
 }
-function Shell({crumbs,children,sticky,wide}){
+function Shell({crumbs,children,sticky,wide,nocta}){
   return (
     <div className={sticky?"has-sticky":undefined} style={{background:"#fff",minHeight:"100vh",fontFamily:F,color:C.text}}>
       <a href="#main" className="skiplink">Skip to content</a>
@@ -534,7 +535,7 @@ function Shell({crumbs,children,sticky,wide}){
       <main id="main">
       {crumbs && <Breadcrumbs crumbs={crumbs} width={wide||760}/>}
       {children}
-      <QuoteCTA/>
+      {!nocta && <QuoteCTA/>}
       </main>
       <SubFooter/>
       {sticky && <StickyCall/>}
@@ -559,6 +560,46 @@ function Shell({crumbs,children,sticky,wide}){
         @media(max-width:520px){.snl{display:none}.snl-keep{display:inline !important}.article h1{font-size:1.8rem}.article h2{font-size:1.35rem}}
       `}}/>
     </div>
+  );
+}
+function PrivacyPage(){
+  const a={color:C.blue};
+  return (
+    <Shell crumbs={[{name:"Home",url:"/"},{name:"Privacy Policy"}]} nocta>
+      <article className="article">
+        <h1>Privacy Policy</h1>
+        <p><strong>Effective date: September 25, 2026</strong></p>
+        <p>This page explains, in plain language, what information {BRAND.name} collects, why we collect it, and how you can ask us to delete it.</p>
+        <h2>What we collect</h2>
+        <p>We only collect what you choose to send us when you ask for an estimate:</p>
+        <ul>
+          <li><strong>From the quote form on this website:</strong> your name, phone number, email address, the type of service you're interested in, and any notes you add about the job.</li>
+          <li><strong>From our Facebook and Instagram lead forms:</strong> your name, phone number, email address, zip code, and any answers you give on the form.</li>
+        </ul>
+        <p>If you call, text, or email us, we also have whatever you share in that conversation.</p>
+        <h2>Why we collect it</h2>
+        <p>We use your information to contact you about the estimate you requested — to answer questions, schedule a visit, and give you a quote. We don't add you to a mailing list or use your information for anything unrelated to your request.</p>
+        <h2>Analytics and advertising tools</h2>
+        <p>This website uses a few third-party tools to understand how the site is used and to run our ads:</p>
+        <ul>
+          <li><strong>Google Analytics</strong> — shows us things like which pages get visited and how people find the site.</li>
+          <li><strong>Google Ads</strong> — tells us when someone who clicked one of our Google ads sends a quote request.</li>
+          <li><strong>Meta Pixel</strong> (Facebook and Instagram) — tells us when someone who saw our Meta ads visits the site or sends a quote request, and helps show our ads to people in our area.</li>
+        </ul>
+        <p>These tools use cookies and similar technology, and the companies that run them process that data under their own privacy policies. You can manage how Google and Meta use your data for ads at <a href="https://adssettings.google.com" style={a}>Google's ad settings</a> and in your <a href="https://www.facebook.com/adpreferences" style={a}>Facebook ad preferences</a>. You can also block or clear cookies in your browser settings.</p>
+        <h2>We don't sell your information</h2>
+        <p>We don't sell or rent your personal information to anyone.</p>
+        <h2>Deleting your information</h2>
+        <p>If you'd like us to delete the information you've sent us, just ask:</p>
+        <ul>
+          <li>Email <a href={`mailto:${BRAND.email}`} style={a}>{BRAND.email}</a></li>
+          <li>Call or text <a href={`tel:${BRAND.tel}`} style={a}>{BRAND.phone}</a></li>
+        </ul>
+        <p>You can use the same contact info for any questions about this policy.</p>
+        <h2>Changes to this policy</h2>
+        <p>If we change this policy, we'll update this page and the effective date at the top.</p>
+      </article>
+    </Shell>
   );
 }
 function BlogIndex(){
@@ -860,6 +901,7 @@ function normPath(p){
 function App({route}){
   const path = normPath(route || (typeof window!=="undefined" ? window.location.pathname : "/"));
   if(path==="/blog/") return <BlogIndex/>;
+  if(path==="/privacy/") return <PrivacyPage/>;
   const post = BLOG_POSTS.find(p=>p.path===path);
   if(post) return <BlogPost post={post}/>;
   if(path==="/services/" && SERVICE_PAGES.length) return <ServicesIndex/>;

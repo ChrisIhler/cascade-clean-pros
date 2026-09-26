@@ -17,6 +17,12 @@ export const SUBROUTES = [
     title: "Blog — Exterior Cleaning Guides for the Pacific Northwest | Cascade Clean Pros",
     description: "Guides to pressure washing, soft washing, roof moss removal, and home exterior care across King & Snohomish County, WA.",
   },
+  {
+    path: "/privacy/",
+    kind: "privacy",
+    title: "Privacy Policy | Cascade Clean Pros",
+    description: "What information Cascade Clean Pros collects from quote requests, how we use it, the analytics and ad tools on our site, and how to ask us to delete your info.",
+  },
   ...BLOG_POSTS.map(p => ({
     path: p.path,
     kind: "post",
