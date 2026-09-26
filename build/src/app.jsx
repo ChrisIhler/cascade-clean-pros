@@ -60,7 +60,7 @@ const COMM=[
 
 
 const STEPS=[
-  {n:"01",t:"Request a Quote",d:"Fill out the quick form or give us a call. We respond within an hour on business days."},
+  {n:"01",t:"Request a Quote",d:"Fill out the quick form or give us a call. We'll get back to you promptly."},
   {n:"02",t:"Free Assessment",d:"We measure, assess condition, and send an exact written quote — no obligation."},
   {n:"03",t:"Schedule & Prep",d:"Pick a date. We send prep notes and confirm 24 hours ahead."},
   {n:"04",t:"Professional Clean",d:"Right pressure, right chemistry, for every surface. On time, every time."},
@@ -238,7 +238,7 @@ function Home(){
             {!sent?(<div>
               <div style={{fontSize:".76rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800,marginBottom:5}}>Free · No Obligation</div>
               <h3 style={{fontFamily:FS,fontSize:"1.5rem",marginBottom:3,color:C.ink,fontWeight:600}}>Get your quote today</h3>
-              <p style={{fontSize:".92rem",color:C.ink,fontWeight:600,marginBottom:20}}>We respond within the hour, every business day.</p>
+              <p style={{fontSize:".92rem",color:C.ink,fontWeight:600,marginBottom:20}}>We'll get back to you promptly.</p>
               {[["name","Full Name","text","name"],["phone","Phone","tel","tel"],["email","Email","email","email"]].map(f=>(
                 <input key={f[0]} type={f[2]} autoComplete={f[3]} aria-label={f[1]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}/>
               ))}
@@ -254,7 +254,7 @@ function Home(){
             <div style={{textAlign:"center",padding:"30px 0"}}>
               <div style={{width:60,height:60,borderRadius:"50%",background:GRAD,margin:"0 auto 14px",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:"1.8rem"}}>✓</div>
               <h4 style={{color:C.teal,marginBottom:8,fontSize:"1.2rem",fontFamily:FS}}>Request received!</h4>
-              <p style={{color:C.soft,fontSize:".92rem",marginBottom:18}}>We'll contact you within the hour during business hours.</p>
+              <p style={{color:C.soft,fontSize:".92rem",marginBottom:18}}>Thanks! We'll get back to you promptly.</p>
               <a href={`tel:${BRAND.tel}`} style={{display:"inline-block",padding:"13px 26px",background:C.aqua,color:C.ink,borderRadius:10,fontWeight:700}}>Call {BRAND.phone}</a>
             </div>)}
           </div>
@@ -431,7 +431,7 @@ function Home(){
         <div style={{position:"absolute",inset:0}}><img src={P.drive2} alt="" loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover"}}/><div style={{position:"absolute",inset:0,background:`linear-gradient(135deg,${C.ink}f2,${C.teal}cc)`}}/></div>
         <div style={{position:"relative",zIndex:2,maxWidth:680,margin:"0 auto",textAlign:"center"}}>
           <h2 style={{fontFamily:FS,fontSize:"2.9rem",color:"#fff",marginBottom:14,fontWeight:600,lineHeight:1.1}}>Ready for a cleaner property?</h2>
-          <p style={{fontSize:"1.12rem",color:"rgba(255,255,255,.85)",marginBottom:34}}>Free, no-obligation estimate. We respond within the hour.</p>
+          <p style={{fontSize:"1.12rem",color:"rgba(255,255,255,.85)",marginBottom:34}}>Free, no-obligation estimate. We'll get back to you promptly.</p>
           <div style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap"}}>
             <a href={`tel:${BRAND.tel}`} style={{display:"inline-flex",alignItems:"center",gap:10,background:C.aqua,color:C.ink,padding:"18px 38px",borderRadius:12,fontSize:"1.2rem",fontWeight:800,boxShadow:"0 10px 30px rgba(63,192,180,.45)"}}>📞 {BRAND.phone}</a>
             <button onClick={()=>go("quote")} style={{background:"rgba(255,255,255,.14)",color:"#fff",border:"1px solid rgba(255,255,255,.32)",padding:"18px 32px",borderRadius:12,fontSize:"1rem",fontWeight:600,cursor:"pointer",fontFamily:F,backdropFilter:"blur(8px)"}}>↑ Back to Quote Form</button>
@@ -521,7 +521,7 @@ function QuoteCTA(){
     <section style={{background:GRAD,padding:"54px 22px",marginTop:56}}>
       <div style={{maxWidth:760,margin:"0 auto",textAlign:"center"}}>
         <h2 style={{fontFamily:FS,color:"#fff",fontSize:"2rem",fontWeight:600,margin:"0 0 10px"}}>Get a free, no-obligation estimate</h2>
-        <p style={{color:"rgba(255,255,255,.85)",fontSize:"1.02rem",margin:"0 0 26px",lineHeight:1.6}}>Owner-operated exterior cleaning across King &amp; Snohomish Counties. We respond within the hour on business days.</p>
+        <p style={{color:"rgba(255,255,255,.85)",fontSize:"1.02rem",margin:"0 0 26px",lineHeight:1.6}}>Owner-operated exterior cleaning across King &amp; Snohomish Counties. We'll get back to you promptly.</p>
         <div style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap"}}>
           <a href="/#quote" style={{background:C.aqua,color:C.ink,padding:"15px 30px",borderRadius:11,fontWeight:700,fontSize:"1rem",textDecoration:"none"}}>Request a Free Estimate →</a>
           <a href={`tel:${BRAND.tel}`} style={{background:"rgba(255,255,255,.14)",color:"#fff",border:"1px solid rgba(255,255,255,.32)",padding:"15px 26px",borderRadius:11,fontWeight:600,fontSize:"1rem",textDecoration:"none"}}>Call {BRAND.phone}</a>
