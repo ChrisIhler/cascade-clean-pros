@@ -15,6 +15,8 @@ const require = createRequire(import.meta.url);
 const PROD = { "process.env.NODE_ENV": '"production"' };
 const ORIGIN = "https://cascadecleanpros.com";
 const TODAY = "2026-06-09";
+// Per-route sitemap lastmod for pages changed after TODAY.
+const LASTMOD = { "/services/": "2026-09-25", "/services/gutter-cleaning/": "2026-09-25" };
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // 1. Client hydration bundle -> ../app.js
@@ -167,7 +169,7 @@ try {
   // strip all previously-generated single-line sub-route entries
   sm = sm.replace(/[ \t]*<url><loc>https:\/\/cascadecleanpros\.com\/[^<]*<\/loc>(?:<lastmod>[^<]*<\/lastmod>)?<changefreq>monthly<\/changefreq><priority>0\.7<\/priority><\/url>\n?/g, "");
   const entries = SUBROUTES.map(r =>
-    `  <url><loc>${ORIGIN + r.path}</loc><lastmod>${TODAY}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join("\n");
+    `  <url><loc>${ORIGIN + r.path}</loc><lastmod>${LASTMOD[r.path] || TODAY}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join("\n");
   sm = sm.replace("</urlset>", entries + (entries ? "\n" : "") + "</urlset>");
   writeFileSync(smPath, sm);
   console.log(`sitemap.xml: refreshed ${SUBROUTES.length} sub-route url(s)`);

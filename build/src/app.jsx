@@ -244,7 +244,7 @@ function Home(){
             <div style={{flex:"1 1 420px"}}>
               <span style={{fontSize:".95rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>New This Fall · Gutter Cleaning</span>
               <h2 style={{fontFamily:FS,fontSize:"2rem",color:C.ink,margin:"8px 0 10px",fontWeight:600,lineHeight:1.15}}>Beat the rains: gutters cleared from $99</h2>
-              <p style={{fontSize:"1.02rem",color:C.soft,margin:0}}>Intro pricing for our first customers: <strong style={{color:C.ink}}>$99 one-story, $149 two-story.</strong> Debris hauled away, downspouts checked, before and after photos, and a 30-day overflow guarantee. Serving Lynnwood and nearby.</p>
+              <p style={{fontSize:"1.02rem",color:C.soft,margin:0}}>Fall intro pricing: <strong style={{color:C.ink}}>$99 one-story, $149 two-story.</strong> Debris hauled away, downspouts checked, before and after photos, and a 30-day overflow guarantee. Serving Lynnwood and nearby.</p>
             </div>
             <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
               <a href={`tel:${BRAND.tel}`} style={{display:"inline-flex",alignItems:"center",gap:8,background:GRAD,color:"#fff",padding:"15px 26px",borderRadius:11,fontWeight:700,fontSize:"1rem"}}>Call or Text {BRAND.phone}</a>
