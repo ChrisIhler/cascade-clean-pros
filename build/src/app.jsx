@@ -37,6 +37,7 @@ const ADDON_ICONS=[
   <svg key="i3" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3 5 5.6v5.2c0 4.4 3 7.7 7 9.2 4-1.5 7-4.8 7-9.2V5.6L12 3z"/></svg>,
   <svg key="i4" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 21V7l1.5-2 1.5 2v14"/><path d="M10.5 21V7l1.5-2 1.5 2v14"/><path d="M16.5 21V7l1.5-2 1.5 2v14"/><path d="M3 11.5h18"/><path d="M3 16.5h18"/></svg>,
   <svg key="i5" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4.5" width="10.5" height="5.5" rx="1.5"/><path d="M13.5 7.2h3.3a1.2 1.2 0 0 0 1.2-1.2V4.5"/><path d="M9 10v2a2 2 0 0 1-2 2 1.6 1.6 0 0 0-1.6 1.6V21"/></svg>,
+  <svg key="i6j" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M2 16V7h11v9"/><path d="M13 10h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg>,
   <svg key="i6" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M14.6 6.4a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.4-3.4a6 6 0 0 1-7.8 7.8l-6.6 6.6a2.1 2.1 0 0 1-3-3l6.6-6.6a6 6 0 0 1 7.8-7.8l-3.4 3.4z"/></svg>,
 ];
 const ADDON_SERVICES=[
@@ -46,6 +47,7 @@ const ADDON_SERVICES=[
   {href:"/services/driveway-concrete-cleaning/",title:"Concrete Sealing",desc:"Protective sealing after cleaning to guard concrete against stains, moisture, and wear."},
   {title:"Deck & Fence Staining",desc:"Refresh and protect wood after cleaning with quality stain or sealer for lasting color."},
   {title:"Exterior Painting Touch-Ups",desc:"Light exterior painting and touch-up work to finish off your property's refresh."},
+  {title:"Junk Removal & Haul-Away",desc:"Old furniture, yard debris, and household junk hauled away. Tell us what you have and we'll give you a price."},
   {title:"Odd Jobs — Just Ask",desc:"Got something else on your list? Debris haul-away and other small exterior tasks — ask us, we can likely help."},
 ];
 
@@ -92,29 +94,35 @@ const FS="'Fraunces','Georgia',serif";
 
 function Reveal({children,style}){const r=useRef(null);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){e.target.classList.add("in");o.disconnect()}},{threshold:.12});if(r.current)o.observe(r.current);return()=>o.disconnect()},[]);return<div ref={r} className="fade-up" style={style}>{children}</div>}
 
-const SERVICE_OPTIONS=["House Washing","Roof Cleaning & Moss","Gutter Cleaning","Driveway & Concrete","Deck & Patio","Fence Cleaning","Walkways & Hardscape","Window Cleaning","Commercial / Fleet","Other"];
-function ServicePicker({form,setForm}){
+const SERVICE_OPTIONS=["House Washing","Roof Cleaning & Moss","Gutter Cleaning","Driveway & Concrete","Deck & Patio","Fence Cleaning","Walkways & Hardscape","Window Cleaning","Commercial / Fleet","Junk Removal","Other"];
+function ServicePicker({form,setForm,inp}){
+  const[open,setOpen]=useState(false);
   const toggle=o=>setForm(p=>({...p,services:p.services.includes(o)?p.services.filter(x=>x!==o):[...p.services,o]}));
+  const n=form.services.length;
+  const summary=n===0?"What can we help with? (choose any)":form.services.join(", ");
   return (
-    <fieldset style={{border:"none",padding:0,margin:"0 0 13px"}}>
-      <legend style={{fontSize:".82rem",fontWeight:700,color:C.ink,marginBottom:8,textAlign:"left"}}>What can we help with? <span style={{fontWeight:500,color:C.text}}>(check all that apply)</span></legend>
-      <div style={{display:"flex",flexWrap:"wrap",gap:7}}>
-        {SERVICE_OPTIONS.map(o=>{const on=form.services.includes(o);return(
-          <label key={o} style={{display:"inline-flex",alignItems:"center",gap:6,padding:"7px 11px",borderRadius:999,border:`1.5px solid ${on?C.blue:C.line}`,background:on?C.mist:"#fff",color:on?C.blue:C.text,fontSize:".8rem",fontWeight:on?700:500,cursor:"pointer",userSelect:"none"}}>
-            <input type="checkbox" checked={on} onChange={()=>toggle(o)} style={{margin:0,accentColor:C.blue}}/>{o}
-          </label>);})}
-      </div>
-    </fieldset>
+    <div style={{marginBottom:10}}>
+      <button type="button" aria-expanded={open} onClick={()=>setOpen(o=>!o)} style={{...inp,marginBottom:0,display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,cursor:"pointer",textAlign:"left",color:n?C.ink:C.soft,fontWeight:n?600:400}}>
+        <span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{summary}</span>
+        <span style={{flexShrink:0,display:"flex",alignItems:"center",gap:6,color:C.blue,fontSize:".8rem",fontWeight:700}}>{n>0&&<span style={{background:C.blue,color:"#fff",borderRadius:999,padding:"1px 7px"}}>{n}</span>}{open?"▲":"▼"}</span>
+      </button>
+      {open&&<div style={{border:`1.5px solid ${C.line}`,borderTop:"none",borderRadius:"0 0 10px 10px",background:"#fff",padding:"8px 10px 6px",marginTop:-4}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 8px"}}>
+          {SERVICE_OPTIONS.map(o=>(<label key={o} style={{display:"flex",alignItems:"center",gap:7,fontSize:".8rem",lineHeight:1.25,color:C.text,padding:"5px 0",cursor:"pointer"}}><input type="checkbox" checked={form.services.includes(o)} onChange={()=>toggle(o)} style={{margin:0,accentColor:C.blue}}/>{o}</label>))}
+        </div>
+        <div style={{textAlign:"right"}}><button type="button" onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:C.blue,fontWeight:700,fontSize:".82rem",cursor:"pointer",padding:"4px 2px"}}>Done</button></div>
+      </div>}
+    </div>
   );
 }
 const CONSENT_VERSION="2026.09.25.v1";
 function ConsentBlock({form,setForm}){
-  const lab={display:"flex",alignItems:"flex-start",gap:9,fontSize:".76rem",lineHeight:1.5,color:C.text,marginBottom:9,cursor:"pointer",textAlign:"left"};
+  const lab={display:"flex",alignItems:"flex-start",gap:8,fontSize:".72rem",lineHeight:1.45,color:C.text,marginBottom:7,cursor:"pointer",textAlign:"left"};
   const cb={marginTop:3,flexShrink:0,accentColor:C.blue};
   const a={color:C.blue,textDecoration:"underline"};
   const set=k=>e=>setForm(p=>({...p,[k]:e.target.checked}));
   return (
-    <div style={{background:"rgba(234,242,251,.6)",border:`1px solid ${C.line}`,borderRadius:10,padding:"12px 13px 4px",marginBottom:14}}>
+    <div style={{background:"rgba(234,242,251,.6)",border:`1px solid ${C.line}`,borderRadius:10,padding:"10px 11px 3px",marginBottom:12}}>
       <label style={lab}><input type="checkbox" checked={form.consent_contact} onChange={set("consent_contact")} style={cb} aria-required="true"/>
         <span><strong style={{color:C.ink}}>Required.</strong> I authorize {BRAND.name} to contact me by phone and email at the information I provided about my estimate request. This consent is not a condition of any purchase.</span></label>
       <label style={lab}><input type="checkbox" checked={form.consent_sms_ai} onChange={set("consent_sms_ai")} style={cb}/>
@@ -238,18 +246,22 @@ function Home(){
             {!sent?(<div>
               <div style={{fontSize:".76rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800,marginBottom:5}}>Free · No Obligation</div>
               <h3 style={{fontFamily:FS,fontSize:"1.5rem",marginBottom:3,color:C.ink,fontWeight:600}}>Get your quote today</h3>
-              <p style={{fontSize:".92rem",color:C.ink,fontWeight:600,marginBottom:20}}>We'll get back to you promptly.</p>
-              {[["name","Full Name","text","name"],["phone","Phone","tel","tel"],["email","Email","email","email"]].map(f=>(
-                <input key={f[0]} type={f[2]} autoComplete={f[3]} aria-label={f[1]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}/>
-              ))}
-              <ServicePicker form={form} setForm={setForm}/>
-              <select aria-label="Property type" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}>
-                <option value="residential">Residential</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
-              </select>
-              <textarea aria-label="Project details" placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",height:100,minHeight:80,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
+              <p style={{fontSize:".92rem",color:C.ink,fontWeight:600,marginBottom:14}}>We'll get back to you promptly.</p>
+              <style>{`.qrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:430px){.qrow{grid-template-columns:1fr;gap:0}}`}</style>
+              {(()=>{const inp={width:"100%",padding:"11px 13px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".92rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:10};
+                const field=f=><input key={f[0]} type={f[2]} autoComplete={f[3]} aria-label={f[1]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={inp}/>;
+                return(<>
+                  {field(["name","Full Name","text","name"])}
+                  <div className="qrow">{field(["phone","Phone","tel","tel"])}{field(["email","Email","email","email"])}</div>
+                  <select aria-label="Property type" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))} style={inp}>
+                    <option value="residential">Residential</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
+                  </select>
+                  <ServicePicker form={form} setForm={setForm} inp={inp}/>
+                  <textarea aria-label="Project details" placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{...inp,height:64,minHeight:56,resize:"vertical"}}/>
+                </>);})()}
               <ConsentBlock form={form} setForm={setForm}/>
               {err&&<div style={{background:"#fdecea",border:"1px solid #f5c2c0",color:"#b3261e",fontSize:".83rem",padding:"10px 13px",borderRadius:9,marginBottom:12}}>{err}</div>}
-              <button onClick={submitForm} disabled={sending} style={{width:"100%",padding:15,background:GRAD,color:"#fff",border:"none",borderRadius:10,fontSize:"1rem",fontWeight:700,cursor:sending?"default":"pointer",fontFamily:F,opacity:sending?.7:1}}>{sending?"Sending…":"Request My Free Quote →"}</button><div style={{textAlign:"center",marginTop:16,fontSize:".92rem",color:C.ink,fontWeight:600,lineHeight:1.5}}>Prefer to call or email?<div style={{marginTop:6}}><a href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,fontSize:"1.02rem",textDecoration:"none",whiteSpace:"nowrap"}}>{BRAND.phone}</a></div><div style={{marginTop:3}}><a href={`mailto:${BRAND.email}`} style={{color:C.blue,fontWeight:700,textDecoration:"none",wordBreak:"break-word"}}>{BRAND.email}</a></div></div>
+              <button onClick={submitForm} disabled={sending} style={{width:"100%",padding:15,background:GRAD,color:"#fff",border:"none",borderRadius:10,fontSize:"1rem",fontWeight:700,cursor:sending?"default":"pointer",fontFamily:F,opacity:sending?.7:1}}>{sending?"Sending…":"Request My Free Quote →"}</button><div style={{textAlign:"center",marginTop:12,fontSize:".9rem",color:C.ink,fontWeight:600,lineHeight:1.6}}>Prefer to call or email? <a href={`tel:${BRAND.tel}`} style={{color:C.blue,fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>{BRAND.phone}</a><br/><a href={`mailto:${BRAND.email}`} style={{color:C.blue,fontWeight:700,textDecoration:"none",wordBreak:"break-word"}}>{BRAND.email}</a></div>
             </div>):(
             <div style={{textAlign:"center",padding:"30px 0"}}>
               <div style={{width:60,height:60,borderRadius:"50%",background:GRAD,margin:"0 auto 14px",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:"1.8rem"}}>✓</div>
@@ -786,6 +798,7 @@ const SERVICE_GROUPS=[
     {name:"Concrete Sealing",icon:"seal",line:"Penetrating sealer after cleaning to slow stains, moss and freeze-thaw damage.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
     {name:"Deck & Fence Staining",icon:"brush",line:"Stain or sealer on freshly cleaned wood for lasting color.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
     {name:"Exterior Painting Touch-Ups",icon:"paint",line:"Light touch-up work to finish off your exterior refresh.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
+    {name:"Junk Removal & Haul-Away",icon:"truck",line:"Furniture, yard debris and household junk hauled away.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
     {name:"Odd Jobs — Just Ask",icon:"wrench",line:"Debris haul-away and other small exterior tasks.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
   ]},
 ];
@@ -800,7 +813,7 @@ const SERVICE_FACTS={
     price:"Free on-site estimate",priceNote:"Priced after we see your roof's pitch and condition",time:"Confirmed on your estimate"},
   "gutter-cleaning":{icon:"gutter",summary:"Fall gutter clear-out so the first big storm goes down the downspout, not over the edge.",
     included:["Leaves, needles and moss removed by hand","Water flush to confirm drainage","Downspouts checked and cleared","Debris bagged and hauled away","Before and after photos"],
-    price:"From $99",priceNote:"$99 one-story · $149 two-story (first 10 gutter cleanings this fall)",time:"1–2 hours for most homes",photoCredit:GUTTER_CREDIT,photo:"/media/stock-gutter-unsplash.jpg",photoAlt:"Stock photo of a mossy, dirty gutter below a tile roof"},
+    price:"From $99",priceNote:"$99 one-story · $149 two-story (first 10 gutter cleanings this fall)",photoCredit:GUTTER_CREDIT,photo:"/media/stock-gutter-unsplash.jpg",photoAlt:"Stock photo of a mossy, dirty gutter below a tile roof"},
   "driveway-concrete-cleaning":{icon:"drive",summary:"Concrete cleaned at the right pressure, then sealed if it's worth it for your slab.",
     included:["Driveways, walkways, steps and patios","Algae, moss, tire marks and stains","Pavers cleaned without blowing out joint sand","Optional penetrating sealer once dry","Final look-over with you"],
     price:"Free on-site estimate",priceNote:"Including a straight answer on whether sealing is worth it",time:"Confirmed on your estimate — sealing waits until the concrete is dry"},
@@ -898,7 +911,7 @@ function QuickFacts({facts}){
         {facts.included.map(x=><li key={x} style={{display:"flex",gap:9,alignItems:"flex-start",margin:"0 0 7px",fontSize:".95rem",lineHeight:1.45,color:C.text}}><span style={{color:C.blue,flexShrink:0,marginTop:1}}><Icon name="check" size={18} sw={2.4}/></span>{x}</li>)}
       </ul>
       {row("tag","Price",facts.price,facts.priceNote)}
-      {row("clock","Typical time",facts.time)}
+      {facts.time&&row("clock","Typical time",facts.time)}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginTop:14}}>
         <a href={`tel:+1${BRAND.tel}`} style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",background:GRAD,color:"#fff",padding:"12px 8px",borderRadius:11,fontWeight:700,textDecoration:"none",textAlign:"center",lineHeight:1.25}}><span style={{fontSize:"1rem"}}>Call / Text</span><span style={{fontSize:".86rem",fontWeight:600,opacity:.92,whiteSpace:"nowrap"}}>{BRAND.phone}</span></a>
         <a href="/#quote" style={{display:"flex",alignItems:"center",justifyContent:"center",background:"#fff",color:C.blue,border:`1.5px solid ${C.blue}`,padding:"12px 8px",borderRadius:11,fontWeight:700,fontSize:"1rem",textDecoration:"none",textAlign:"center"}}>Get a Quote</a>
