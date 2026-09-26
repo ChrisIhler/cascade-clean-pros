@@ -31,23 +31,23 @@ const RES=[
 ];
 
 const ADDON_ICONS=[
+  <svg key="i1" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M2 6.5 12 3l10 3.5"/><path d="M3 9h18v2a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 11z"/><path d="M16.5 12.5v5.5"/><path d="M16.5 20c-.8 1.1-1.2 1.8-1.2 2.3a1.2 1.2 0 0 0 2.4 0c0-.5-.4-1.2-1.2-2.3z"/><path d="M6.5 12.5v2"/><path d="M11 12.5v2"/></svg>,
+  <svg key="i6j" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M2 16V7h11v9"/><path d="M13 10h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg>,
   <svg key="i0" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/></svg>,
-  <svg key="i1" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3c3.4 4.1 5.4 6.6 5.4 9.2a5.4 5.4 0 0 1-10.8 0C6.6 9.6 8.6 7.1 12 3z"/></svg>,
   <svg key="i2" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="1.5"/><path d="M12 3.5v17M4 12h16"/></svg>,
   <svg key="i3" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3 5 5.6v5.2c0 4.4 3 7.7 7 9.2 4-1.5 7-4.8 7-9.2V5.6L12 3z"/></svg>,
   <svg key="i4" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 21V7l1.5-2 1.5 2v14"/><path d="M10.5 21V7l1.5-2 1.5 2v14"/><path d="M16.5 21V7l1.5-2 1.5 2v14"/><path d="M3 11.5h18"/><path d="M3 16.5h18"/></svg>,
   <svg key="i5" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4.5" width="10.5" height="5.5" rx="1.5"/><path d="M13.5 7.2h3.3a1.2 1.2 0 0 0 1.2-1.2V4.5"/><path d="M9 10v2a2 2 0 0 1-2 2 1.6 1.6 0 0 0-1.6 1.6V21"/></svg>,
-  <svg key="i6j" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M2 16V7h11v9"/><path d="M13 10h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg>,
   <svg key="i6" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M14.6 6.4a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.4-3.4a6 6 0 0 1-7.8 7.8l-6.6 6.6a2.1 2.1 0 0 1-3-3l6.6-6.6a6 6 0 0 1 7.8-7.8l-3.4 3.4z"/></svg>,
 ];
 const ADDON_SERVICES=[
-  {href:"/services/roof-cleaning/",title:"Roof Cleaning & Moss Treatment",desc:"We treat, kill, and clear moss and algae from your roof, then clean up — never high-pressure washing the shingles."},
   {href:"/services/gutter-cleaning/",title:"Gutter Cleaning & Clear-Out",desc:"Full gutter and downspout clear-out so water flows freely and your foundation stays protected."},
+  {href:"/services/junk-removal/",title:"Junk Removal & Haul-Away",desc:"Old furniture, yard debris, and household junk loaded and hauled away with our truck and dump trailer. Text us photos for a price."},
+  {href:"/services/roof-cleaning/",title:"Roof Cleaning & Moss Treatment",desc:"We treat, kill, and clear moss and algae from your roof, then clean up — never high-pressure washing the shingles."},
   {title:"Window Cleaning",desc:"Streak-free interior and exterior windows, with screen and track cleaning on request."},
   {href:"/services/driveway-concrete-cleaning/",title:"Concrete Sealing",desc:"Protective sealing after cleaning to guard concrete against stains, moisture, and wear."},
   {title:"Deck & Fence Staining",desc:"Refresh and protect wood after cleaning with quality stain or sealer for lasting color."},
   {title:"Exterior Painting Touch-Ups",desc:"Light exterior painting and touch-up work to finish off your property's refresh."},
-  {href:"/services/junk-removal/",title:"Junk Removal & Haul-Away",desc:"Old furniture, yard debris, and household junk loaded and hauled away with our truck and dump trailer. Text us photos for a price."},
   {title:"Odd Jobs — Just Ask",desc:"Got something else on your list? Small exterior tasks — ask us, we can likely help."},
 ];
 
@@ -94,7 +94,7 @@ const FS="'Fraunces','Georgia',serif";
 
 function Reveal({children,style}){const r=useRef(null);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){e.target.classList.add("in");o.disconnect()}},{threshold:.12});if(r.current)o.observe(r.current);return()=>o.disconnect()},[]);return<div ref={r} className="fade-up" style={style}>{children}</div>}
 
-const SERVICE_OPTIONS=["House Washing","Roof Cleaning & Moss","Gutter Cleaning","Driveway & Concrete","Deck & Patio","Fence Cleaning","Walkways & Hardscape","Window Cleaning","Commercial / Fleet","Junk Removal","Other"];
+const SERVICE_OPTIONS=["Pressure Washing","House Washing","Roof Cleaning & Moss","Gutter Cleaning","Driveway & Concrete","Deck & Patio","Fence Cleaning","Walkways & Hardscape","Window Cleaning","Commercial / Fleet","Junk Removal","Other"];
 function ServicePicker({form,setForm,inp}){
   const[open,setOpen]=useState(false);
   const toggle=o=>setForm(p=>({...p,services:p.services.includes(o)?p.services.filter(x=>x!==o):[...p.services,o]}));
@@ -747,7 +747,7 @@ function BlogPost({post}){
 const ICO={
   house:["M3 10.5 12 3l9 7.5","M5.5 9.5V20h13V9.5","M10 20v-5h4v5"],
   roof:["M2 13 12 4l10 9","M5 11v9h14v-9","M8 8.5l1-1M12 7l1-1M15.5 9l1-1"],
-  gutter:["M3 6h18l-1.5 4h-15z","M17 10v7a3 3 0 0 1-3 3h-2","M8 14c-.8 1.2-1.2 2-1.2 2.6a1.2 1.2 0 0 0 2.4 0c0-.6-.4-1.4-1.2-2.6z"],
+  gutter:["M2 6.5 12 3l10 3.5","M3 9h18v2a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 11z","M16.5 12.5v5.5","M16.5 20c-.8 1.1-1.2 1.8-1.2 2.3a1.2 1.2 0 0 0 2.4 0c0-.5-.4-1.2-1.2-2.3z","M6.5 12.5v2","M11 12.5v2"],
   drive:["M8 3 5 21","M16 3l3 18","M12 4v2.5M12 10v2.5M12 16v3"],
   deck:["M3 9h18","M3 13h18","M3 17h18","M6 17v4M18 17v4","M5 9V5h14v4"],
   path:["M9 21c0-4 6-5 6-9s-4-5-4-9","M5 21c0-5 6-6 6-10","M19 21c0-4-3-6-3-9"],
@@ -777,12 +777,10 @@ const SERVICE_GROUPS=[
   {id:"residential",label:"Residential",title:"For your home",intro:"Soft washing for the delicate stuff, pressure washing where concrete can take it.",items:[
     {name:"House Washing",icon:"house",img:"/media/cards/house-washing.jpg",line:"Soft wash for siding, trim and soffits — lifts dirt, mold and mildew.",price:FREE_EST,href:"/services/house-washing/"},
     {name:"Roof Cleaning & Moss Treatment",icon:"roof",img:"/media/cards/roof-cleaning.jpg",line:"Moss and algae treated at the root — never high pressure on shingles.",price:FREE_EST,href:"/services/roof-cleaning/"},
-    {name:"Gutter Cleaning",icon:"gutter",img:"/media/cards/gutter-cleaning.jpg",line:"Gutters and downspouts cleared, debris hauled away.",price:"From $99",href:"/services/gutter-cleaning/"},
     {name:"Driveway & Concrete",icon:"drive",img:"/media/cards/driveway-concrete.jpg",line:"Algae, moss and stains lifted from concrete and pavers, with optional sealing.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
     {name:"Walkways & Hardscape",icon:"path",img:"/media/cards/walkways-hardscape.jpg",line:"Slick, mossy paths, steps and pavers made safe to walk on again.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
     {name:"Deck & Patio",icon:"deck",img:"/media/cards/deck-patio.jpg",line:"Wood, composite and stone brightened with the right pressure for each.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
     {name:"Fence Cleaning",icon:"fence",img:"/media/cards/fence-cleaning.jpg",line:"Green algae, moss and grime cleared from wood, vinyl and metal fencing.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
-    {name:"Junk Removal & Haul-Away",icon:"truck",img:"/media/cards/junk-removal.jpg",line:"Furniture, yard debris, cleanouts — we load it and haul it away.",price:"Free quote",href:"/services/junk-removal/"},
   ]},
   {id:"commercial",label:"Commercial",title:"For your business or property",intro:"Written bids, scheduling around your hours, and water-capture practices on commercial sites.",items:[
     {name:"Apartment & Multi-Family",icon:"apt",img:"/media/cards/apartment-multifamily.jpg",line:"Breezeways, stairwells, siding and shared walkways.",price:FREE_EST,href:"/services/commercial-fleet-washing/"},
@@ -793,6 +791,8 @@ const SERVICE_GROUPS=[
     {name:"Fleet & Equipment",icon:"truck",img:"/media/cards/fleet-equipment.jpg",line:"On-site washing for trucks, vans and heavy equipment.",price:FREE_EST,href:"/services/commercial-fleet-washing/"},
   ]},
   {id:"more",label:"More Services",title:"Finish the whole to-do list",intro:"Add any of these to a wash, or ask about them on their own.",items:[
+    {name:"Gutter Cleaning",icon:"gutter",img:"/media/cards/gutter-cleaning.jpg",line:"Gutters and downspouts cleared, debris hauled away.",price:"From $99",href:"/services/gutter-cleaning/"},
+    {name:"Junk Removal & Haul-Away",icon:"truck",img:"/media/cards/junk-removal.jpg",line:"Furniture, yard debris, cleanouts — we load it and haul it away.",price:"Free quote",href:"/services/junk-removal/"},
     {name:"Window Cleaning",icon:"window",line:"Interior and exterior windows, with screens and tracks on request.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
     {name:"Concrete Sealing",icon:"seal",line:"Penetrating sealer after cleaning to slow stains, moss and freeze-thaw damage.",price:FREE_EST,href:"/services/driveway-concrete-cleaning/"},
     {name:"Deck & Fence Staining",icon:"brush",line:"Stain or sealer on freshly cleaned wood for lasting color.",price:FREE_EST,href:"/#quote",cta:"Get a quote"},
