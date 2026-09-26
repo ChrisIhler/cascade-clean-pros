@@ -210,7 +210,7 @@ function Home(){
                 <input key={f[0]} type={f[2]} autoComplete={f[3]} aria-label={f[1]} placeholder={f[1]} value={form[f[0]]} onChange={e=>setForm(p=>({...p,[f[0]]:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}/>
               ))}
               <select aria-label="Service type" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".94rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",boxSizing:"border-box",marginBottom:13}}>
-                <option value="residential">Residential</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
+                <option value="residential">Residential</option><option>Gutter Cleaning</option><option>Commercial — Small Business</option><option>Commercial — Mid-Size</option><option>Commercial — Enterprise / Property Mgmt</option>
               </select>
               <textarea aria-label="Project details" placeholder="Tell us about your project..." value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={{width:"100%",padding:"13px 15px",borderRadius:10,border:`1.5px solid ${C.line}`,fontSize:".9rem",fontFamily:F,background:formActive?C.mist:"rgba(234,242,251,.6)",height:100,minHeight:80,resize:"vertical",boxSizing:"border-box",marginBottom:14}}/>
               {err&&<div style={{background:"#fdecea",border:"1px solid #f5c2c0",color:"#b3261e",fontSize:".83rem",padding:"10px 13px",borderRadius:9,marginBottom:12}}>{err}</div>}
@@ -236,6 +236,24 @@ function Home(){
           </div>))}
         </div>
       </div>
+
+      {/* FALL GUTTER OFFER */}
+      <section id="gutters" aria-label="Fall gutter cleaning offer" style={{maxWidth:1240,margin:"0 auto",padding:"46px 28px 0"}}>
+        <Reveal>
+          <div style={{background:C.mist,border:`1.5px solid ${C.aqua}`,borderRadius:18,padding:"30px 30px",display:"flex",flexWrap:"wrap",alignItems:"center",justifyContent:"space-between",gap:"22px 30px"}}>
+            <div style={{flex:"1 1 420px"}}>
+              <span style={{fontSize:".95rem",textTransform:"uppercase",letterSpacing:2,color:C.teal,fontWeight:800}}>New This Fall · Gutter Cleaning</span>
+              <h2 style={{fontFamily:FS,fontSize:"2rem",color:C.ink,margin:"8px 0 10px",fontWeight:600,lineHeight:1.15}}>Beat the rains: gutters cleared from $99</h2>
+              <p style={{fontSize:"1.02rem",color:C.soft,margin:0}}>Intro pricing for our first customers: <strong style={{color:C.ink}}>$99 one-story, $149 two-story.</strong> Debris hauled away, downspouts checked, before and after photos, and a 30-day overflow guarantee. Serving Lynnwood and nearby.</p>
+            </div>
+            <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
+              <a href={`tel:${BRAND.tel}`} style={{display:"inline-flex",alignItems:"center",gap:8,background:GRAD,color:"#fff",padding:"15px 26px",borderRadius:11,fontWeight:700,fontSize:"1rem"}}>Call or Text {BRAND.phone}</a>
+              <button onClick={()=>{setForm(p=>({...p,service:"Gutter Cleaning"}));go("quote");}} style={{background:"#fff",color:C.blue,border:`1.5px solid ${C.blue}`,padding:"15px 24px",borderRadius:11,fontWeight:700,fontSize:"1rem",cursor:"pointer",fontFamily:F}}>Book Online</button>
+              <a href="/services/gutter-cleaning/" style={{display:"inline-flex",alignItems:"center",color:C.blue,padding:"15px 6px",fontWeight:700,fontSize:"1rem"}}>Details →</a>
+            </div>
+          </div>
+        </Reveal>
+      </section>
 
       {/* RESIDENTIAL SERVICES */}
       <section id="services" style={{maxWidth:1240,margin:"0 auto",padding:"74px 28px 34px"}}>
