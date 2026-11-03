@@ -6,3 +6,10 @@ node_modules/
 
 # Internal marketing docs — stored here for convenience, never deployed
 cascade-marketing/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
